@@ -29,20 +29,38 @@ void Player::myUpdate()
 		case CreatureStates::Walking :
 		case CreatureStates::Idle :
 		default :
-			float speed = 60;
+			float speed = 90;
+			float jumpHeight = 8;
+			float fallSpeed = 15;
+			float maxFallSpeed = 20;
 			Vector2 moveVector;
 
 			if (keystates[SDLK_RIGHT])
+			{
 				moveVector.x = deltaTime * speed;
+			}
 
 			if (keystates[SDLK_LEFT])
+			{
 				moveVector.x = -deltaTime * speed;
+			}
 
-			if (keystates[SDLK_DOWN])
-				moveVector.y = deltaTime * speed;
-
-			if (keystates[SDLK_UP])
-				moveVector.y = -deltaTime * speed;
+			if (grounded)
+			{
+				if (keystates[SDLK_UP])
+				{
+					velocity.y = -jumpHeight;
+					grounded = false;
+				}
+			}
+			
+			if (!grounded || moveVector.x)
+			{
+				velocity.y += deltaTime * fallSpeed;
+				if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
+			}
+			
+			moveVector += velocity;
 
 			if (moveVector.x != 0 || moveVector.y != 0)
 			{

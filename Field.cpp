@@ -42,6 +42,8 @@ void Field::init(const int32_t &x, const int32_t &y, const int32_t &metricsLengt
 	xGridded = (int32_t)this->x / GRID_SIZE;
 	yGridded = (int32_t)this->y / GRID_SIZE;
 
+	grounded = false;
+
 	insertIntoMap(xGridded, yGridded);
 
 	this->metricsLength = metricsLength;
@@ -88,17 +90,17 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 
 	for (i = 0; i<metricsLength; i++)
 	{
-		xStart = metrics[i].x / GRID_SIZE;
-		if (metrics[i].x % GRID_SIZE) xStart--;
+		xStart = metricsNew[i].x / GRID_SIZE;
+		if (metricsNew[i].x % GRID_SIZE) xStart--;
 
-		yStart = metrics[i].y / GRID_SIZE;
-		if (metrics[i].y % GRID_SIZE) yStart--;
+		yStart = metricsNew[i].y / GRID_SIZE;
+		if (metricsNew[i].y % GRID_SIZE) yStart--;
 
-		xEnd = (metrics[i].x + metrics[i].w) / GRID_SIZE;
-		if ((metrics[i].x + metrics[i].w) % GRID_SIZE) xEnd++;
+		xEnd = (metricsNew[i].x + metricsNew[i].w) / GRID_SIZE;
+		if ((metricsNew[i].x + metricsNew[i].w) % GRID_SIZE) xEnd++;
 
-		yEnd = (metrics[i].y + metrics[i].h) / GRID_SIZE;
-		if ((metrics[i].y + metrics[i].h) % GRID_SIZE) yEnd++;
+		yEnd = (metricsNew[i].y + metricsNew[i].h) / GRID_SIZE;
+		if ((metricsNew[i].y + metricsNew[i].h) % GRID_SIZE) yEnd++;
 
 		
 
@@ -125,11 +127,16 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 					{
 						for (ii = 0; ii<backIt->second->metricsLength; ii++)
 						{
-							if ( metrics[i].collidesWith(backIt->second->metrics[ii]) )
+							if (metricsNew[i].intersectsWith(backIt->second->metrics[ii]))
 							{
-								moveVector.x = 0;
-								moveVector.y = 0;
-								return;
+								if (metricsNew[i].shortenVectorToNotInteresctWith(backIt->second->metrics[ii], moveVector))
+								{
+									return applyCollisionToVector(moveVector);
+								}
+								else
+								{
+									return;
+								}
 							}
 						}
 					}
@@ -145,11 +152,16 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 						{
 							for (ii = 0; ii<frontIt->second->metricsLength; ii++)
 							{
-								if ( metrics[i].collidesWith(frontIt->second->metrics[ii]) )
+								if (metricsNew[i].intersectsWith(backIt->second->metrics[ii]))
 								{
-									moveVector.x = 0;
-									moveVector.y = 0;
-									return;
+									if (metricsNew[i].shortenVectorToNotInteresctWith(backIt->second->metrics[ii], moveVector))
+									{
+										return applyCollisionToVector(moveVector);
+									}
+									else
+									{
+										return;
+									}
 								}
 							}
 						}
@@ -185,7 +197,8 @@ void Field::updatePosition(const float &xNew, const float &yNew)
 	}
 }
 
-void Field::applyCollision() const
+//informs every collision that it happened
+void Field::applyCollision()
 {
 	int64_t xy64;
 	unordered_map<int64_t, FieldBack*>::const_iterator backIt;
@@ -201,6 +214,8 @@ void Field::applyCollision() const
 
 	int32_t i;
 	int32_t ii;
+
+	grounded = false;
 
 	for (i = 0; i<metricsLength; i++)
 	{
@@ -235,14 +250,25 @@ void Field::applyCollision() const
 				xy64 = world.int64FromXY(x, y);
 
 				backIt = world.mapBack.find(xy64);
-				if (backIt != world.mapBack.end())
+				if (backIt != world.mapBack.end() && backIt->second != NULL)
 				{
-					if (backIt->second != NULL && backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
+					if (backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
 					{
 						for (ii = 0; ii<backIt->second->metricsLength; ii++)
 						{
 							if ( metrics[i].collidesWith(backIt->second->metrics[ii]) )
 							{
+								if ( !grounded
+									&& (metrics[i].y + metrics[i].h) <= (backIt->second->metrics[ii].y)
+									&& (metrics[i].x + metrics[i].w) > (backIt->second->metrics[ii].x)
+									&& (metrics[i].x) < (backIt->second->metrics[ii].x + backIt->second->metrics[ii].w) )
+								{
+									if (velocity.y > 0) {
+										velocity.y = 0;
+									}
+									grounded = true;
+								}
+
 								backIt->second->onCollision(this);
 								break;
 							}
@@ -262,6 +288,17 @@ void Field::applyCollision() const
 							{
 								if ( metrics[i].collidesWith(frontIt->second->metrics[ii]) )
 								{
+									if ( !grounded
+										&& (metrics[i].y + metrics[i].h) <= (backIt->second->metrics[ii].y)
+										&& (metrics[i].x + metrics[i].w) > (backIt->second->metrics[ii].x)
+										&& (metrics[i].x) < (backIt->second->metrics[ii].x + backIt->second->metrics[ii].w) )
+									{
+										if (velocity.y > 0) {
+											velocity.y = 0;
+										}
+										grounded = true;
+									}
+
 									backIt->second->onCollision(this);
 									break;
 								}

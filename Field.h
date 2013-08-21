@@ -10,15 +10,17 @@ public:
 	Field(void);
 	virtual ~Field(void);
 
-	//never ever write these two directly, use updatePosition instead !
 	float x;
 	float y;
 	int32_t xGridded;
 	int32_t yGridded;
 
+	Vector2 velocity;
+
+	bool grounded;
+
 	float lastDraw;
 	
-	//TODO metrics
 	int32_t metricsLength;
 	
 	Rect* metrics;
@@ -45,7 +47,7 @@ public:
 
 	void applyCollisionToVector(Vector2 &moveVector);
 
-	void applyCollision() const;
+	void applyCollision();
 
 	void updatePosition(const float &xNew, const float &yNew);
 

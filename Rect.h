@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL.h"
+#include "Vector2.h"
 
 class Rect
 {
@@ -14,5 +15,9 @@ public:
 	int32_t h;
 
 	bool collidesWith(const Rect &rect2);
+
+	bool intersectsWith(const Rect &rect2);
+
+	bool shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVector);
 };
 

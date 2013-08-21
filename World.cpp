@@ -5,6 +5,8 @@
 
 World::World(void)
 {
+	mapFront.reserve(100000);
+	mapBack.reserve(100000);
 }
 
 World::~World(void)
