@@ -25,9 +25,6 @@
     <ClCompile Include="World.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="CreatureStates.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Rect.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -58,9 +55,6 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="CreatureStates.h">
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="Rect.h">

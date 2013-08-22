@@ -19,22 +19,22 @@ void FieldBackEarth::init(const int32_t &x, const int32_t &y)
 	switch (myRand(x ^ (y<<2)) % 6)
 	{
 	case 0:
-		image = SURFACE_ERDE_1;
+		image = load_image("erz_erde1.jpg");
 		break;
 	case 1:
-		image = SURFACE_ERDE_2;
+		image = load_image("erz_erde2.jpg");
 		break;
 	case 2:
-		image = SURFACE_ERDE_3;
+		image = load_image("erz_erde3.jpg");
 		break;
 	case 3:
-		image = SURFACE_ERDE_4;
+		image = load_image("erz_erde4.jpg");
 		break;
 	case 4:
-		image = SURFACE_ERDE_5;
+		image = load_image("erz_erde5.jpg");
 		break;
 	case 5:
-		image = SURFACE_ERDE_6;
+		image = load_image("erz_erde6.jpg");
 		break;
 	}
 }

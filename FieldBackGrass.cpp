@@ -18,22 +18,22 @@ void FieldBackGrass::init(const int32_t &x, const int32_t &y)
 	switch (myRand(x ^ (y<<2)) % 6)
 	{
 	case 0:
-		image = SURFACE_GRAS_1;
+		image = load_image("erz_gras1.jpg");
 		break;
 	case 1:
-		image = SURFACE_GRAS_2;
+		image = load_image("erz_gras2.jpg");
 		break;
 	case 2:
-		image = SURFACE_GRAS_3;
+		image = load_image("erz_gras3.jpg");
 		break;
 	case 3:
-		image = SURFACE_GRAS_4;
+		image = load_image("erz_gras4.jpg");
 		break;
 	case 4:
-		image = SURFACE_GRAS_5;
+		image = load_image("erz_gras5.jpg");
 		break;
 	case 5:
-		image = SURFACE_GRAS_6;
+		image = load_image("erz_gras6.jpg");
 		break;
 	}
 }

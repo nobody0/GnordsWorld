@@ -18,6 +18,7 @@ void FieldFront::init(const int32_t &x, const int32_t &y, const int32_t &metrics
 	colidingLayer = 3;
 }
 
+//TODO possibly remove more references from the map, based on metrics
 void FieldFront::removeFromMap(const int32_t &x, const int32_t &y) const
 {
 	int64_t xy64 = world.int64FromXY(x, y);
@@ -33,6 +34,7 @@ void FieldFront::removeFromMap(const int32_t &x, const int32_t &y) const
 	}
 }
 
+//TODO possibly add more references from the map, based on metrics
 void FieldFront::insertIntoMap(const int32_t &x, const int32_t &y) const
 {
 	world.mapFront.insert(

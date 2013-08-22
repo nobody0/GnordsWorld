@@ -20,6 +20,15 @@ void FieldBack::init(const int32_t &x, const int32_t &y, const int32_t &metricsL
 	colidingLayer = 2;
 }
 
+void FieldBack::onClick()
+{
+	removeFromMap(xGridded, yGridded);
+
+	//reminder: this has to be the very last thing to execute!
+	delete this;
+	return;
+}
+
 void FieldBack::removeFromMap(const int32_t &x, const int32_t &y) const
 {
 	int64_t xy64 = world.int64FromXY(x, y);

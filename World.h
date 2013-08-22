@@ -27,6 +27,8 @@ public:
 
 	void generateBack(const int32_t &x, const int32_t &y);
 	
+	void onClick();
+	
 	void update();
 };
 

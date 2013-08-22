@@ -37,6 +37,19 @@ bool Rect::intersectsWith(const Rect &rect2)
 	return true;
 }
 
+bool Rect::intersectsWith(const int32_t &dotX, const int32_t &dotY)
+{
+	if (   dotX > x
+		&& dotX < x + w
+		&& dotY > y
+		&& dotY < y + h )
+	{
+		return true;
+	}
+
+	return false;
+}
+
 bool Rect::shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVector)
 {
 	if (moveVector.x > 0)

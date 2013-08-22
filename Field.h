@@ -53,6 +53,8 @@ public:
 
 	void onCollision(const Field* const other);
 
+	virtual void onClick();
+
 	void update();
 
 	virtual void removeFromMap(const int32_t &x, const int32_t &y) const = 0;

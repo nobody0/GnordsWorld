@@ -1,38 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Field" Collapsed="true">
-    <Position X="3" Y="1.25" Width="1.5" />
+  <Class Name="World" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAQAAAAKAAAIAAAAAEAAAECAAAABgCAAGgAA=</HashCode>
+      <HashCode>AAAAAAgEABQAAAAAAAQAAAAAAAACAAIBAAAAAAAEAAA=</HashCode>
+      <FileName>World.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldBackEarth" Collapsed="true">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIBIAAAAAAAAAIAAQAAAAAAAAA=</HashCode>
+      <FileName>FieldBackEarth.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FieldBackGrass" Collapsed="true">
+    <Position X="4.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAIAAAAAEAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>FieldBackGrass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Field" Collapsed="true">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAA4AAQAAgACEAAIAIEAAEEgAUCIAAARgCiAGgAA=</HashCode>
       <FileName>Field.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FieldBack" Collapsed="true">
-    <Position X="1.75" Y="2.5" Width="1.5" />
+    <Position X="3.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAIAAAAQAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAAAIAAAAQAAAACAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>FieldBack.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FieldFront" Collapsed="true">
-    <Position X="4" Y="2.5" Width="1.5" />
+    <Position X="6.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAAAACAABAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAQAAAACAABAAAAAAAAAIAAIAAAAAAAAAAAA=</HashCode>
       <FileName>FieldFront.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Player" Collapsed="true">
-    <Position X="4" Y="4" Width="1.5" />
+    <Position X="6.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAEABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAAQAAABA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="World" Collapsed="true">
-    <Position X="8.25" Y="1.25" Width="1.5" />
+  <Class Name="Rect" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAABQAAAAAAAQAAAAAAAACAAIBAAAAAAAEAAA=</HashCode>
-      <FileName>World.h</FileName>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAABAAACSAAAAAQAhgAAAAAAA=</HashCode>
+      <FileName>Rect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vector2" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAABAAAAAAAAAQAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Vector2.h</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

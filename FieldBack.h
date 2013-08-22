@@ -8,6 +8,8 @@ public:
 	virtual ~FieldBack(void);
 
 	virtual void init(const int32_t &x, const int32_t &y, const int32_t &metricsLength = 1);
+
+	virtual void onClick();
 	
 	void removeFromMap(const int32_t &x, const int32_t &y) const;
 	void insertIntoMap(const int32_t &x, const int32_t &y) const;

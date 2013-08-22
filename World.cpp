@@ -11,17 +11,7 @@ World::World(void)
 
 World::~World(void)
 {
-	/*
-	for (unordered_multimap<int64_t, FieldFront*>::iterator frontIt = mapFront.begin(); frontIt != mapFront.end(); frontIt++)
-	{
-		delete frontIt->second;
-	}
 
-	for (unordered_map<int64_t, FieldBack*>::const_iterator backIt = mapBack.begin(); backIt != mapBack.end(); backIt++)
-	{
-		delete backIt->second;
-	}
-	*/
 }
 
 int64_t World::int64FromXY(const int32_t &x, const int32_t &y)
@@ -36,7 +26,7 @@ void World::init()
 
 void World::generateBack(const int32_t &x, const int32_t &y)
 {
-	if (y > 0)
+	if (y > 2)
 	{
 		if (myRand(x ^ (y << 2)) % 3 != 0)
 		{
@@ -52,6 +42,78 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 			(FieldBack*) NULL
 		)
 	);
+}
+
+void World::onClick()
+{
+	int64_t xy64;
+	unordered_map<int64_t, FieldBack*>::const_iterator backIt;
+	pair<unordered_multimap<int64_t, FieldFront*>::iterator, unordered_multimap<int64_t, FieldFront*>::iterator> frontItPair;
+	unordered_multimap<int64_t, FieldFront*>::iterator frontIt;
+
+	int32_t xStart;
+	int32_t yStart;
+	int32_t xEnd;
+	int32_t yEnd;
+	int32_t x;
+	int32_t y;
+
+	int32_t i;
+	int32_t ii;
+
+	int32_t mouseWorldX = mouseX + (int32_t)world.player.x - SCREEN_WIDTH/2;
+	int32_t mouseWorldY = mouseY + (int32_t)world.player.y - SCREEN_HEIGHT/2;
+
+	xStart = mouseWorldX / GRID_SIZE;
+	if (mouseWorldX % GRID_SIZE) xStart--;
+
+	yStart = mouseWorldY / GRID_SIZE;
+	if (mouseWorldY % GRID_SIZE) yStart--;
+
+	xEnd = mouseWorldX / GRID_SIZE;
+	if (mouseWorldX % GRID_SIZE) xEnd++;
+
+	yEnd = mouseWorldY / GRID_SIZE;
+	if (mouseWorldY % GRID_SIZE) yEnd++;
+
+	for (x = xStart; x <= xEnd; x++)
+	{
+		for (y = yStart; y <= yEnd; y++)
+		{
+			xy64 = world.int64FromXY(x, y);
+
+			frontItPair = world.mapFront.equal_range(xy64);
+
+			for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
+			{
+				if (frontIt->second != NULL) //TODO prevent double checking the same object!
+				{
+					for (ii = 0; ii<frontIt->second->metricsLength; ii++)
+					{
+						if (frontIt->second->metrics[ii].intersectsWith(mouseWorldX, mouseWorldY))
+						{
+							return frontIt->second->onClick();
+						}
+					}
+				}
+			}
+
+			backIt = world.mapBack.find(xy64);
+			if (backIt != world.mapBack.end())
+			{
+				if (backIt->second != NULL) //TODO prevent double checking the same object!
+				{
+					for (ii = 0; ii<backIt->second->metricsLength; ii++)
+					{
+						if (backIt->second->metrics[ii].intersectsWith(mouseWorldX, mouseWorldY))
+						{
+							return backIt->second->onClick();
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void World::update()

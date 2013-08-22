@@ -12,17 +12,6 @@ Field::~Field(void)
 	//delete[] metricsNew;
 }
 
-void Field::update()
-{
-	if (lastUpdate != totalTime) {
-		lastUpdate = totalTime;
-
-		//REMINDER: THIS HAS TO BE THE VERY LAST THING HAPPENING IN UPDATE!
-		//WE MIGHT DO A "delete this" INSIDE myUpdate http://www.parashift.com/c++-faq-lite/delete-this.html
-		myUpdate();
-	}
-}
-
 void Field::draw() const
 {
 	//TODO bug, cant assign a value to lastDraw!
@@ -314,4 +303,20 @@ void Field::applyCollision()
 void Field::onCollision(const Field* const other)
 {
 
+}
+
+void Field::onClick()
+{
+	
+}
+
+void Field::update()
+{
+	if (lastUpdate != totalTime) {
+		lastUpdate = totalTime;
+
+		//REMINDER: THIS HAS TO BE THE VERY LAST THING HAPPENING IN UPDATE!
+		//WE MIGHT DO A "delete this" INSIDE myUpdate http://www.parashift.com/c++-faq-lite/delete-this.html
+		myUpdate();
+	}
 }
