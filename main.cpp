@@ -30,7 +30,6 @@ World world;
 int32_t MY_RAND_SEED = 123456;
 int32_t myRand(int32_t x)
 {
-	//TODO this does not look very much random!
     x = (x*362436069+521288629) ^ MY_RAND_SEED;
     int32_t w = 88675123;
     int32_t t = x ^ (x << 11);

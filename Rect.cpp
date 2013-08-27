@@ -55,7 +55,7 @@ bool Rect::shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVecto
 	if (moveVector.x > 0)
 	{
 		float xCeiled = ceil(moveVector.x);
-		float temp = x + w - rect2.x;
+		float temp = (float)(x + w - rect2.x);
 		if (temp < xCeiled && temp != 0)
 		{
 			moveVector.x -= temp;
@@ -71,7 +71,7 @@ bool Rect::shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVecto
 	if (moveVector.x < 0)
 	{
 		float xFloored = floor(moveVector.x);
-		float temp = x - (rect2.x + rect2.w);
+		float temp = (float)(x - (rect2.x + rect2.w));
 		if (temp > xFloored && temp != 0)
 		{
 			moveVector.x -= temp;
@@ -87,7 +87,7 @@ bool Rect::shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVecto
 	if (moveVector.y > 0)
 	{
 		float yCeiled = ceil(moveVector.y);
-		float temp = y + h - rect2.y;
+		float temp = (float)(y + h - rect2.y);
 		if (temp < yCeiled && temp != 0)
 		{
 			moveVector.y -= temp;
@@ -103,7 +103,7 @@ bool Rect::shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVecto
 	if (moveVector.y < 0)
 	{
 		float yFloored = floor(moveVector.y);
-		float temp = y - (rect2.y + rect2.h);
+		float temp = (float)(y - (rect2.y + rect2.h));
 		if (temp > yFloored && temp != 0)
 		{
 			moveVector.y -= temp;

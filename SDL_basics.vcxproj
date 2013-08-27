@@ -51,6 +51,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SDLmain.lib;SDL.lib;SDL_image.lib;SDL_mixer.lib;SDL_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,6 +71,11 @@
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FieldBack.cpp" />
     <ClCompile Include="FieldBackEarth.cpp" />
+    <ClCompile Include="FieldBackCoal.cpp" />
+    <ClCompile Include="FieldBackCopper.cpp" />
+    <ClCompile Include="FieldBackStone.cpp" />
+    <ClCompile Include="FieldBackSilver.cpp" />
+    <ClCompile Include="FieldBackIron.cpp" />
     <ClCompile Include="FieldBackGrass.cpp" />
     <ClCompile Include="FieldFront.cpp" />
     <ClCompile Include="main.cpp" />
@@ -82,6 +88,11 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="FieldBack.h" />
     <ClInclude Include="FieldBackEarth.h" />
+    <ClInclude Include="FieldBackCoal.h" />
+    <ClInclude Include="FieldBackCopper.h" />
+    <ClInclude Include="FieldBackStone.h" />
+    <ClInclude Include="FieldBackSilver.h" />
+    <ClInclude Include="FieldBackIron.h" />
     <ClInclude Include="FieldBackGrass.h" />
     <ClInclude Include="FieldFront.h" />
     <ClInclude Include="main.h" />

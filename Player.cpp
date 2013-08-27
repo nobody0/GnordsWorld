@@ -18,7 +18,7 @@ void Player::init(const int32_t &x, const int32_t &y)
 {
 	FieldFront::init(x, y);
 
-	image = load_image("Gnord_still.png");
+	image = load_image("Foreground/Gnord/Gnord_still.png");
 }
 
 void Player::updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t &y)
@@ -32,7 +32,7 @@ void Player::updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t
 void Player::myUpdate()
 {
 		float speed = 90;
-		float jumpHeight = 8;
+		float jumpHeight = 9;
 		float fallSpeed = 15;
 		float maxFallSpeed = 20;
 		Vector2 moveVector;
@@ -56,12 +56,9 @@ void Player::myUpdate()
 				grounded = false;
 			}
 		}
-			
-		if (!grounded || moveVector.x)
-		{
-			velocity.y += deltaTime * fallSpeed;
-			if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
-		}
+		
+		velocity.y += deltaTime * fallSpeed;
+		if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
 			
 		moveVector += velocity;
 

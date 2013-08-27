@@ -2,6 +2,12 @@
 #include "main.h"
 #include "FieldBackEarth.h"
 #include "FieldBackGrass.h"
+#include "FieldBackIron.h"
+#include "FieldBackCoal.h"
+#include "FieldBackCopper.h"
+#include "FieldBackSilver.h"
+#include "FieldBackStone.h"
+
 
 World::World(void)
 {
@@ -26,22 +32,61 @@ void World::init()
 
 void World::generateBack(const int32_t &x, const int32_t &y)
 {
-	if (y > 2)
+	int32_t r = myRand( (x ^ (y << 4)) ^ (y ^ (x << 2)) );
+
+	r = r % 28;
+
+	if (y < 3 || r > 20)
 	{
-		if (myRand(x ^ (y << 2)) % 3 != 0)
+		world.mapBack.insert(
+			make_pair(
+				world.int64FromXY(x, y),
+				(FieldBack*) NULL
+			)
+		);
+	}
+	else
+	{
+		switch (r % 28)
 		{
-			FieldBackEarth* fieldBackEarth = new FieldBackEarth();
-			fieldBackEarth->init(x*GRID_SIZE, y*GRID_SIZE);
-			return;
+			case 0:
+			{
+				FieldBackIron* fieldBackIron = new FieldBackIron();
+				fieldBackIron->init(x*GRID_SIZE, y*GRID_SIZE);
+				break;
+			}
+			case 1:
+			{
+				FieldBackCoal* fieldBackCoal = new FieldBackCoal();
+				fieldBackCoal->init(x*GRID_SIZE, y*GRID_SIZE);
+				break;
+			}
+			case 2:
+			{
+				FieldBackCopper* fieldBackCopper = new FieldBackCopper();
+				fieldBackCopper->init(x*GRID_SIZE, y*GRID_SIZE);
+				break;
+			}
+			case 3:
+			{
+				FieldBackSilver* fieldBackSilver = new FieldBackSilver();
+				fieldBackSilver->init(x*GRID_SIZE, y*GRID_SIZE);
+				break;
+			}
+			case 4:
+			{
+				FieldBackStone* fieldBackStone = new FieldBackStone();
+				fieldBackStone->init(x*GRID_SIZE, y*GRID_SIZE);
+				break;
+			}
+			default:
+			{
+				FieldBackEarth* fieldBackEarth = new FieldBackEarth();
+				fieldBackEarth->init(x*GRID_SIZE, y*GRID_SIZE);
+				break;
+			}
 		}
 	}
-
-	world.mapBack.insert(
-		make_pair(
-			world.int64FromXY(x, y),
-			(FieldBack*) NULL
-		)
-	);
 }
 
 void World::onClick()
@@ -59,7 +104,6 @@ void World::onClick()
 	int32_t y;
 
 	int32_t i;
-	int32_t ii;
 
 	int32_t mouseWorldX = mouseX + (int32_t)world.player.x - SCREEN_WIDTH/2;
 	int32_t mouseWorldY = mouseY + (int32_t)world.player.y - SCREEN_HEIGHT/2;
@@ -88,9 +132,9 @@ void World::onClick()
 			{
 				if (frontIt->second != NULL) //TODO prevent double checking the same object!
 				{
-					for (ii = 0; ii<frontIt->second->metricsLength; ii++)
+					for (i = 0; i<frontIt->second->metricsLength; i++)
 					{
-						if (frontIt->second->metrics[ii].intersectsWith(mouseWorldX, mouseWorldY))
+						if (frontIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
 						{
 							return frontIt->second->onClick();
 						}
@@ -103,9 +147,9 @@ void World::onClick()
 			{
 				if (backIt->second != NULL) //TODO prevent double checking the same object!
 				{
-					for (ii = 0; ii<backIt->second->metricsLength; ii++)
+					for (i = 0; i<backIt->second->metricsLength; i++)
 					{
-						if (backIt->second->metrics[ii].intersectsWith(mouseWorldX, mouseWorldY))
+						if (backIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
 						{
 							return backIt->second->onClick();
 						}

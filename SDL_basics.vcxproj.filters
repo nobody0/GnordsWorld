@@ -31,6 +31,21 @@
     <ClCompile Include="Vector2.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="FieldBackIron.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackCoal.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackCopper.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackSilver.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackStone.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -62,6 +77,21 @@
     </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackIron.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackCoal.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackCopper.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackSilver.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackStone.h">
+      <Filter>BackFields</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
