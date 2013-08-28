@@ -46,6 +46,9 @@
     <ClCompile Include="FieldBackStone.cpp">
       <Filter>BackFields</Filter>
     </ClCompile>
+    <ClCompile Include="Paralax.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -92,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="FieldBackStone.h">
       <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="Paralax.h">
+      <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

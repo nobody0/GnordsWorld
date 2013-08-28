@@ -1,5 +1,6 @@
 #include "World.h"
 #include "main.h"
+#include "Paralax.h"
 #include "FieldBackEarth.h"
 #include "FieldBackGrass.h"
 #include "FieldBackIron.h"
@@ -166,6 +167,8 @@ void World::update()
 	unordered_map<int64_t, FieldBack*>::const_iterator backIt;
 	pair<unordered_multimap<int64_t, FieldFront*>::iterator, unordered_multimap<int64_t, FieldFront*>::iterator> frontItPair;
 	unordered_multimap<int64_t, FieldFront*>::iterator frontIt;
+	int32_t x;
+	int32_t y;
 
 	SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0, 0, 0 ) );
 
@@ -185,9 +188,9 @@ void World::update()
 	int32_t updateYStart = player.yGridded - VISIBLE_GRIDS_Y/2 - UPDATE_GRID_OUT_VIEW_SIZE/2;
 	int32_t updateYEnd = player.yGridded + VISIBLE_GRIDS_Y/2 + UPDATE_GRID_OUT_VIEW_SIZE/2;
 
-	for (int32_t x=updateXStart; x<updateXEnd; x++)
+	for (x=updateXStart; x<updateXEnd; x++)
 	{
-		for (int32_t y=updateYStart; y<updateYEnd; y++)
+		for (y=updateYStart; y<updateYEnd; y++)
 		{
 			xy64 = int64FromXY(x, y);
 
@@ -226,9 +229,11 @@ void World::update()
 	int32_t drawYStart = player.yGridded - VISIBLE_GRIDS_Y/2;
 	int32_t drawYEnd = player.yGridded + VISIBLE_GRIDS_Y/2;
 
-	for (int32_t x=drawXStart; x<drawXEnd; x++)
+	Paralax::draw(100);
+
+	for (x=drawXStart; x<drawXEnd; x++)
 	{
-		for (int32_t y=drawYStart; y<drawYEnd; y++)
+		for (y=drawYStart; y<drawYEnd; y++)
 		{
 			xy64 = int64FromXY(x, y);
 
