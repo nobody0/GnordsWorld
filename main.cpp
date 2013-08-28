@@ -86,6 +86,10 @@ SDL_Surface *load_image( const string &filename )
 				//SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, 0xFF, 0, 0xFF ) );
 			}
 		}
+		else
+		{
+			throw new exception("file couldnt be loaded");
+		}
 
 		loadedImages.insert(make_pair(filename, optimizedImage));
 

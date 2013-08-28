@@ -1,29 +1,14 @@
-﻿Build started 27.08.2013 18:31:47.
-     1>Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" on node 2 (Rebuild target(s)).
-     1>_PrepareForClean:
-         Deleting file "Debug\SDL_basics.lastbuildstate".
-       InitializeBuildStatus:
+﻿Build started 28.08.2013 17:13:35.
+     1>Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
          Creating "Debug\SDL_basics.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Field.cpp FieldBack.cpp FieldBackEarth.cpp FieldBackCoal.cpp FieldBackCopper.cpp FieldBackStone.cpp FieldBackSilver.cpp FieldBackIron.cpp FieldBackGrass.cpp FieldFront.cpp main.cpp Player.cpp Rect.cpp Vector2.cpp World.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp World.cpp
          World.cpp
-         Vector2.cpp
-         Rect.cpp
          Player.cpp
-         main.cpp
-         FieldFront.cpp
-         FieldBackGrass.cpp
-         FieldBackIron.cpp
-         FieldBackSilver.cpp
-         FieldBackStone.cpp
-         FieldBackCopper.cpp
-         FieldBackCoal.cpp
-         FieldBackEarth.cpp
-         FieldBack.cpp
-         Field.cpp
          Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.exe" /INCREMENTAL /NOLOGO SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib SDL_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.lib" /MACHINE:X86 /PROFILE Debug\Field.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.exe" /NOLOGO SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib SDL_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.pdb" /TLBID:1 /ENTRY:"WinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.lib" /MACHINE:X86 /PROFILE Debug\Field.obj
          Debug\FieldBack.obj
          Debug\FieldBackEarth.obj
          Debug\FieldBackCoal.obj
@@ -38,15 +23,15 @@
          Debug\Rect.obj
          Debug\Vector2.obj
          Debug\World.obj
-     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/PROFILE' specification
      1>Field.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+     1>LINK : warning LNK4031: no subsystem specified; CONSOLE assumed
      1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
          SDL_basics.vcxproj -> C:\Users\Student\Desktop\GnordsWorld\Debug\SDL_basics.exe
        FinalizeBuildStatus:
          Deleting file "Debug\SDL_basics.unsuccessfulbuild".
          Touching "Debug\SDL_basics.lastbuildstate".
-     1>Done Building Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:07.61
+Time Elapsed 00:00:02.21

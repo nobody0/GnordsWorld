@@ -36,7 +36,7 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 
 	r = r % 28;
 
-	if (y < 3 || r > 20)
+	if (y < 8 || r > 20)
 	{
 		world.mapBack.insert(
 			make_pair(
