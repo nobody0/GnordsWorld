@@ -41,4 +41,4 @@ extern int32_t myRand(int32_t x);
 
 extern SDL_Surface *load_image( const string &filename );
 
-extern void apply_surface( int32_t x, int32_t y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL );
+extern void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL );

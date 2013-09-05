@@ -28,7 +28,7 @@ int64_t World::int64FromXY(const int32_t &x, const int32_t &y)
 
 void World::init()
 {
-	player.init(0, 0);
+	player.init(0, -256);
 }
 
 void World::generateBack(const int32_t &x, const int32_t &y)
@@ -37,7 +37,7 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 
 	r = r % 28;
 
-	if (y < 8 || r > 20)
+	if (y < 0 || r > 20 && false)
 	{
 		world.mapBack.insert(
 			make_pair(
@@ -229,7 +229,7 @@ void World::update()
 	int32_t drawYStart = player.yGridded - VISIBLE_GRIDS_Y/2;
 	int32_t drawYEnd = player.yGridded + VISIBLE_GRIDS_Y/2;
 
-	Paralax::draw(100);
+	Paralax::draw();
 
 	for (x=drawXStart; x<drawXEnd; x++)
 	{

@@ -48,6 +48,13 @@ bool init()
         return false;
     }
 
+	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
+	int initted=IMG_Init(flags);
+	if( initted & flags != flags)
+	{
+		return false;
+	}
+
     SDL_WM_SetCaption( "Hello 2D World", NULL );
 
     return true;
@@ -68,13 +75,14 @@ SDL_Surface *load_image( const string &filename )
 		SDL_Surface* optimizedImage = NULL;
 
 		//Load the image
-		loadedImage = IMG_Load( (BASE_IMAGE_PATH+filename).c_str() );
+		loadedImage = IMG_Load( ("../"+BASE_IMAGE_PATH+filename).c_str() );
+		if (loadedImage == NULL) loadedImage = IMG_Load( (BASE_IMAGE_PATH+filename).c_str() );
 
 		//If the image loaded
 		if( loadedImage != NULL )
 		{
 			//Create an optimized surface
-			optimizedImage = SDL_DisplayFormat( loadedImage );
+			optimizedImage = SDL_DisplayFormatAlpha( loadedImage );
 
 			//Free the old surface
 			SDL_FreeSurface( loadedImage );
@@ -108,7 +116,7 @@ void unload_files()
 }
 
 
-void apply_surface( int32_t x, int32_t y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip )
+void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip )
 {
     //Holds offsets
     SDL_Rect offset;

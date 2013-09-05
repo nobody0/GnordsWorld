@@ -31,21 +31,29 @@ void Player::updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t
 
 void Player::myUpdate()
 {
-		float speed = 100;
-		float jumpHeight = 200;
-		float fallSpeed = 500;
-		float maxFallSpeed = 600;
-		Vector2 moveVector;
-		Vector2 moveVectorToApply;
+	float speed = 100;
+	float jumpHeight = 200;
+	float fallSpeed = 500;
+	float maxFallSpeed = 600;
+	Vector2 moveVector;
+	Vector2 moveVectorToApply;
+
+	float maxDelta = 0.05;
+	float deltaTimeLeft = deltaTime;
+	float myDeltaTime;
+
+	do {
+		myDeltaTime = min(maxDelta, deltaTimeLeft);
+		deltaTimeLeft -= myDeltaTime;
 
 		if (keystates[SDLK_RIGHT])
 		{
-			moveVector.x = deltaTime * speed;
+			moveVector.x = myDeltaTime * speed;
 		}
 
 		if (keystates[SDLK_LEFT])
 		{
-			moveVector.x = deltaTime * -speed;
+			moveVector.x = myDeltaTime * -speed;
 		}
 
 		if (grounded)
@@ -57,23 +65,23 @@ void Player::myUpdate()
 			}
 		}
 		
-		velocity.y += deltaTime * fallSpeed;
+		velocity.y += myDeltaTime * fallSpeed;
 		if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
 
 		if (velocity.y != 0)
 		{
 			moveVectorToApply.x = 0;
-			moveVectorToApply.y = velocity.y * deltaTime;
+			moveVectorToApply.y = velocity.y * myDeltaTime;
 			move(moveVectorToApply);
-			velocity.y = moveVectorToApply.y / deltaTime;
+			velocity.y = moveVectorToApply.y / myDeltaTime;
 		}
 
 		if (velocity.x != 0)
 		{
-			moveVectorToApply.x = velocity.x * deltaTime;
+			moveVectorToApply.x = velocity.x * myDeltaTime;
 			moveVectorToApply.y = 0;
 			move(moveVectorToApply);
-			velocity.x = moveVectorToApply.x / deltaTime;
+			velocity.x = moveVectorToApply.x / myDeltaTime;
 		}
 
 		if (moveVector.y != 0)
@@ -91,4 +99,5 @@ void Player::myUpdate()
 			move(moveVectorToApply);
 			moveVector.x = moveVectorToApply.x;
 		}
+	} while (deltaTimeLeft > 0);
 }
