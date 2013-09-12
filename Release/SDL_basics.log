@@ -1,9 +1,9 @@
-﻿Build started 05.09.2013 19:29:04.
+﻿Build started 12.09.2013 14:31:29.
      1>Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
-     1>main.cpp(53): warning C4554: '&' : check operator precedence for possible error; use parentheses to clarify precedence
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
+         Player.cpp
+     1>Player.cpp(41): warning C4305: 'initializing' : truncation from 'double' to 'float'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.exe" /NOLOGO SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib SDL_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /ENTRY:"WinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.lib" /MACHINE:X86 /SAFESEH Release\Field.obj
          Release\FieldBack.obj
@@ -28,4 +28,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.20
+Time Elapsed 00:00:02.07

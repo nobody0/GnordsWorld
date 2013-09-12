@@ -10,4 +10,5 @@ public:
 	
 	static void draw();
 	static void draw2(SDL_Surface* image, const float &speed);
+	static void drawBG();
 };

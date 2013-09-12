@@ -23,10 +23,10 @@ void Player::init(const int32_t &x, const int32_t &y)
 
 void Player::updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t &y)
 {
-	metrics[0].x = x;
-	metrics[0].y = y;
-	metrics[0].w = GRID_SIZE;
-	metrics[0].h = GRID_SIZE * 2;
+	metrics[0].x = x+1;
+	metrics[0].y = y+15;
+	metrics[0].w = 29;
+	metrics[0].h = 49;
 }
 
 void Player::myUpdate()
