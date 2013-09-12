@@ -23,30 +23,39 @@ void Field::draw() const
 	}
 }
 
-void Field::init(const int32_t &x, const int32_t &y, const int32_t &metricsLength)
+void Field::init(const int32_t &x, const int32_t &y, const int32_t &metricsLength, const int32_t &affectedGridsLength)
 {
 	this->x = (float)x;
 	this->y = (float)y;
 	
-	xGridded = (int32_t)this->x / GRID_SIZE;
-	yGridded = (int32_t)this->y / GRID_SIZE;
+	xGridded = (int32_t)floor(this->x / GRID_SIZE);
+	yGridded = (int32_t)floor(this->y / GRID_SIZE);
 
 	grounded = false;
-
-	insertIntoMap(xGridded, yGridded);
 
 	this->metricsLength = metricsLength;
 	metrics = new Rect[metricsLength];
 	metricsNew = new Rect[metricsLength];
-	updateMetrics(metrics, x, y);
+
+	this->affectedGridsLength = affectedGridsLength;
+	affectedGrids = new int64_t[affectedGridsLength];
+	affectedGridsNew = new int64_t[affectedGridsLength];
+
+	updateMetrics(metrics, affectedGrids, x, y);
+
+	insertIntoMap();
 }
 
-void Field::updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t &y)
+void Field::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y)
 {
 	metrics[0].x = x;
 	metrics[0].y = y;
 	metrics[0].w = GRID_SIZE;
 	metrics[0].h = GRID_SIZE;
+	
+	int32_t xGridded = (int32_t)floor((double)x / GRID_SIZE);
+	int32_t yGridded = (int32_t)floor((double)y / GRID_SIZE);
+	affectedGrids[0] = world.int64FromXY(xGridded, yGridded);
 }
 
 //calls applyCollision then updatePosition
@@ -65,56 +74,52 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 	pair<unordered_multimap<int64_t, FieldFront*>::iterator, unordered_multimap<int64_t, FieldFront*>::iterator> frontItPair;
 	unordered_multimap<int64_t, FieldFront*>::iterator frontIt;
 
-	int32_t xStart;
-	int32_t yStart;
-	int32_t xEnd;
-	int32_t yEnd;
-	int32_t x;
-	int32_t y;
-
 	int32_t i;
 	int32_t ii;
+	int32_t ai;
 
-	updateMetrics(metricsNew, (int32_t)(this->x + moveVector.x), (int32_t)(this->y + moveVector.y));
+	updateMetrics(metricsNew, affectedGridsNew, (int32_t)(this->x + moveVector.x), (int32_t)(this->y + moveVector.y));
 
-	for (i = 0; i<metricsLength; i++)
+	for (ai = 0; ai<affectedGridsLength; ai++)
 	{
-		xStart = metricsNew[i].x / GRID_SIZE;
-		if (metricsNew[i].x % GRID_SIZE) xStart--;
+		xy64 = affectedGridsNew[ai];
 
-		yStart = metricsNew[i].y / GRID_SIZE;
-		if (metricsNew[i].y % GRID_SIZE) yStart--;
-
-		xEnd = (metricsNew[i].x + metricsNew[i].w) / GRID_SIZE;
-		if ((metricsNew[i].x + metricsNew[i].w) % GRID_SIZE) xEnd++;
-
-		yEnd = (metricsNew[i].y + metricsNew[i].h) / GRID_SIZE;
-		if ((metricsNew[i].y + metricsNew[i].h) % GRID_SIZE) yEnd++;
-
-		
-
-		/*
-			colidingLayer
-
-			1 colides with 1 and 2 (back back elemente)
-			2 colides with 1, 2 and 3 (back elemente)
-			3 colides with 2, and 3
-
-			1 and 2 is back map
-			3 is front map only
-		*/
-		for (x = xStart; x <= xEnd; x++)
+		backIt = world.mapBack.find(xy64);
+		if (backIt != world.mapBack.end())
 		{
-			for (y = yStart; y <= yEnd; y++)
+			if (backIt->second != NULL && backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
 			{
-				xy64 = world.int64FromXY(x, y);
-
-				backIt = world.mapBack.find(xy64);
-				if (backIt != world.mapBack.end())
+				for (i = 0; i<metricsLength; i++)
 				{
-					if (backIt->second != NULL && backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
+					for (ii = 0; ii<backIt->second->metricsLength; ii++)
 					{
-						for (ii = 0; ii<backIt->second->metricsLength; ii++)
+						if (metricsNew[i].intersectsWith(backIt->second->metrics[ii]))
+						{
+							if (metricsNew[i].shortenVectorToNotInteresctWith(backIt->second->metrics[ii], moveVector))
+							{
+								return applyCollisionToVector(moveVector);
+							}
+							else
+							{
+								return;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if (colidingLayer != 1)
+		{
+			frontItPair = world.mapFront.equal_range(xy64);
+
+			for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
+			{
+				if (frontIt->second != NULL && frontIt->second != this) //TODO prevent double checking the same object!
+				{
+					for (i = 0; i<metricsLength; i++)
+					{
+						for (ii = 0; ii<frontIt->second->metricsLength; ii++)
 						{
 							if (metricsNew[i].intersectsWith(backIt->second->metrics[ii]))
 							{
@@ -130,32 +135,6 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 						}
 					}
 				}
-
-				if (colidingLayer != 1)
-				{
-					frontItPair = world.mapFront.equal_range(xy64);
-
-					for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
-					{
-						if (frontIt->second != NULL && frontIt->second != this) //TODO prevent double checking the same object!
-						{
-							for (ii = 0; ii<frontIt->second->metricsLength; ii++)
-							{
-								if (metricsNew[i].intersectsWith(backIt->second->metrics[ii]))
-								{
-									if (metricsNew[i].shortenVectorToNotInteresctWith(backIt->second->metrics[ii], moveVector))
-									{
-										return applyCollisionToVector(moveVector);
-									}
-									else
-									{
-										return;
-									}
-								}
-							}
-						}
-					}
-				}
 			}
 		}
 	}
@@ -165,24 +144,33 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 void Field::updatePosition(const float &xNew, const float &yNew)
 {
 	if (x != xNew || y != yNew) {
-		updateMetrics(metrics, (int32_t)xNew, (int32_t)yNew);
+		updateMetrics(metrics, affectedGrids, (int32_t)xNew, (int32_t)yNew);
 
 		applyCollision();
 
-		int32_t newGridX = (int32_t)xNew / GRID_SIZE;
-		int32_t newGridY = (int32_t)yNew / GRID_SIZE;
+		int32_t newGridX = (int32_t)floor(xNew / GRID_SIZE);
+		int32_t newGridY = (int32_t)floor(yNew / GRID_SIZE);
 
 		if (xGridded != newGridX || yGridded != newGridY)
 		{
-			removeFromMap(xGridded, yGridded);
-			insertIntoMap(newGridX, newGridY);
-		}
+			removeFromMap();
 
-		x = xNew;
-		y = yNew;
+			x = xNew;
+			y = yNew;
 	
-		xGridded = newGridX;
-		yGridded = newGridY;
+			xGridded = newGridX;
+			yGridded = newGridY;
+
+			insertIntoMap();
+		}
+		else
+		{
+			x = xNew;
+			y = yNew;
+	
+			xGridded = newGridX;
+			yGridded = newGridY;
+		}
 	}
 }
 
@@ -194,58 +182,59 @@ void Field::applyCollision()
 	pair<unordered_multimap<int64_t, FieldFront*>::iterator, unordered_multimap<int64_t, FieldFront*>::iterator> frontItPair;
 	unordered_multimap<int64_t, FieldFront*>::iterator frontIt;
 
-	int32_t xStart;
-	int32_t yStart;
-	int32_t xEnd;
-	int32_t yEnd;
-	int32_t x;
-	int32_t y;
-
 	int32_t i;
 	int32_t ii;
+	int32_t ai;
 
 	grounded = false;
 
-	for (i = 0; i<metricsLength; i++)
+	for (ai = 0; ai<affectedGridsLength; ai++)
 	{
-		xStart = metrics[i].x / GRID_SIZE;
-		if (metrics[i].x % GRID_SIZE) xStart--;
+		xy64 = affectedGrids[ai];
 
-		yStart = metrics[i].y / GRID_SIZE;
-		if (metrics[i].y % GRID_SIZE) yStart--;
-
-		xEnd = (metrics[i].x + metrics[i].w) / GRID_SIZE;
-		if ((metrics[i].x + metrics[i].w) % GRID_SIZE) xEnd++;
-
-		yEnd = (metrics[i].y + metrics[i].h) / GRID_SIZE;
-		if ((metrics[i].y + metrics[i].h) % GRID_SIZE) yEnd++;
-
-		
-
-		/*
-			colidingLayer
-
-			1 colides with 1 and 2 (back back elemente)
-			2 colides with 1, 2 and 3 (back elemente)
-			3 colides with 2, and 3
-
-			1 and 2 is back map
-			3 is front map only
-		*/
-		for (x = xStart; x <= xEnd; x++)
+		backIt = world.mapBack.find(xy64);
+		if (backIt != world.mapBack.end() && backIt->second != NULL)
 		{
-			for (y = yStart; y <= yEnd; y++)
+			if (backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
 			{
-				xy64 = world.int64FromXY(x, y);
-
-				backIt = world.mapBack.find(xy64);
-				if (backIt != world.mapBack.end() && backIt->second != NULL)
+				for (i = 0; i<metricsLength; i++)
 				{
-					if (backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
+					for (ii = 0; ii<backIt->second->metricsLength; ii++)
 					{
-						for (ii = 0; ii<backIt->second->metricsLength; ii++)
+						if ( metrics[i].collidesWith(backIt->second->metrics[ii]) )
 						{
-							if ( metrics[i].collidesWith(backIt->second->metrics[ii]) )
+							if ( !grounded
+								&& (metrics[i].y + metrics[i].h) <= (backIt->second->metrics[ii].y)
+								&& (metrics[i].x + metrics[i].w) > (backIt->second->metrics[ii].x)
+								&& (metrics[i].x) < (backIt->second->metrics[ii].x + backIt->second->metrics[ii].w) )
+							{
+								if (velocity.y > 0) {
+									velocity.y = 0;
+								}
+								grounded = true;
+							}
+
+							backIt->second->onCollision(this);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		if (colidingLayer != 1)
+		{
+			frontItPair = world.mapFront.equal_range(xy64);
+
+			for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
+			{
+				if (frontIt->second != NULL && frontIt->second != this) //TODO prevent double checking the same object!
+				{
+					for (i = 0; i<metricsLength; i++)
+					{
+						for (ii = 0; ii<frontIt->second->metricsLength; ii++)
+						{
+							if ( metrics[i].collidesWith(frontIt->second->metrics[ii]) )
 							{
 								if ( !grounded
 									&& (metrics[i].y + metrics[i].h) <= (backIt->second->metrics[ii].y)
@@ -260,37 +249,6 @@ void Field::applyCollision()
 
 								backIt->second->onCollision(this);
 								break;
-							}
-						}
-					}
-				}
-
-				if (colidingLayer != 1)
-				{
-					frontItPair = world.mapFront.equal_range(xy64);
-
-					for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
-					{
-						if (frontIt->second != NULL && frontIt->second != this) //TODO prevent double checking the same object!
-						{
-							for (ii = 0; ii<frontIt->second->metricsLength; ii++)
-							{
-								if ( metrics[i].collidesWith(frontIt->second->metrics[ii]) )
-								{
-									if ( !grounded
-										&& (metrics[i].y + metrics[i].h) <= (backIt->second->metrics[ii].y)
-										&& (metrics[i].x + metrics[i].w) > (backIt->second->metrics[ii].x)
-										&& (metrics[i].x) < (backIt->second->metrics[ii].x + backIt->second->metrics[ii].w) )
-									{
-										if (velocity.y > 0) {
-											velocity.y = 0;
-										}
-										grounded = true;
-									}
-
-									backIt->second->onCollision(this);
-									break;
-								}
 							}
 						}
 					}

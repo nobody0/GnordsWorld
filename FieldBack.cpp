@@ -13,49 +13,63 @@ FieldBack::~FieldBack(void)
 {
 }
 
-void FieldBack::init(const int32_t &x, const int32_t &y, const int32_t &metricsLength)
+void FieldBack::init(const int32_t &x, const int32_t &y, const int32_t &metricsLength, const int32_t &affectedGridsLength)
 {
-	Field::init(x, y, metricsLength);
+	Field::init(x, y, metricsLength, affectedGridsLength);
 
 	colidingLayer = 2;
 }
 
 void FieldBack::onUsed()
 {
-	removeFromMap(xGridded, yGridded);
+	removeFromMap();
 
 	//reminder: this has to be the very last thing to execute!
 	delete this;
 	return;
 }
 
-void FieldBack::removeFromMap(const int32_t &x, const int32_t &y) const
+void FieldBack::removeFromMap() const
 {
-	int64_t xy64 = world.int64FromXY(x, y);
+	int64_t xy64;
+	unordered_map<int64_t, FieldBack*>::iterator backIt;
 
-	unordered_map<int64_t, FieldBack*>::iterator backIt = world.mapBack.find(xy64);
-
-	if (backIt != world.mapBack.end())
+	for (int32_t i = 0; i<affectedGridsLength; i++)
 	{
-		backIt->second = NULL;
+		xy64 = affectedGrids[i];
+
+		backIt = world.mapBack.find(xy64);
+
+		if (backIt != world.mapBack.end())
+		{
+			backIt->second = NULL;
+		}
 	}
 }
 
-void FieldBack::insertIntoMap(const int32_t &x, const int32_t &y) const
+void FieldBack::insertIntoMap() const
 {
-	//TODO if there already is an obejct at that position, do we override it?!?
-	unordered_map<int64_t, FieldBack*>::iterator backIt = world.mapBack.find(world.int64FromXY(x, y));
-	if (backIt != world.mapBack.end())
+	int64_t xy64;
+	unordered_map<int64_t, FieldBack*>::iterator backIt;
+
+	for (int32_t i = 0; i<affectedGridsLength; i++)
 	{
-		backIt->second = (FieldBack*) this;
-	}
-	else
-	{
-		world.mapBack.insert(
-			make_pair(
-				world.int64FromXY(x, y),
-				(FieldBack*) this
-			)
-		);
+		int64_t xy642 = world.int64FromXY(xGridded, yGridded);
+		xy64 = affectedGrids[i];
+		backIt = world.mapBack.find(xy64);
+		if (backIt != world.mapBack.end())
+		{
+			//TODO if there already is an obejct at that position, do we override it?!?
+			backIt->second = (FieldBack*) this;
+		}
+		else
+		{
+			world.mapBack.insert(
+				make_pair(
+					xy64,
+					(FieldBack*) this
+				)
+			);
+		}
 	}
 }

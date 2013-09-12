@@ -16,19 +16,37 @@ Player::~Player(void)
 
 void Player::init(const int32_t &x, const int32_t &y)
 {
-	FieldFront::init(x, y);
+	FieldFront::init(x, y, 1, 12);
 
 	activeTool = NULL;
 
 	image = load_image("Foreground/Gnord/Gnord_still.png");
 }
 
-void Player::updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t &y)
+void Player::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y)
 {
 	metrics[0].x = x+1;
 	metrics[0].y = y+15;
 	metrics[0].w = 29;
 	metrics[0].h = 49;
+
+	int32_t xGridded = (int32_t)floor((double)x / GRID_SIZE);
+	int32_t yGridded = (int32_t)floor((double)y / GRID_SIZE);
+
+	affectedGrids[0] = world.int64FromXY(xGridded-1, yGridded-1);
+	affectedGrids[1] = world.int64FromXY(xGridded-1, yGridded);
+	affectedGrids[2] = world.int64FromXY(xGridded-1, yGridded+1);
+	affectedGrids[3] = world.int64FromXY(xGridded-1, yGridded+2);
+
+	affectedGrids[4] = world.int64FromXY(xGridded, yGridded-1);
+	affectedGrids[5] = world.int64FromXY(xGridded, yGridded);
+	affectedGrids[6] = world.int64FromXY(xGridded, yGridded+1);
+	affectedGrids[7] = world.int64FromXY(xGridded, yGridded+2);
+
+	affectedGrids[8] = world.int64FromXY(xGridded+1, yGridded-1);
+	affectedGrids[9] = world.int64FromXY(xGridded+1, yGridded);
+	affectedGrids[10] = world.int64FromXY(xGridded+1, yGridded+1);
+	affectedGrids[11] = world.int64FromXY(xGridded+1, yGridded+2);
 }
 
 void Player::myUpdate()

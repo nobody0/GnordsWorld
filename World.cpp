@@ -28,7 +28,7 @@ int64_t World::int64FromXY(const int32_t &x, const int32_t &y)
 
 void World::init()
 {
-	player.init(0, -256);
+	player.init(0, -64);
 }
 
 void World::generateBack(const int32_t &x, const int32_t &y)
@@ -105,10 +105,14 @@ void World::onClick()
 	int32_t mouseWorldX = mouseX + (int32_t)world.player.x - SCREEN_WIDTH/2;
 	int32_t mouseWorldY = mouseY + (int32_t)world.player.y - SCREEN_HEIGHT/2;
 
-	x = mouseWorldX / GRID_SIZE;
-	if (mouseWorldX < 0) x--;
-	y = mouseWorldY / GRID_SIZE;
-	if (mouseWorldY < 0) y--;
+	x = (int32_t)floor((double)mouseWorldX / GRID_SIZE);
+	y = (int32_t)floor((double)mouseWorldY / GRID_SIZE);
+
+	Rect colidingRect;
+	colidingRect.x = x * GRID_SIZE + 1;
+	colidingRect.y = y * GRID_SIZE + 1;
+	colidingRect.h = GRID_SIZE - 2;
+	colidingRect.w = GRID_SIZE - 2;
 
 	xy64 = world.int64FromXY(x, y);
 
@@ -119,7 +123,7 @@ void World::onClick()
 		{
 			for (i = 0; i<frontIt->second->metricsLength; i++)
 			{
-				if (frontIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
+				if (frontIt->second->metrics[i].collidesWith(colidingRect))
 				{
 					return player.useTool(frontIt->second, x, y);
 				}
@@ -186,6 +190,18 @@ void World::update()
 					backIt->second->update();
 				}
 			}
+			else
+			{
+				generateBack(x, y);
+			}
+		}
+	}
+
+	for (x=updateXStart; x<updateXEnd; x++)
+	{
+		for (y=updateYStart; y<updateYEnd; y++)
+		{
+			xy64 = int64FromXY(x, y);
 
 			frontItPair = mapFront.equal_range(xy64);
 
@@ -204,8 +220,6 @@ void World::update()
 			}
 		}
 	}
-
-	//TODO test if we have to increase our world
 	
 	int32_t drawXStart = player.xGridded - VISIBLE_GRIDS_X/2;
 	int32_t drawXEnd = player.xGridded + VISIBLE_GRIDS_X/2;
@@ -228,10 +242,6 @@ void World::update()
 				{
 					backIt->second->draw();
 				}
-			}
-			else
-			{
-				generateBack(x, y);
 			}
 
 			frontItPair = mapFront.equal_range(xy64);

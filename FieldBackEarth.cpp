@@ -48,7 +48,7 @@ void FieldBackEarth::myUpdate()
 		{
 			if (backIt->second == NULL)
 			{
-				removeFromMap(xGridded, yGridded);
+				removeFromMap();
 
 				FieldBackGrass* fieldBackGrass = new FieldBackGrass();
 				fieldBackGrass->init(xGridded*GRID_SIZE, yGridded*GRID_SIZE);

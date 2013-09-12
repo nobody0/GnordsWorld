@@ -15,7 +15,7 @@ public:
 	
 	void init(const int32_t &x, const int32_t &y);
 
-	void updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t &y);
+	void updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y);
 
 	void myUpdate();
 

@@ -7,10 +7,10 @@ public:
 	FieldBack(void);
 	virtual ~FieldBack(void);
 
-	virtual void init(const int32_t &x, const int32_t &y, const int32_t &metricsLength = 1);
+	virtual void init(const int32_t &x, const int32_t &y, const int32_t &metricsLength = 1, const int32_t &affectedGridsLength = 1);
 
 	virtual void onUsed();
 	
-	void removeFromMap(const int32_t &x, const int32_t &y) const;
-	void insertIntoMap(const int32_t &x, const int32_t &y) const;
+	void removeFromMap() const;
+	void insertIntoMap() const;
 };

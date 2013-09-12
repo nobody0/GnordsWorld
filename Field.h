@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SDL.h"
 #include "Rect.h"
 #include "Vector2.h"
 
@@ -22,10 +21,13 @@ public:
 	float lastDraw;
 	
 	int32_t metricsLength;
-	
+	int32_t affectedGridsLength;
+
 	Rect* metrics;
+	int64_t* affectedGrids;
 
 	Rect* metricsNew;
+	int64_t* affectedGridsNew;
 
 	/*
 		1 colides with 1 and 2 (back back elemente)
@@ -39,10 +41,10 @@ public:
 
 	void draw() const;
 
-	virtual void init(const int32_t &x, const int32_t &y, const int32_t &metricsLength = 1);
+	virtual void init(const int32_t &x, const int32_t &y, const int32_t &metricsLength = 1, const int32_t &affectedGridsLength = 1);
 	
-	virtual void updateMetrics(Rect* const &metrics, const int32_t &x, const int32_t &y);
-
+	virtual void updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y);
+	
 	void move(Vector2 &moveVector);
 
 	void applyCollisionToVector(Vector2 &moveVector);
@@ -57,8 +59,8 @@ public:
 
 	void update();
 
-	virtual void removeFromMap(const int32_t &x, const int32_t &y) const = 0;
-	virtual void insertIntoMap(const int32_t &x, const int32_t &y) const = 0;
+	virtual void removeFromMap() const = 0;
+	virtual void insertIntoMap() const = 0;
 
 protected:
 	SDL_Surface* image;
