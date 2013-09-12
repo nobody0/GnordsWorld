@@ -305,7 +305,7 @@ void Field::onCollision(const Field* const other)
 
 }
 
-void Field::onClick()
+void Field::onUsed()
 {
 	
 }

@@ -71,7 +71,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>SDLmain.lib;SDL.lib;SDL_image.lib;SDL_mixer.lib;SDL_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -90,6 +90,10 @@
     <ClCompile Include="FieldBackIron.cpp" />
     <ClCompile Include="FieldBackGrass.cpp" />
     <ClCompile Include="FieldFront.cpp" />
+    <ClCompile Include="Fists.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryEarth.cpp" />
+    <ClCompile Include="InventoryObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paralax.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -108,6 +112,10 @@
     <ClInclude Include="FieldBackIron.h" />
     <ClInclude Include="FieldBackGrass.h" />
     <ClInclude Include="FieldFront.h" />
+    <ClInclude Include="Fists.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryEarth.h" />
+    <ClInclude Include="InventoryObject.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Paralax.h" />
     <ClInclude Include="Player.h" />

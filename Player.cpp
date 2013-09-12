@@ -18,6 +18,8 @@ void Player::init(const int32_t &x, const int32_t &y)
 {
 	FieldFront::init(x, y);
 
+	activeTool = NULL;
+
 	image = load_image("Foreground/Gnord/Gnord_still.png");
 }
 
@@ -46,19 +48,19 @@ void Player::myUpdate()
 		myDeltaTime = min(maxDelta, deltaTimeLeft);
 		deltaTimeLeft -= myDeltaTime;
 
-		if (keystates[SDLK_RIGHT])
+		if (keystates[SDLK_RIGHT] || keystates[SDLK_d])
 		{
 			moveVector.x = myDeltaTime * speed;
 		}
 
-		if (keystates[SDLK_LEFT])
+		if (keystates[SDLK_LEFT] || keystates[SDLK_a])
 		{
 			moveVector.x = myDeltaTime * -speed;
 		}
 
 		if (grounded)
 		{
-			if (keystates[SDLK_UP])
+			if (keystates[SDLK_UP] || keystates[SDLK_w] || keystates[SDLK_SPACE])
 			{
 				velocity.y = -jumpHeight;
 				grounded = false;
@@ -100,4 +102,16 @@ void Player::myUpdate()
 			moveVector.x = moveVectorToApply.x;
 		}
 	} while (deltaTimeLeft > 0);
+}
+
+void Player::useTool(Field* target, const int32_t &x, const int32_t &y)
+{
+	if (activeTool != NULL)
+	{
+		activeTool->onUse(target, x, y);
+	}
+	else
+	{
+		defaultTool.onUse(target, x, y);
+	}
 }

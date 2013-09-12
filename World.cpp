@@ -97,10 +97,6 @@ void World::onClick()
 	pair<unordered_multimap<int64_t, FieldFront*>::iterator, unordered_multimap<int64_t, FieldFront*>::iterator> frontItPair;
 	unordered_multimap<int64_t, FieldFront*>::iterator frontIt;
 
-	int32_t xStart;
-	int32_t yStart;
-	int32_t xEnd;
-	int32_t yEnd;
 	int32_t x;
 	int32_t y;
 
@@ -109,56 +105,44 @@ void World::onClick()
 	int32_t mouseWorldX = mouseX + (int32_t)world.player.x - SCREEN_WIDTH/2;
 	int32_t mouseWorldY = mouseY + (int32_t)world.player.y - SCREEN_HEIGHT/2;
 
-	xStart = mouseWorldX / GRID_SIZE;
-	if (mouseWorldX % GRID_SIZE) xStart--;
+	x = mouseWorldX / GRID_SIZE;
+	if (mouseWorldX < 0) x--;
+	y = mouseWorldY / GRID_SIZE;
+	if (mouseWorldY < 0) y--;
 
-	yStart = mouseWorldY / GRID_SIZE;
-	if (mouseWorldY % GRID_SIZE) yStart--;
+	xy64 = world.int64FromXY(x, y);
 
-	xEnd = mouseWorldX / GRID_SIZE;
-	if (mouseWorldX % GRID_SIZE) xEnd++;
-
-	yEnd = mouseWorldY / GRID_SIZE;
-	if (mouseWorldY % GRID_SIZE) yEnd++;
-
-	for (x = xStart; x <= xEnd; x++)
+	frontItPair = world.mapFront.equal_range(xy64);
+	for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
 	{
-		for (y = yStart; y <= yEnd; y++)
+		if (frontIt->second != NULL) //TODO prevent double checking the same object!
 		{
-			xy64 = world.int64FromXY(x, y);
-
-			frontItPair = world.mapFront.equal_range(xy64);
-
-			for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
+			for (i = 0; i<frontIt->second->metricsLength; i++)
 			{
-				if (frontIt->second != NULL) //TODO prevent double checking the same object!
+				if (frontIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
 				{
-					for (i = 0; i<frontIt->second->metricsLength; i++)
-					{
-						if (frontIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
-						{
-							return frontIt->second->onClick();
-						}
-					}
-				}
-			}
-
-			backIt = world.mapBack.find(xy64);
-			if (backIt != world.mapBack.end())
-			{
-				if (backIt->second != NULL) //TODO prevent double checking the same object!
-				{
-					for (i = 0; i<backIt->second->metricsLength; i++)
-					{
-						if (backIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
-						{
-							return backIt->second->onClick();
-						}
-					}
+					return player.useTool(frontIt->second, x, y);
 				}
 			}
 		}
 	}
+
+	backIt = world.mapBack.find(xy64);
+	if (backIt != world.mapBack.end())
+	{
+		if (backIt->second != NULL) //TODO prevent double checking the same object!
+		{
+			for (i = 0; i<backIt->second->metricsLength; i++)
+			{
+				if (backIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
+				{
+					return player.useTool(backIt->second, x, y);
+				}
+			}
+		}
+	}
+
+	return player.useTool(NULL, x, y);
 }
 
 void World::update()

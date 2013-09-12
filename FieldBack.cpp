@@ -20,7 +20,7 @@ void FieldBack::init(const int32_t &x, const int32_t &y, const int32_t &metricsL
 	colidingLayer = 2;
 }
 
-void FieldBack::onClick()
+void FieldBack::onUsed()
 {
 	removeFromMap(xGridded, yGridded);
 

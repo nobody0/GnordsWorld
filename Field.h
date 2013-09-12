@@ -53,7 +53,7 @@ public:
 
 	void onCollision(const Field* const other);
 
-	virtual void onClick();
+	virtual void onUsed();
 
 	void update();
 

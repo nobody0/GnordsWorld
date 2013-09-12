@@ -49,6 +49,16 @@
     <ClCompile Include="Paralax.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="InventoryEarth.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryObject.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Fists.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -99,6 +109,16 @@
     <ClInclude Include="Paralax.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="InventoryEarth.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryObject.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Fists.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -109,6 +129,9 @@
     </Filter>
     <Filter Include="Framework">
       <UniqueIdentifier>{b8fa7a82-96d8-4b63-bedf-204393c1c4b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InvenotryObjects">
+      <UniqueIdentifier>{faef8041-5bb6-40cd-a397-2bc89e099cae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

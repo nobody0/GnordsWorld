@@ -74,7 +74,7 @@ void Paralax::draw2(SDL_Surface* image, const float &speed)
 
 	int32_t xGridded = ((int32_t)(world.player.x/speed - world.player.x) % width) - width;
 
-	int32_t y = -height - world.player.y + SCREEN_HEIGHT/2;
+	int32_t y = -height - (int32_t)world.player.y + SCREEN_HEIGHT/2;
 
 	for (int32_t x = xGridded; x<SCREEN_WIDTH; x+=width)
 	{

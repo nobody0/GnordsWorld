@@ -1,6 +1,7 @@
 #include "FieldBackEarth.h"
 #include "main.h"
 #include "FieldBackGrass.h"
+#include "InventoryEarth.h"
 
 
 FieldBackEarth::FieldBackEarth(void)
@@ -62,4 +63,11 @@ void FieldBackEarth::myUpdate()
 	} else {
 		updateCounter++;
 	}
+}
+
+void FieldBackEarth::onUsed()
+{
+	InventoryObject* inventoryObject = new InventoryEarth(1);
+	world.player.inventory.add(inventoryObject);
+	FieldBack::onUsed();
 }
