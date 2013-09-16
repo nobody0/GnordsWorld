@@ -12,6 +12,8 @@ public:
 
 	Player(void);
 	virtual ~Player(void);
+
+	void draw(bool forceRedraw = false);
 	
 	void init(const int32_t &x, const int32_t &y);
 
@@ -20,4 +22,17 @@ public:
 	void myUpdate();
 
 	void useTool(Field* target, const int32_t &x, const int32_t &y);
+
+	void onUsed(const ToolTypes &toolType, const int32_t &toolLevel);
+
+private:
+	SDL_Surface* body[6];
+	SDL_Surface* fell;
+	SDL_Surface* arm[8];
+	
+	float bodyAnimStart;
+	uint32_t bodyAnimIndex;
+	
+	float armAnimStart;
+	uint32_t armAnimIndex;
 };

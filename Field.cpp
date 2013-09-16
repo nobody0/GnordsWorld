@@ -12,14 +12,13 @@ Field::~Field(void)
 	//delete[] metricsNew;
 }
 
-void Field::draw() const
+void Field::draw(bool forceRedraw)
 {
-	//TODO bug, cant assign a value to lastDraw!
-	//if (lastDraw != totalTime)
+	if (lastDraw != totalTime && !forceRedraw)
 	{
 		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, image, screen);
 
-		//lastDraw = totalTime;
+		lastDraw = totalTime;
 	}
 }
 
@@ -44,6 +43,9 @@ void Field::init(const int32_t &x, const int32_t &y, const int32_t &metricsLengt
 	updateMetrics(metrics, affectedGrids, x, y);
 
 	insertIntoMap();
+	
+	appropriateTool = Default;
+	health = 1.1;
 }
 
 void Field::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y)
@@ -263,9 +265,24 @@ void Field::onCollision(const Field* const other)
 
 }
 
-void Field::onUsed()
+void Field::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
 {
-	
+	if (toolType == appropriateTool)
+	{
+		health -= 2*toolLevel*deltaTime;
+	}
+	else
+	{
+		health -= toolLevel*deltaTime;
+	}
+
+	if (health <= 0)
+	{
+		removeFromMap();
+
+		delete this;
+		return;
+	}
 }
 
 void Field::update()
@@ -273,8 +290,6 @@ void Field::update()
 	if (lastUpdate != totalTime) {
 		lastUpdate = totalTime;
 
-		//REMINDER: THIS HAS TO BE THE VERY LAST THING HAPPENING IN UPDATE!
-		//WE MIGHT DO A "delete this" INSIDE myUpdate http://www.parashift.com/c++-faq-lite/delete-this.html
 		myUpdate();
 	}
 }

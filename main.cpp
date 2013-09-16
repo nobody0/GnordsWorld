@@ -19,6 +19,7 @@ SDL_Event event;
 
 Uint8 *keystates;
 
+bool mouseDown = false;
 uint16_t mouseX;
 uint16_t mouseY;
 
@@ -169,11 +170,22 @@ int main( int argc, char* args[] )
 			case SDL_MOUSEBUTTONDOWN:
 				if(event.button.button == SDL_BUTTON_LEFT)
 				{
-					world.onClick();
+					mouseDown = true;
+				}
+				break;
+			case SDL_MOUSEBUTTONUP:
+				if(event.button.button == SDL_BUTTON_LEFT)
+				{
+					mouseDown = false;
 				}
 				break;
 			}
         }
+
+		if (mouseDown)
+		{
+			world.onClick();
+		}
 
 		world.update();
 

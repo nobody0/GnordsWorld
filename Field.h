@@ -2,6 +2,7 @@
 
 #include "Rect.h"
 #include "Vector2.h"
+#include "ToolTypes.h"
 
 class Field
 {
@@ -17,8 +18,6 @@ public:
 	Vector2 velocity;
 
 	bool grounded;
-
-	float lastDraw;
 	
 	int32_t metricsLength;
 	int32_t affectedGridsLength;
@@ -35,11 +34,14 @@ public:
 		3 colides with 2, and 3
 	*/
 	int32_t colidingLayer;
+	
+	ToolTypes appropriateTool;
+	float health;
 
 
 	bool visible;
 
-	void draw() const;
+	virtual void draw(bool forceRedraw = false);
 
 	virtual void init(const int32_t &x, const int32_t &y, const int32_t &metricsLength = 1, const int32_t &affectedGridsLength = 1);
 	
@@ -55,7 +57,7 @@ public:
 
 	void onCollision(const Field* const other);
 
-	virtual void onUsed();
+	virtual void onUsed(const ToolTypes &toolType, const int32_t &toolLevel);
 
 	void update();
 
@@ -66,6 +68,7 @@ protected:
 	SDL_Surface* image;
 
 	float lastUpdate;
+	float lastDraw;
 
 	virtual void myUpdate() = 0;
 };

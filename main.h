@@ -28,6 +28,7 @@ extern SDL_Event event;
 
 extern Uint8 *keystates;
 
+extern bool mouseDown;
 extern uint16_t mouseX;
 extern uint16_t mouseY;
 

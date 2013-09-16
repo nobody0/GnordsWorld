@@ -42,7 +42,7 @@ void FieldBackEarth::init(const int32_t &x, const int32_t &y)
 
 void FieldBackEarth::myUpdate()
 {
-	if (updateCounter > 10) {
+	if (updateCounter > 2) {
 		unordered_map<int64_t, FieldBack*>::iterator backIt = world.mapBack.find(world.int64FromXY(xGridded, yGridded-1));
 		if (backIt != world.mapBack.end())
 		{
@@ -52,8 +52,8 @@ void FieldBackEarth::myUpdate()
 
 				FieldBackGrass* fieldBackGrass = new FieldBackGrass();
 				fieldBackGrass->init(xGridded*GRID_SIZE, yGridded*GRID_SIZE);
+				fieldBackGrass->health = health;
 
-				//reminder: this has to be the very last thing to execute!
 				delete this;
 				return;
 			}
@@ -61,13 +61,29 @@ void FieldBackEarth::myUpdate()
 
 		updateCounter = 0;
 	} else {
-		updateCounter++;
+		updateCounter += deltaTime;
 	}
 }
 
-void FieldBackEarth::onUsed()
+void FieldBackEarth::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
 {
-	InventoryObject* inventoryObject = new InventoryEarth(1);
-	world.player.inventory.add(inventoryObject);
-	FieldBack::onUsed();
+	if (toolType == appropriateTool)
+	{
+		health -= 2*toolLevel*deltaTime;
+	}
+	else
+	{
+		health -= toolLevel*deltaTime;
+	}
+
+	if (health <= 0)
+	{
+		InventoryObject* inventoryObject = new InventoryEarth(1);
+		world.player.inventory.add(inventoryObject);
+
+		removeFromMap();
+
+		delete this;
+		return;
+	}
 }

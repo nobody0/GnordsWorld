@@ -20,15 +20,6 @@ void FieldBack::init(const int32_t &x, const int32_t &y, const int32_t &metricsL
 	colidingLayer = 2;
 }
 
-void FieldBack::onUsed()
-{
-	removeFromMap();
-
-	//reminder: this has to be the very last thing to execute!
-	delete this;
-	return;
-}
-
 void FieldBack::removeFromMap() const
 {
 	int64_t xy64;

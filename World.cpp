@@ -255,6 +255,5 @@ void World::update()
 		}
 	}
 
-	player.lastDraw = 0;
-	player.draw();
+	player.draw(true);
 }

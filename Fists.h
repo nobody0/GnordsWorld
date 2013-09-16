@@ -7,7 +7,5 @@ class Fists :
 public:
 	Fists(void);
 	~Fists(void);
-
-	void onUse(Field* target, const int32_t &x, const int32_t &y);
 };
 

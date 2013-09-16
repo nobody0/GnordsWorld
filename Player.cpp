@@ -14,21 +14,56 @@ Player::~Player(void)
 {
 }
 
+void Player::draw(bool forceRedraw)
+{
+	if (forceRedraw)
+	{
+		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
+		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fell, screen);
+		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
+
+		lastDraw = totalTime;
+	}
+}
+
 void Player::init(const int32_t &x, const int32_t &y)
 {
 	FieldFront::init(x, y, 1, 12);
 
 	activeTool = NULL;
+	
+	body[0] = load_image("Foreground/Gnord/walk_1.png");
+	body[1] = load_image("Foreground/Gnord/walk_2.png");
+	body[2] = load_image("Foreground/Gnord/walk_3.png");
+	body[3] = load_image("Foreground/Gnord/walk_4.png");
+	body[4] = load_image("Foreground/Gnord/walk_5.png");
+	body[5] = load_image("Foreground/Gnord/walk_6.png");
 
-	image = load_image("Foreground/Gnord/Gnord_still.png");
+	fell = load_image("Foreground/Gnord/fell.png");
+	
+	arm[0] = load_image("Foreground/Gnord/arm_1.png");
+	arm[1] = load_image("Foreground/Gnord/arm_2.png");
+	arm[2] = load_image("Foreground/Gnord/arm_3.png");
+	arm[3] = load_image("Foreground/Gnord/arm_4.png");
+	arm[4] = load_image("Foreground/Gnord/arm_5.png");
+	arm[5] = load_image("Foreground/Gnord/arm_6.png");
+	arm[6] = load_image("Foreground/Gnord/arm_7.png");
+	arm[7] = load_image("Foreground/Gnord/arm_8.png");
+	
+	bodyAnimStart = -1;
+	bodyAnimIndex = 0;
+
+	armAnimStart = -1;
+	armAnimIndex = 0;
 }
+
 
 void Player::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y)
 {
-	metrics[0].x = x+1;
-	metrics[0].y = y+15;
+	metrics[0].x = x;
+	metrics[0].y = y+8;
 	metrics[0].w = 29;
-	metrics[0].h = 49;
+	metrics[0].h = 50;
 
 	int32_t xGridded = (int32_t)floor((double)x / GRID_SIZE);
 	int32_t yGridded = (int32_t)floor((double)y / GRID_SIZE);
@@ -84,7 +119,51 @@ void Player::myUpdate()
 				grounded = false;
 			}
 		}
-		
+
+		if (moveVector.x != 0 && grounded)
+		{
+			if (bodyAnimStart == -1)
+			{
+				bodyAnimStart = totalTime;
+			}
+
+			float animSpeed = 10/speed;
+			int32_t size = sizeof(body) / sizeof(body[0]);
+			int32_t offset = ceil((totalTime-bodyAnimStart)/animSpeed);
+
+			if (moveVector.x > 0)
+			{
+				bodyAnimIndex = offset % size;
+			}
+			else
+			{
+				bodyAnimIndex = (size-1) - (offset % size);
+			}
+		}
+		else
+		{
+			bodyAnimIndex = 0;
+			bodyAnimStart = -1;
+		}
+
+		if (mouseDown)
+		{
+			if (armAnimIndex == -1)
+			{
+				armAnimIndex = totalTime;
+			}
+
+			float animSpeed = 0.1;
+			int32_t size = sizeof(arm) / sizeof(arm[0]);
+			int32_t offset = ceil((totalTime-armAnimStart)/animSpeed);
+
+			armAnimIndex = offset % size;
+		}
+		else
+		{
+			armAnimIndex = 0;
+			armAnimStart = -1;
+		}
 		velocity.y += myDeltaTime * fallSpeed;
 		if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
 
@@ -131,5 +210,23 @@ void Player::useTool(Field* target, const int32_t &x, const int32_t &y)
 	else
 	{
 		defaultTool.onUse(target, x, y);
+	}
+}
+
+void Player::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
+{
+	if (toolType == Enemy)
+	{
+		health -= toolLevel*deltaTime;
+	}
+
+	if (health <= 0)
+	{
+		/*
+		removeFromMap();
+
+		delete this;
+		return;
+		*/
 	}
 }

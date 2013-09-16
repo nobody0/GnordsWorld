@@ -58,7 +58,9 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Fists.cpp" />
+    <ClCompile Include="Fists.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -118,7 +120,12 @@
     <ClInclude Include="Inventory.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Fists.h" />
+    <ClInclude Include="Fists.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolTypes.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

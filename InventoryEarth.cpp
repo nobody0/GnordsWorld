@@ -22,7 +22,7 @@ void InventoryEarth::onUse(Field* target, const int32_t &x, const int32_t &y)
 {
 	if (target != NULL)
 	{
-		target->onUsed();
+		target->onUsed(toolType, toolLevel);
 	}
 	else
 	{

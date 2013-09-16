@@ -113,6 +113,7 @@
     <ClInclude Include="FieldBackGrass.h" />
     <ClInclude Include="FieldFront.h" />
     <ClInclude Include="Fists.h" />
+    <ClInclude Include="ToolTypes.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryEarth.h" />
     <ClInclude Include="InventoryObject.h" />

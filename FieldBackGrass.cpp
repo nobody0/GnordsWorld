@@ -1,5 +1,7 @@
 #include "FieldBackGrass.h"
 #include "main.h"
+#include "FieldBackEarth.h"
+#include "InventoryEarth.h"
 
 
 FieldBackGrass::FieldBackGrass(void)
@@ -40,5 +42,42 @@ void FieldBackGrass::init(const int32_t &x, const int32_t &y)
 
 void FieldBackGrass::myUpdate()
 {
+	unordered_map<int64_t, FieldBack*>::iterator backIt = world.mapBack.find(world.int64FromXY(xGridded, yGridded-1));
+	if (backIt != world.mapBack.end())
+	{
+		if (backIt->second != NULL)
+		{
+			removeFromMap();
 
+			FieldBackEarth* fieldBackEarth = new FieldBackEarth();
+			fieldBackEarth->init(xGridded*GRID_SIZE, yGridded*GRID_SIZE);
+			fieldBackEarth->health = health;
+
+			delete this;
+			return;
+		}
+	}
+}
+
+void FieldBackGrass::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
+{
+	if (toolType == appropriateTool)
+	{
+		health -= 2*toolLevel*deltaTime;
+	}
+	else
+	{
+		health -= toolLevel*deltaTime;
+	}
+
+	if (health <= 0)
+	{
+		InventoryObject* inventoryObject = new InventoryEarth(1);
+		world.player.inventory.add(inventoryObject);
+
+		removeFromMap();
+
+		delete this;
+		return;
+	}
 }
