@@ -27,12 +27,17 @@ public:
 
 private:
 	SDL_Surface* body[6];
+	SDL_Surface* bodyFlipped[6];
 	SDL_Surface* fell;
+	SDL_Surface* fellFlipped;
 	SDL_Surface* arm[8];
+	SDL_Surface* armFlipped[8];
 	
 	float bodyAnimStart;
 	uint32_t bodyAnimIndex;
 	
 	float armAnimStart;
 	uint32_t armAnimIndex;
+
+	bool flip;
 };

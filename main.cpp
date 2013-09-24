@@ -111,11 +111,45 @@ SDL_Surface *load_image( const string &filename )
 	}
 }
 
-void unload_files()
+Uint32 get_pixel32( SDL_Surface *surface, int x, int y )
 {
+    //Convert the pixels to 32 bit
+    Uint32 *pixels = (Uint32 *)surface->pixels;
 
+    //Get the requested pixel
+    return pixels[ ( y * surface->w ) + x ];
 }
 
+void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel )
+{
+    //Convert the pixels to 32 bit
+    Uint32 *pixels = (Uint32 *)surface->pixels;
+
+    //Set the pixel
+    pixels[ ( y * surface->w ) + x ] = pixel;
+}
+
+Uint32 shade_pixel32( Uint32 pixel, float shade )
+{
+	Uint8 B = pixel & 0xFF;
+	Uint8 G = (pixel >> 8) & 0xFF;
+	Uint8 R = (pixel >> 16) & 0xFF;
+	
+	if (shade > 1)
+	{
+		R = min(R + (0xFF - R) * (shade-1), (float)0xFF);
+		G = min(G + (0xFF - G) * (shade-1), (float)0xFF);
+		B = min(B + (0xFF - B) * (shade-1), (float)0xFF);
+	}
+	else
+	{
+		R = min(R*shade, (float)0xFF);
+		G = min(G*shade, (float)0xFF);
+		B = min(B*shade, (float)0xFF);
+	}
+
+	return (pixel & 0xFF000000) | R<<16 | G<<8 | B;
+}
 
 void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip )
 {
@@ -128,6 +162,70 @@ void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL
 
     //Blit
     SDL_BlitSurface( source, clip, destination, &offset );
+}
+
+SDL_Surface* flip_surface( SDL_Surface *surface, int flags )
+{
+    //Pointer to the soon to be flipped surface
+    SDL_Surface *flipped = NULL;
+
+    //If the image is color keyed
+    if( surface->flags & SDL_SRCCOLORKEY )
+    {
+        flipped = SDL_CreateRGBSurface( SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel, surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, 0 );
+    }
+    //Otherwise
+    else
+    {
+        flipped = SDL_CreateRGBSurface( SDL_SWSURFACE, surface->w, surface->h, surface->format->BitsPerPixel, surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask );
+    }
+
+    //If the surface must be locked
+    if( SDL_MUSTLOCK( surface ) )
+    {
+        //Lock the surface
+        SDL_LockSurface( surface );
+    }
+
+    //Go through columns
+    for( int x = 0, rx = flipped->w - 1; x < flipped->w; x++, rx-- )
+    {
+        //Go through rows
+        for( int y = 0, ry = flipped->h - 1; y < flipped->h; y++, ry-- )
+        {
+            //Get pixel
+            Uint32 pixel = get_pixel32( surface, x, y );
+
+            //Copy pixel
+            if( ( flags & FLIP_VERTICAL ) && ( flags & FLIP_HORIZONTAL ) )
+            {
+                put_pixel32( flipped, rx, ry, pixel );
+            }
+            else if( flags & FLIP_HORIZONTAL )
+            {
+                put_pixel32( flipped, rx, y, pixel );
+            }
+            else if( flags & FLIP_VERTICAL )
+            {
+                put_pixel32( flipped, x, ry, pixel );
+            }
+        }
+    }
+
+    //Unlock surface
+    if( SDL_MUSTLOCK( surface ) )
+    {
+        SDL_UnlockSurface( surface );
+    }
+
+    //Copy color key
+    if( surface->flags & SDL_SRCCOLORKEY )
+    {
+        SDL_SetColorKey( flipped, SDL_RLEACCEL | SDL_SRCCOLORKEY, surface->format->colorkey );
+    }
+
+    //Return flipped surface
+    return flipped;
 }
 
 int main( int argc, char* args[] )
@@ -189,6 +287,26 @@ int main( int argc, char* args[] )
 
 		world.update();
 
+		//lighting demo
+		float shade = 1;
+		if (world.player.y > 30)
+		{
+			shade = 1 / (world.player.y / 30);
+		}
+		else if (world.player.y < 0)
+		{
+			shade = 1 * (1 - world.player.y / 3000);
+		}
+		for( int x = 0; x < screen->w; x++)
+		{
+			for( int y = 0; y < screen->h; y++)
+			{
+				Uint32 pixel = get_pixel32( screen, x, y );
+				pixel = shade_pixel32(pixel, shade);
+				put_pixel32( screen, x, y, pixel );
+			}
+		}
+
 		if( SDL_Flip( screen ) == -1 )
 		{
 			return 1;
@@ -196,8 +314,6 @@ int main( int argc, char* args[] )
     }
 
     SDL_Quit();
-
-	unload_files();
 
     return 0;
 }

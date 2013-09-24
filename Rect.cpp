@@ -37,6 +37,19 @@ bool Rect::intersectsWith(const Rect &rect2)
 	return true;
 }
 
+bool Rect::collidesWith(const int32_t &dotX, const int32_t &dotY)
+{
+	if (   dotX >= x
+		&& dotX <= x + w
+		&& dotY >= y
+		&& dotY <= y + h )
+	{
+		return true;
+	}
+
+	return false;
+}
+
 bool Rect::intersectsWith(const int32_t &dotX, const int32_t &dotY)
 {
 	if (   dotX > x

@@ -18,9 +18,18 @@ void Player::draw(bool forceRedraw)
 {
 	if (forceRedraw)
 	{
-		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
-		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fell, screen);
-		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
+		if (flip)
+		{
+			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
+			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fellFlipped, screen);
+			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, armFlipped[armAnimIndex], screen);
+		}
+		else
+		{
+			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
+			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fell, screen);
+			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
+		}
 
 		lastDraw = totalTime;
 	}
@@ -38,7 +47,7 @@ void Player::init(const int32_t &x, const int32_t &y)
 	body[3] = load_image("Foreground/Gnord/walk_4.png");
 	body[4] = load_image("Foreground/Gnord/walk_5.png");
 	body[5] = load_image("Foreground/Gnord/walk_6.png");
-
+	
 	fell = load_image("Foreground/Gnord/fell.png");
 	
 	arm[0] = load_image("Foreground/Gnord/arm_1.png");
@@ -49,6 +58,25 @@ void Player::init(const int32_t &x, const int32_t &y)
 	arm[5] = load_image("Foreground/Gnord/arm_6.png");
 	arm[6] = load_image("Foreground/Gnord/arm_7.png");
 	arm[7] = load_image("Foreground/Gnord/arm_8.png");
+
+	
+	bodyFlipped[0] = flip_surface(body[0], FLIP_HORIZONTAL);
+	bodyFlipped[1] = flip_surface(body[1], FLIP_HORIZONTAL);
+	bodyFlipped[2] = flip_surface(body[2], FLIP_HORIZONTAL);
+	bodyFlipped[3] = flip_surface(body[3], FLIP_HORIZONTAL);
+	bodyFlipped[4] = flip_surface(body[4], FLIP_HORIZONTAL);
+	bodyFlipped[5] = flip_surface(body[5], FLIP_HORIZONTAL);
+
+	fellFlipped = flip_surface(fell, FLIP_HORIZONTAL);
+
+	armFlipped[0] = flip_surface(arm[0], FLIP_HORIZONTAL);
+	armFlipped[1] = flip_surface(arm[1], FLIP_HORIZONTAL);
+	armFlipped[2] = flip_surface(arm[2], FLIP_HORIZONTAL);
+	armFlipped[3] = flip_surface(arm[3], FLIP_HORIZONTAL);
+	armFlipped[4] = flip_surface(arm[4], FLIP_HORIZONTAL);
+	armFlipped[5] = flip_surface(arm[5], FLIP_HORIZONTAL);
+	armFlipped[6] = flip_surface(arm[6], FLIP_HORIZONTAL);
+	armFlipped[7] = flip_surface(arm[7], FLIP_HORIZONTAL);
 	
 	bodyAnimStart = -1;
 	bodyAnimIndex = 0;
@@ -62,7 +90,7 @@ void Player::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, 
 {
 	metrics[0].x = x;
 	metrics[0].y = y+8;
-	metrics[0].w = 29;
+	metrics[0].w = 30;
 	metrics[0].h = 50;
 
 	int32_t xGridded = (int32_t)floor((double)x / GRID_SIZE);
@@ -93,7 +121,7 @@ void Player::myUpdate()
 	Vector2 moveVector;
 	Vector2 moveVectorToApply;
 
-	float maxDelta = 0.05;
+	float maxDelta = (float)0.05;
 	float deltaTimeLeft = deltaTime;
 	float myDeltaTime;
 
@@ -120,24 +148,29 @@ void Player::myUpdate()
 			}
 		}
 
-		if (moveVector.x != 0 && grounded)
+		if (moveVector.x != 0)
 		{
-			if (bodyAnimStart == -1)
+			if (grounded)
 			{
-				bodyAnimStart = totalTime;
-			}
+				if (bodyAnimStart == -1)
+				{
+					bodyAnimStart = totalTime;
+				}
 
-			float animSpeed = 10/speed;
-			int32_t size = sizeof(body) / sizeof(body[0]);
-			int32_t offset = ceil((totalTime-bodyAnimStart)/animSpeed);
+				float animSpeed = 10/speed;
+				int32_t size = sizeof(body) / sizeof(body[0]);
+				int32_t offset = (int32_t)((totalTime-bodyAnimStart)/animSpeed);
+
+				bodyAnimIndex = offset % size;
+			}
 
 			if (moveVector.x > 0)
 			{
-				bodyAnimIndex = offset % size;
+				flip = false;
 			}
 			else
 			{
-				bodyAnimIndex = (size-1) - (offset % size);
+				flip = true;
 			}
 		}
 		else
@@ -148,9 +181,9 @@ void Player::myUpdate()
 
 		if (mouseDown)
 		{
-			if (armAnimIndex == -1)
+			if (armAnimStart == -1)
 			{
-				armAnimIndex = totalTime;
+				armAnimStart = totalTime;
 			}
 
 			float animSpeed = 0.1;

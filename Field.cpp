@@ -45,7 +45,7 @@ void Field::init(const int32_t &x, const int32_t &y, const int32_t &metricsLengt
 	insertIntoMap();
 	
 	appropriateTool = Default;
-	health = 1.1;
+	health = (float)1.1;
 }
 
 void Field::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, const int32_t &x, const int32_t &y)

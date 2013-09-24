@@ -138,7 +138,7 @@ void World::onClick()
 		{
 			for (i = 0; i<backIt->second->metricsLength; i++)
 			{
-				if (backIt->second->metrics[i].intersectsWith(mouseWorldX, mouseWorldY))
+				if (backIt->second->metrics[i].collidesWith(mouseWorldX, mouseWorldY))
 				{
 					return player.useTool(backIt->second, x, y);
 				}
@@ -146,7 +146,7 @@ void World::onClick()
 		}
 	}
 
-	return player.useTool(NULL, x, y);
+	player.useTool(NULL, x, y);
 }
 
 void World::update()

@@ -18,6 +18,8 @@ public:
 
 	bool intersectsWith(const Rect &rect2);
 
+	bool collidesWith(const int32_t &dotX, const int32_t &dotY);
+
 	bool intersectsWith(const int32_t &dotX, const int32_t &dotY);
 
 	bool shortenVectorToNotInteresctWith(const Rect &rect2, Vector2 &moveVector);
