@@ -1,14 +1,27 @@
-﻿Der Buildvorgang wurde am 18.09.2013 17:34:48 gestartet.
-     1>Projekt "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" auf Knoten "2", Build Ziel(e).
+﻿Build started 25.09.2013 18:52:23.
+     1>Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" on node 2 (Rebuild target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Field.cpp FieldBack.cpp FieldBackEarth.cpp FieldBackCoal.cpp FieldBackCopper.cpp FieldBackStone.cpp FieldBackSilver.cpp FieldBackIron.cpp FieldBackGrass.cpp FieldFront.cpp Fists.cpp Inventory.cpp InventoryEarth.cpp InventoryObject.cpp main.cpp Paralax.cpp Player.cpp Rect.cpp Vector2.cpp World.cpp
+         Field.cpp
+         FieldBack.cpp
+         FieldBackEarth.cpp
+         FieldBackCoal.cpp
+         FieldBackCopper.cpp
+         FieldBackStone.cpp
+         FieldBackSilver.cpp
+         FieldBackIron.cpp
+         FieldBackGrass.cpp
+         FieldFront.cpp
+         Fists.cpp
+         Inventory.cpp
+         InventoryEarth.cpp
+         InventoryObject.cpp
          main.cpp
-     1>main.cpp(140): warning C4244: '=': Konvertierung von 'const float' in 'Uint8', möglicher Datenverlust
-     1>main.cpp(141): warning C4244: '=': Konvertierung von 'const float' in 'Uint8', möglicher Datenverlust
-     1>main.cpp(142): warning C4244: '=': Konvertierung von 'const float' in 'Uint8', möglicher Datenverlust
-     1>main.cpp(146): warning C4244: '=': Konvertierung von 'const float' in 'Uint8', möglicher Datenverlust
-     1>main.cpp(147): warning C4244: '=': Konvertierung von 'const float' in 'Uint8', möglicher Datenverlust
-     1>main.cpp(148): warning C4244: '=': Konvertierung von 'const float' in 'Uint8', möglicher Datenverlust
+         Paralax.cpp
+         Player.cpp
+         Rect.cpp
+         Vector2.cpp
+         World.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.exe" /NOLOGO SDLmain.lib SDL.lib SDL_image.lib SDL_mixer.lib SDL_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /ENTRY:"WinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.lib" /MACHINE:X86 /SAFESEH Release\Field.obj
          Release\FieldBack.obj
@@ -30,11 +43,11 @@
          Release\Rect.obj
          Release\Vector2.obj
          Release\World.obj
-         Code wird generiert.
-         Codegenerierung ist abgeschlossen.
+         Generating code
+         Finished generating code
          SDL_basics.vcxproj -> C:\Users\Student\Desktop\GnordsWorld\Release\SDL_basics.exe
-     1>Die Erstellung des Projekts "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" ist abgeschlossen, Build Ziel(e).
+     1>Done Building Project "C:\Users\Student\Desktop\GnordsWorld\SDL_basics.vcxproj" (Rebuild target(s)).
 
-Build erfolgreich.
+Build succeeded.
 
-Verstrichene Zeit 00:00:02.09
+Time Elapsed 00:00:08.68

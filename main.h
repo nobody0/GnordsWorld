@@ -3,6 +3,7 @@
 #include <string>
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_TTF.h"
 #include "World.h"
 #include <iostream>
 
@@ -21,6 +22,7 @@ extern int32_t UPDATE_GRID_OUT_VIEW_SIZE;
 const int32_t SCREEN_BPP = 32;
 
 extern const string BASE_IMAGE_PATH;
+extern const string BASE_FONT_PATH;
 
 //Flip flags
 const int FLIP_VERTICAL = 1;
@@ -46,10 +48,14 @@ extern int32_t myRand(int32_t x);
 
 extern SDL_Surface *load_image( const string &filename );
 
+extern TTF_Font* load_font( const string &filename );
+
 extern Uint32 get_pixel32( SDL_Surface *surface, int x, int y );
 
 extern void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel );
 
 extern void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL );
+
+extern void apply_font( const int32_t &x, const int32_t &y, SDL_Surface* destination, TTF_Font* font, const string text, const SDL_Color color );
 
 extern SDL_Surface* flip_surface( SDL_Surface *surface, int flags );

@@ -186,9 +186,9 @@ void Player::myUpdate()
 				armAnimStart = totalTime;
 			}
 
-			float animSpeed = 0.1;
+			float animSpeed = (float)0.1;
 			int32_t size = sizeof(arm) / sizeof(arm[0]);
-			int32_t offset = ceil((totalTime-armAnimStart)/animSpeed);
+			int32_t offset = (int32_t)ceil((totalTime-armAnimStart)/animSpeed);
 
 			armAnimIndex = offset % size;
 		}

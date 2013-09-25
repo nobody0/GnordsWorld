@@ -1,4 +1,3 @@
-//The headers
 #include "main.h"
 
 int32_t SCREEN_WIDTH = 640;
@@ -12,6 +11,7 @@ int32_t VISIBLE_GRIDS_Y = SCREEN_WIDTH/GRID_SIZE + 4;
 int32_t UPDATE_GRID_OUT_VIEW_SIZE = 64;
 
 const string BASE_IMAGE_PATH = "gfx/images/";
+const string BASE_FONT_PATH = "gfx/fonts/";
 
 SDL_Surface * screen = NULL;
 
@@ -111,6 +111,30 @@ SDL_Surface *load_image( const string &filename )
 	}
 }
 
+unordered_map<string, TTF_Font*> loadedFonts;
+
+TTF_Font* load_font( const string &filename )
+{
+	unordered_map<string, TTF_Font*>::const_iterator it = loadedFonts.find (filename);
+
+	if (it != loadedFonts.end())
+	{
+		return it->second;
+	}
+
+	TTF_Font* font = TTF_OpenFont(("../" + BASE_FONT_PATH + filename).c_str(), 14);
+	if (font == NULL) font = TTF_OpenFont((BASE_FONT_PATH + filename).c_str(), 14);
+	
+	if (font == NULL)
+	{
+		throw new exception("file couldnt be loaded");
+	}
+
+	loadedFonts.insert(make_pair(filename, font));
+
+	return font;
+}
+
 Uint32 get_pixel32( SDL_Surface *surface, int x, int y )
 {
     //Convert the pixels to 32 bit
@@ -137,15 +161,15 @@ Uint32 shade_pixel32( Uint32 pixel, float shade )
 	
 	if (shade > 1)
 	{
-		R = min(R + (0xFF - R) * (shade-1), (float)0xFF);
-		G = min(G + (0xFF - G) * (shade-1), (float)0xFF);
-		B = min(B + (0xFF - B) * (shade-1), (float)0xFF);
+		R = (Uint8)min(R + (0xFF - R) * (shade-1), (float)0xFF);
+		G = (Uint8)min(G + (0xFF - G) * (shade-1), (float)0xFF);
+		B = (Uint8)min(B + (0xFF - B) * (shade-1), (float)0xFF);
 	}
 	else
 	{
-		R = min(R*shade, (float)0xFF);
-		G = min(G*shade, (float)0xFF);
-		B = min(B*shade, (float)0xFF);
+		R = (Uint8)min(R*shade, (float)0xFF);
+		G = (Uint8)min(G*shade, (float)0xFF);
+		B = (Uint8)min(B*shade, (float)0xFF);
 	}
 
 	return (pixel & 0xFF000000) | R<<16 | G<<8 | B;
@@ -162,6 +186,13 @@ void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL
 
     //Blit
     SDL_BlitSurface( source, clip, destination, &offset );
+}
+
+void apply_font( const int32_t &x, const int32_t &y, SDL_Surface* destination, TTF_Font* font, const string text, const SDL_Color color )
+{
+	SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), color);
+	apply_surface(x, y, textSurface, destination);
+	SDL_FreeSurface(textSurface);
 }
 
 SDL_Surface* flip_surface( SDL_Surface *surface, int flags )
@@ -306,6 +337,10 @@ int main( int argc, char* args[] )
 				put_pixel32( screen, x, y, pixel );
 			}
 		}
+
+		//font demo
+		SDL_Color color = {0,0,0};
+		apply_font(100, 100, screen, load_font("arial.ttf"), "Hallo Gnord ich bin dein Gott", color);
 
 		if( SDL_Flip( screen ) == -1 )
 		{
