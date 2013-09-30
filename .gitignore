@@ -13,3 +13,9 @@
 *.a
 
 *.tlog
+*.obj
+*.log
+*.exe
+*.pdb
+*.lastbuildstate
+*.txt
