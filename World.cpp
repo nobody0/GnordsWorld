@@ -161,7 +161,7 @@ void World::update()
 	SDL_FillRect( screen, &screen->clip_rect, SDL_MapRGB( screen->format, 0, 0, 0 ) );
 
 	/////////////////RESERVE SOME BUCKETS BEFOREHAND START/////////////////////
-	int offset = VISIBLE_GRIDS_X + VISIBLE_GRIDS_Y + UPDATE_GRID_OUT_VIEW_SIZE;
+	int offset = VISIBLE_GRIDS_X + VISIBLE_GRIDS_Y + UPDATE_GRID_OUT_VIEW_SIZE*2;
 
 	int reserve = mapFront.size() + offset;
 	mapFront.reserve(reserve - reserve%offset + 3*offset);
@@ -170,11 +170,11 @@ void World::update()
 	mapBack.reserve(reserve - reserve%offset + 3*offset);
 	/////////////////RESERVE SOME BUCKETS BEFOREHAND END///////////////////////
 	
-	int32_t updateXStart = player.xGridded - VISIBLE_GRIDS_X/2 - UPDATE_GRID_OUT_VIEW_SIZE/2;
-	int32_t updateXEnd = player.xGridded + VISIBLE_GRIDS_X/2 + UPDATE_GRID_OUT_VIEW_SIZE/2;
+	int32_t updateXStart = player.xGridded - VISIBLE_GRIDS_X/2 - UPDATE_GRID_OUT_VIEW_SIZE;
+	int32_t updateXEnd = player.xGridded + VISIBLE_GRIDS_X/2 + UPDATE_GRID_OUT_VIEW_SIZE;
 	
-	int32_t updateYStart = player.yGridded - VISIBLE_GRIDS_Y/2 - UPDATE_GRID_OUT_VIEW_SIZE/2;
-	int32_t updateYEnd = player.yGridded + VISIBLE_GRIDS_Y/2 + UPDATE_GRID_OUT_VIEW_SIZE/2;
+	int32_t updateYStart = player.yGridded - VISIBLE_GRIDS_Y/2 - UPDATE_GRID_OUT_VIEW_SIZE;
+	int32_t updateYEnd = player.yGridded + VISIBLE_GRIDS_Y/2 + UPDATE_GRID_OUT_VIEW_SIZE;
 
 	for (x=updateXStart; x<updateXEnd; x++)
 	{

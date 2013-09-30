@@ -1,14 +1,14 @@
 #include "main.h"
 
-int32_t SCREEN_WIDTH = 640;
-int32_t SCREEN_HEIGHT = 480;
+int32_t SCREEN_WIDTH = 1024;
+int32_t SCREEN_HEIGHT = 768;
 
 int32_t GRID_SIZE = 32;
 
 int32_t VISIBLE_GRIDS_X = SCREEN_WIDTH/GRID_SIZE + 4;
 int32_t VISIBLE_GRIDS_Y = SCREEN_WIDTH/GRID_SIZE + 4;
 
-int32_t UPDATE_GRID_OUT_VIEW_SIZE = 64;
+int32_t UPDATE_GRID_OUT_VIEW_SIZE = 16;
 
 const string BASE_IMAGE_PATH = "gfx/images/";
 const string BASE_FONT_PATH = "gfx/fonts/";
@@ -339,8 +339,8 @@ int main( int argc, char* args[] )
 		}
 
 		//font demo
-		SDL_Color color = {0,0,0};
-		apply_font(100, 100, screen, load_font("arial.ttf"), "Hallo Gnord ich bin dein Gott", color);
+		//SDL_Color color = {0,0,0};
+		//apply_font(100, 100, screen, load_font("arial.ttf"), "Hallo Gnord ich bin dein Gott", color);
 
 		if( SDL_Flip( screen ) == -1 )
 		{
