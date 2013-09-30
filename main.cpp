@@ -44,7 +44,7 @@ bool init()
         return false;
     }
 
-    if( (screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE )) == NULL )
+    if( (screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_HWSURFACE | SDL_DOUBLEBUF )) == NULL )
     {
         return false;
     }
@@ -87,13 +87,6 @@ SDL_Surface *load_image( const string &filename )
 
 			//Free the old surface
 			SDL_FreeSurface( loadedImage );
-
-			//If the surface was optimized
-			if( optimizedImage != NULL )
-			{
-				//Color key surface
-				//SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, SDL_MapRGB( optimizedImage->format, 0xFF, 0, 0xFF ) );
-			}
 		}
 		else
 		{
@@ -153,26 +146,44 @@ void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel )
     pixels[ ( y * surface->w ) + x ] = pixel;
 }
 
-Uint32 shade_pixel32( Uint32 pixel, float shade )
+void shade_screen()
 {
-	Uint8 B = pixel & 0xFF;
-	Uint8 G = (pixel >> 8) & 0xFF;
-	Uint8 R = (pixel >> 16) & 0xFF;
-	
-	if (shade > 1)
+	Uint32 pixel;
+	Uint8 red, green, blue, alpha;
+	float shade = 1;
+	SDL_PixelFormat* fmt = NULL;
+
+	if (world.player.y > 30)
 	{
-		R = (Uint8)min(R + (0xFF - R) * (shade-1), (float)0xFF);
-		G = (Uint8)min(G + (0xFF - G) * (shade-1), (float)0xFF);
-		B = (Uint8)min(B + (0xFF - B) * (shade-1), (float)0xFF);
-	}
-	else
-	{
-		R = (Uint8)min(R*shade, (float)0xFF);
-		G = (Uint8)min(G*shade, (float)0xFF);
-		B = (Uint8)min(B*shade, (float)0xFF);
+		shade = 1 / (world.player.y / 30);
 	}
 
-	return (pixel & 0xFF000000) | R<<16 | G<<8 | B;
+	if (shade >= 1) return;
+	if (shade <= 0) shade=0;
+
+	SDL_LockSurface(screen);
+
+	fmt = screen->format;
+
+	const Uint8 shadeI = shade*256;
+	Uint32 shadeP = SDL_MapRGBA(fmt, shadeI, shadeI, shadeI, 1);
+	Uint8* shadePP = (Uint8*)&shadeP;
+
+	Uint8* colors = (Uint8*)screen->pixels;
+	for( int x = 0; x < screen->w; x++)
+	{
+		for( int y = 0; y < screen->h; y++)
+		{
+			int offset = (( y * screen->w ) + x) * 4;
+
+			for (int color = 0; color < 4; color++)
+			{
+				colors[ offset + color ] = (colors[ offset + color ] * shadePP[color]) >> 8;
+			}
+		}
+	}
+
+	SDL_UnlockSurface(screen);
 }
 
 void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip )
@@ -319,24 +330,7 @@ int main( int argc, char* args[] )
 		world.update();
 
 		//lighting demo
-		float shade = 1;
-		if (world.player.y > 30)
-		{
-			shade = 1 / (world.player.y / 30);
-		}
-		else if (world.player.y < 0)
-		{
-			shade = 1 * (1 - world.player.y / 3000);
-		}
-		for( int x = 0; x < screen->w; x++)
-		{
-			for( int y = 0; y < screen->h; y++)
-			{
-				Uint32 pixel = get_pixel32( screen, x, y );
-				pixel = shade_pixel32(pixel, shade);
-				put_pixel32( screen, x, y, pixel );
-			}
-		}
+		shade_screen();
 
 		//font demo
 		//SDL_Color color = {0,0,0};
