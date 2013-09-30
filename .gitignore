@@ -19,3 +19,5 @@
 *.pdb
 *.lastbuildstate
 *.txt
+*.idb
+*.opensdf
