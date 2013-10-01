@@ -148,8 +148,6 @@ void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel )
 
 void shade_screen()
 {
-	Uint32 pixel;
-	Uint8 red, green, blue, alpha;
 	float shade = 1;
 	SDL_PixelFormat* fmt = NULL;
 
@@ -157,7 +155,7 @@ void shade_screen()
 	{
 		shade = 1 / (world.player.y / 30);
 	}
-
+	shade = 0.5;
 	if (shade >= 1) return;
 	if (shade <= 0) shade=0;
 
@@ -170,16 +168,15 @@ void shade_screen()
 	Uint8* shadePP = (Uint8*)&shadeP;
 
 	Uint8* colors = (Uint8*)screen->pixels;
-	for( int x = 0; x < screen->w; x++)
-	{
-		for( int y = 0; y < screen->h; y++)
-		{
-			int offset = (( y * screen->w ) + x) * 4;
 
-			for (int color = 0; color < 4; color++)
-			{
-				colors[ offset + color ] = (colors[ offset + color ] * shadePP[color]) >> 8;
-			}
+	int pixelCount = screen->w*screen->h;
+	int color;
+	for( int i = pixelCount-1; i >= 0; i--)
+	{
+		for (color = 0; color < 4; color++)
+		{
+			(*colors) = ((*colors) * shadePP[color]) >> 8;
+			colors++;
 		}
 	}
 
