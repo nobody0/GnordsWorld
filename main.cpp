@@ -155,7 +155,7 @@ void shade_screen()
 	{
 		shade = 1 / (world.player.y / 30);
 	}
-	shade = 0.5;
+	
 	if (shade >= 1) return;
 	if (shade <= 0) shade=0;
 
