@@ -16,7 +16,10 @@ void Field::draw(bool forceRedraw)
 {
 	if (lastDraw != totalTime && !forceRedraw)
 	{
-		apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, image, screen);
+		int32_t xScreen = (int32_t)(x - world.player.x + SCREEN_WIDTH/2);
+		int32_t yScreen = (int32_t)(y - world.player.y + SCREEN_HEIGHT/2);
+		apply_surface(xScreen, yScreen, image, screen);
+		apply_surface(xScreen, yScreen, image, lightScreen);
 
 		lastDraw = totalTime;
 	}
@@ -292,4 +295,9 @@ void Field::update()
 
 		myUpdate();
 	}
+}
+
+void Field::shine()
+{
+
 }

@@ -220,6 +220,8 @@ void World::update()
 			}
 		}
 	}
+
+	SDL_FillRect(lightScreen, NULL, 0);
 	
 	int32_t drawXStart = player.xGridded - VISIBLE_GRIDS_X/2;
 	int32_t drawXEnd = player.xGridded + VISIBLE_GRIDS_X/2;
@@ -256,4 +258,34 @@ void World::update()
 	}
 
 	player.draw(true);
+
+	for( int i = pixelCount-1; i >= 0; i--)
+	{
+		lightMap[i] = 0;
+	}
+
+	for (x=updateXStart; x<updateXEnd; x++)
+	{
+		for (y=updateYStart; y<updateYEnd; y++)
+		{
+			xy64 = int64FromXY(x, y);
+
+			backIt = mapBack.find(xy64);
+			if (backIt != mapBack.end())
+			{
+				if (backIt->second != NULL)
+				{
+					backIt->second->shine();
+				}
+			}
+
+			frontItPair = mapFront.equal_range(xy64);
+			for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
+			{
+				if (frontIt->second != NULL) {
+					frontIt->second->shine();
+				}
+			}
+		}
+	}
 }

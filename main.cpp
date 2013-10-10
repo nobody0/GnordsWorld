@@ -15,6 +15,12 @@ const string BASE_FONT_PATH = "gfx/fonts/";
 
 SDL_Surface * screen = NULL;
 
+SDL_Surface * lightScreen = NULL;
+
+Uint32* lightMap = NULL;
+
+int pixelCount = 0;
+
 SDL_Event event;
 
 Uint8 *keystates;
@@ -48,6 +54,16 @@ bool init()
     {
         return false;
     }
+
+	const SDL_PixelFormat& fmt = *(screen->format);
+    if( (lightScreen = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_WIDTH, SCREEN_HEIGHT, fmt.BitsPerPixel, fmt.Rmask,fmt.Gmask,fmt.Bmask,fmt.Amask)) == NULL )
+    {
+        return false;
+    }
+
+	pixelCount = screen->w*screen->h;
+
+	lightMap = new Uint32[pixelCount];
 
 	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
 	int initted=IMG_Init(flags);
@@ -148,36 +164,16 @@ void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel )
 
 void shade_screen()
 {
-	float shade = 1;
-	SDL_PixelFormat* fmt = NULL;
-
-	if (world.player.y > 30)
-	{
-		shade = 1 / (world.player.y / 30);
-	}
-	
-	if (shade >= 1) return;
-	if (shade <= 0) shade=0;
-
 	SDL_LockSurface(screen);
 
-	fmt = screen->format;
-
-	const Uint8 shadeI = shade*256;
-	Uint32 shadeP = SDL_MapRGBA(fmt, shadeI, shadeI, shadeI, 1);
-	Uint8* shadePP = (Uint8*)&shadeP;
-
 	Uint8* colors = (Uint8*)screen->pixels;
+	Uint8* shades = (Uint8*)lightMap;
 
-	int pixelCount = screen->w*screen->h;
-	int color;
-	for( int i = pixelCount-1; i >= 0; i--)
+	for( int i = (pixelCount*4)-1; i >= 0; i--)
 	{
-		for (color = 0; color < 4; color++)
-		{
-			(*colors) = ((*colors) * shadePP[color]) >> 8;
-			colors++;
-		}
+		(*colors) = ((*colors) * (*shades)) >> 8;
+		colors++;
+		shades++;
 	}
 
 	SDL_UnlockSurface(screen);

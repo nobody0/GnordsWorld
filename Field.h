@@ -61,6 +61,8 @@ public:
 
 	void update();
 
+	virtual void shine();
+
 	virtual void removeFromMap() const = 0;
 	virtual void insertIntoMap() const = 0;
 

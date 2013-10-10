@@ -30,6 +30,12 @@ const int FLIP_HORIZONTAL = 2;
 
 extern SDL_Surface *screen;
 
+extern SDL_Surface *lightScreen;
+
+extern Uint32* lightMap;
+
+extern int pixelCount;
+
 extern SDL_Event event;
 
 extern Uint8 *keystates;
@@ -53,6 +59,8 @@ extern TTF_Font* load_font( const string &filename );
 extern Uint32 get_pixel32( SDL_Surface *surface, int x, int y );
 
 extern void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel );
+
+extern void shade_screen();
 
 extern void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL );
 

@@ -234,6 +234,36 @@ void Player::myUpdate()
 	} while (deltaTimeLeft > 0);
 }
 
+void Player::shine()
+{
+	SDL_PixelFormat* fmt = screen->format;
+	Uint32 shade = SDL_MapRGBA(fmt, 160, 160, 160, 0);
+	Uint32 shade2 = SDL_MapRGBA(fmt, 32, 32, 32, 0);
+
+	int xStart = SCREEN_WIDTH/2 - 200;
+	int xEnd = xStart + 400;
+	int yStart = SCREEN_HEIGHT/2- 200;
+	int yEnd = yStart + 400;
+
+	Uint32* lightPixels = (Uint32*)lightScreen->pixels;
+
+	for (int x = xStart; x < xEnd; x++)
+	{
+		for (int y = yStart; y < yEnd; y++)
+		{
+			int offset = y * SCREEN_WIDTH + x;
+			if (lightPixels[offset] == 0)
+			{
+				lightMap[offset] = shade;
+			}
+			else
+			{
+				lightMap[offset] = shade2;
+			}
+		}
+	}
+}
+
 void Player::useTool(Field* target, const int32_t &x, const int32_t &y)
 {
 	if (activeTool != NULL)
