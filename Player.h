@@ -10,6 +10,8 @@ public:
 	InventoryObject* activeTool;
 	Fists defaultTool;
 
+	float lastShine;
+
 	Player(void);
 	virtual ~Player(void);
 

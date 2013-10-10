@@ -236,8 +236,14 @@ void Player::myUpdate()
 
 void Player::shine()
 {
+	if (lastShine == totalTime) {
+		return;
+	}
+
+	lastShine = totalTime;
+
 	SDL_PixelFormat* fmt = screen->format;
-	Uint32 shade = SDL_MapRGBA(fmt, 160, 160, 160, 0);
+	Uint32 shade = SDL_MapRGBA(fmt, 255, 255, 255, 0);
 	Uint32 shade2 = SDL_MapRGBA(fmt, 32, 32, 32, 0);
 
 	int xStart = SCREEN_WIDTH/2 - 200;
@@ -247,18 +253,26 @@ void Player::shine()
 
 	Uint32* lightPixels = (Uint32*)lightScreen->pixels;
 
-	for (int x = xStart; x < xEnd; x++)
+	int x, y;
+	Uint32* offsetPixel = NULL;
+	Uint32* offsetMap = NULL;
+	for (x = xStart; x < xEnd; x++)
 	{
-		for (int y = yStart; y < yEnd; y++)
+		offsetPixel = lightPixels + yStart * SCREEN_WIDTH + x;
+		offsetMap = lightMap + yStart * SCREEN_WIDTH + x;
+
+		for (y = yStart; y < yEnd; y++)
 		{
-			int offset = y * SCREEN_WIDTH + x;
-			if (lightPixels[offset] == 0)
+			offsetPixel += SCREEN_WIDTH;
+			offsetMap += SCREEN_WIDTH;
+
+			if ((*offsetPixel) == 0)
 			{
-				lightMap[offset] = shade;
+				(*offsetMap) = shade;
 			}
 			else
 			{
-				lightMap[offset] = shade2;
+				(*offsetMap) = shade2;
 			}
 		}
 	}
