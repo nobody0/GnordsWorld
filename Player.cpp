@@ -239,43 +239,73 @@ void Player::shine()
 	if (lastShine == totalTime) {
 		return;
 	}
-
 	lastShine = totalTime;
 
+	SDL_LockSurface(screen);
+
 	SDL_PixelFormat* fmt = screen->format;
-	Uint32 shade = SDL_MapRGBA(fmt, 255, 255, 255, 0);
-	Uint32 shade2 = SDL_MapRGBA(fmt, 32, 32, 32, 0);
+	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
 
-	int xStart = SCREEN_WIDTH/2 - 200;
-	int xEnd = xStart + 400;
-	int yStart = SCREEN_HEIGHT/2- 200;
-	int yEnd = yStart + 400;
+	SDL_Thread* thread1 = NULL;
+	SDL_Thread* thread2 = NULL;
+	SDL_Thread* thread3 = NULL;
+	SDL_Thread* thread4 = NULL;
+	SDL_Thread* thread5 = NULL;
+	SDL_Thread* thread6 = NULL;
+	SDL_Thread* thread7 = NULL;
+	SDL_Thread* thread8 = NULL;
 
-	Uint32* lightPixels = (Uint32*)lightScreen->pixels;
+	int x0 = SCREEN_WIDTH/2;
+	int y0 = SCREEN_HEIGHT/2;
+	int radius = 50;
+	int f = 1 - radius;
+	int ddF_x = 0;
+	int ddf_y = -2 * radius;
+	int xr = 0;
+	int yr = radius;
+	
+	thread1 = threadedShineFactory(x0, y0, x0, y0 + radius, color);
+	thread2 = threadedShineFactory(x0, y0, x0, y0 - radius, color);
+	thread3 = threadedShineFactory(x0, y0, x0 + radius, y0, color);
+	thread4 = threadedShineFactory(x0, y0, x0 - radius, y0, color);
 
-	int x, y;
-	Uint32* offsetPixel = NULL;
-	Uint32* offsetMap = NULL;
-	for (x = xStart; x < xEnd; x++)
+	SDL_WaitThread( thread1, NULL );
+	SDL_WaitThread( thread2, NULL );
+	SDL_WaitThread( thread3, NULL );
+	SDL_WaitThread( thread4, NULL );
+
+	while (xr < yr)
 	{
-		offsetPixel = lightPixels + yStart * SCREEN_WIDTH + x;
-		offsetMap = lightMap + yStart * SCREEN_WIDTH + x;
-
-		for (y = yStart; y < yEnd; y++)
+		if (f >= 0)
 		{
-			offsetPixel += SCREEN_WIDTH;
-			offsetMap += SCREEN_WIDTH;
-
-			if ((*offsetPixel) == 0)
-			{
-				(*offsetMap) = shade;
-			}
-			else
-			{
-				(*offsetMap) = shade2;
-			}
+			yr--;
+			ddf_y += 2;
+			f += ddf_y;
 		}
+		xr++;
+		ddF_x += 2;
+		f += ddF_x + 1;
+
+		thread1 = threadedShineFactory(x0, y0, x0 + xr, y0 + yr, color);
+		thread2 = threadedShineFactory(x0, y0, x0 - xr, y0 + yr, color);
+		thread3 = threadedShineFactory(x0, y0, x0 + xr, y0 - yr, color);
+		thread4 = threadedShineFactory(x0, y0, x0 - xr, y0 - yr, color);
+		thread5 = threadedShineFactory(x0, y0, x0 + yr, y0 + xr, color);
+		thread6 = threadedShineFactory(x0, y0, x0 - yr, y0 + xr, color);
+		thread7 = threadedShineFactory(x0, y0, x0 + yr, y0 - xr, color);
+		thread8 = threadedShineFactory(x0, y0, x0 - yr, y0 - xr, color);
+
+		SDL_WaitThread( thread1, NULL );
+		SDL_WaitThread( thread2, NULL );
+		SDL_WaitThread( thread3, NULL );
+		SDL_WaitThread( thread4, NULL );
+		SDL_WaitThread( thread5, NULL );
+		SDL_WaitThread( thread6, NULL );
+		SDL_WaitThread( thread7, NULL );
+		SDL_WaitThread( thread8, NULL );
 	}
+
+	SDL_UnlockSurface(screen);
 }
 
 void Player::useTool(Field* target, const int32_t &x, const int32_t &y)

@@ -164,6 +164,63 @@ void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel )
     pixels[ ( y * surface->w ) + x ] = pixel;
 }
 
+int threadedShineLine(void* data)
+{
+	threadedShineLineData* threadData = (threadedShineLineData*) data;
+
+	int dx = threadData->xEnd - threadData->xStart;
+	int dy = threadData->yEnd - threadData->yStart;
+	int x = threadData->xStart;
+	int y = threadData->yStart;
+	int failure = dx/2;
+
+	if (dx > dy)
+	{
+		Uint32* lightPixels = (Uint32*)lightScreen->pixels;
+		Uint32* offsetPixel = lightPixels + y * SCREEN_WIDTH + x;
+		Uint32* offsetMap = lightMap + y * SCREEN_WIDTH + x;
+
+		(*offsetMap) = threadData->color;
+	
+		while(x < threadData->xEnd)
+		{
+			x = x + 1;
+			failure -= dy;
+
+			if (failure < 0)
+			{
+				y = y+1;
+				failure += dx;
+				
+				offsetPixel += SCREEN_WIDTH+1;
+				offsetMap += SCREEN_WIDTH+1;
+			}
+			else
+			{
+				offsetPixel += 1;
+				offsetMap += 1;
+			}
+
+			(*offsetMap) = threadData->color;
+		}
+	}
+
+	delete threadData;
+	return 0;
+}
+
+SDL_Thread* threadedShineFactory(const int xStart, const int yStart, const int xEnd, const int yEnd, const Uint32 color)
+{
+	threadedShineLineData* threadData = new threadedShineLineData();
+	threadData->xStart = xStart;
+	threadData->yStart = yStart;
+	threadData->xEnd = xEnd;
+	threadData->yEnd = yEnd;
+	threadData->color = color;
+
+	return SDL_CreateThread( threadedShineLine, threadData );
+}
+
 void shade_screen()
 {
 	SDL_LockSurface(screen);
