@@ -50,6 +50,8 @@ bool init()
         return false;
     }
 
+	TTF_Init();
+
     if( (screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_HWSURFACE | SDL_DOUBLEBUF )) == NULL )
     {
         return false;
@@ -122,7 +124,7 @@ SDL_Surface *load_image( const string &filename )
 
 unordered_map<string, TTF_Font*> loadedFonts;
 
-TTF_Font* load_font( const string &filename )
+TTF_Font* load_font( const string &filename, const int size )
 {
 	unordered_map<string, TTF_Font*>::const_iterator it = loadedFonts.find (filename);
 
@@ -131,15 +133,15 @@ TTF_Font* load_font( const string &filename )
 		return it->second;
 	}
 
-	TTF_Font* font = TTF_OpenFont(("../" + BASE_FONT_PATH + filename).c_str(), 14);
-	if (font == NULL) font = TTF_OpenFont((BASE_FONT_PATH + filename).c_str(), 14);
+	TTF_Font* font = TTF_OpenFont(("../" + BASE_FONT_PATH + filename).c_str(), size);
+	if (font == NULL) font = TTF_OpenFont((BASE_FONT_PATH + filename).c_str(), size);
 	
 	if (font == NULL)
 	{
 		throw new exception("file couldnt be loaded");
 	}
 
-	loadedFonts.insert(make_pair(filename, font));
+	loadedFonts.insert(make_pair(filename + "##" + to_string(size), font));
 
 	return font;
 }
@@ -326,15 +328,16 @@ int main( int argc, char* args[] )
 		shade_screen();
 
 		//font demo
-		//SDL_Color color = {0,0,0};
-		//apply_font(100, 100, screen, load_font("arial.ttf"), "Hallo Gnord ich bin dein Gott", color);
+		SDL_Color color = {0,255,255};
+		apply_font(100, 100, screen, load_font("arial.ttf", 55), "Hallo Gnord ich bin dein Gott", color);
 
 		if( SDL_Flip( screen ) == -1 )
 		{
 			return 1;
 		}
     }
-
+	
+	TTF_Quit();
     SDL_Quit();
 
     return 0;

@@ -54,7 +54,7 @@ extern int32_t myRand(int32_t x);
 
 extern SDL_Surface *load_image( const string &filename );
 
-extern TTF_Font* load_font( const string &filename );
+extern TTF_Font* load_font( const string &filename, const int size = 14 );
 
 extern Uint32 get_pixel32( SDL_Surface *surface, int x, int y );
 
