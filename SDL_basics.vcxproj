@@ -178,10 +178,12 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryEarth.cpp" />
     <ClCompile Include="InventoryObject.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paralax.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="ShineHelper.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -197,6 +199,8 @@
     <ClInclude Include="FieldBackGrass.h" />
     <ClInclude Include="FieldFront.h" />
     <ClInclude Include="Fists.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="ShineHelper.h" />
     <ClInclude Include="ToolTypes.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryEarth.h" />

@@ -61,6 +61,12 @@
     <ClCompile Include="Fists.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ShineHelper.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -124,6 +130,12 @@
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
     <ClInclude Include="ToolTypes.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ShineHelper.h">
       <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>

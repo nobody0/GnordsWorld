@@ -2,6 +2,7 @@
 #include "FieldFront.h"
 #include "Inventory.h"
 #include "Fists.h"
+#include "Light.h"
 
 class Player : public FieldFront
 {
@@ -44,4 +45,6 @@ private:
 	uint32_t armAnimIndex;
 
 	bool flip;
+
+	Light light;
 };

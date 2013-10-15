@@ -60,18 +60,6 @@ extern Uint32 get_pixel32( SDL_Surface *surface, int x, int y );
 
 extern void put_pixel32( SDL_Surface *surface, int x, int y, Uint32 pixel );
 
-typedef struct {
-    int xStart;
-	int yStart;
-    int xEnd;
-	int yEnd;
-	Uint32 color;
-} threadedShineLineData;
-
-extern int threadedShineLine(void* data); 
-
-extern SDL_Thread* threadedShineFactory(const int xStart, const int yStart, const int xEnd, const int yEnd, const Uint32 color);
-
 extern void shade_screen();
 
 extern void apply_surface( const int32_t &x, const int32_t &y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL );

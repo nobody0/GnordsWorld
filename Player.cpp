@@ -83,6 +83,10 @@ void Player::init(const int32_t &x, const int32_t &y)
 
 	armAnimStart = -1;
 	armAnimIndex = 0;
+
+	SDL_PixelFormat* fmt = screen->format;
+	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
+	light.init(100, color);
 }
 
 
@@ -241,71 +245,7 @@ void Player::shine()
 	}
 	lastShine = totalTime;
 
-	SDL_LockSurface(screen);
-
-	SDL_PixelFormat* fmt = screen->format;
-	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
-
-	SDL_Thread* thread1 = NULL;
-	SDL_Thread* thread2 = NULL;
-	SDL_Thread* thread3 = NULL;
-	SDL_Thread* thread4 = NULL;
-	SDL_Thread* thread5 = NULL;
-	SDL_Thread* thread6 = NULL;
-	SDL_Thread* thread7 = NULL;
-	SDL_Thread* thread8 = NULL;
-
-	int x0 = SCREEN_WIDTH/2;
-	int y0 = SCREEN_HEIGHT/2;
-	int radius = 50;
-	int f = 1 - radius;
-	int ddF_x = 0;
-	int ddf_y = -2 * radius;
-	int xr = 0;
-	int yr = radius;
-	
-	thread1 = threadedShineFactory(x0, y0, x0, y0 + radius, color);
-	thread2 = threadedShineFactory(x0, y0, x0, y0 - radius, color);
-	thread3 = threadedShineFactory(x0, y0, x0 + radius, y0, color);
-	thread4 = threadedShineFactory(x0, y0, x0 - radius, y0, color);
-
-	SDL_WaitThread( thread1, NULL );
-	SDL_WaitThread( thread2, NULL );
-	SDL_WaitThread( thread3, NULL );
-	SDL_WaitThread( thread4, NULL );
-
-	while (xr < yr)
-	{
-		if (f >= 0)
-		{
-			yr--;
-			ddf_y += 2;
-			f += ddf_y;
-		}
-		xr++;
-		ddF_x += 2;
-		f += ddF_x + 1;
-
-		thread1 = threadedShineFactory(x0, y0, x0 + xr, y0 + yr, color);
-		thread2 = threadedShineFactory(x0, y0, x0 - xr, y0 + yr, color);
-		thread3 = threadedShineFactory(x0, y0, x0 + xr, y0 - yr, color);
-		thread4 = threadedShineFactory(x0, y0, x0 - xr, y0 - yr, color);
-		thread5 = threadedShineFactory(x0, y0, x0 + yr, y0 + xr, color);
-		thread6 = threadedShineFactory(x0, y0, x0 - yr, y0 + xr, color);
-		thread7 = threadedShineFactory(x0, y0, x0 + yr, y0 - xr, color);
-		thread8 = threadedShineFactory(x0, y0, x0 - yr, y0 - xr, color);
-
-		SDL_WaitThread( thread1, NULL );
-		SDL_WaitThread( thread2, NULL );
-		SDL_WaitThread( thread3, NULL );
-		SDL_WaitThread( thread4, NULL );
-		SDL_WaitThread( thread5, NULL );
-		SDL_WaitThread( thread6, NULL );
-		SDL_WaitThread( thread7, NULL );
-		SDL_WaitThread( thread8, NULL );
-	}
-
-	SDL_UnlockSurface(screen);
+	light.shine(SCREEN_WIDTH/2+15, SCREEN_HEIGHT/2+29);
 }
 
 void Player::useTool(Field* target, const int32_t &x, const int32_t &y)
