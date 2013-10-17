@@ -24,4 +24,6 @@ public:
 	void init(const int &range, const Uint32 &color);
 
 	void shine(int x, int y);
+
+	void pushIfValid(ShineHelper* shineHelper);
 };

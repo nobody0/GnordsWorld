@@ -19,8 +19,7 @@ public:
 	int screenY;
 	int absX;
 	int absY;
-	int distance;
-	int cost;
+	int distance; //eculid distance + wallness
 
 	ShineHelper(Light* light, int lightX, int lightY, int wallness, Uint32* lightMapIt, Uint32* lightPixelsIt);
 	
@@ -28,4 +27,6 @@ public:
 	bool operator>(const ShineHelper &that) const;
 
 	void shine();
+
+	bool isValidPosition();
 };
