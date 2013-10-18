@@ -51,20 +51,22 @@ void Light::shine(int x, int y)
 
 	int offset = y*SCREEN_WIDTH + x;
 
-	pushIfValid(new ShineHelper(this, 0, 0, 0, lightMap + offset, ((Uint32*)lightScreen->pixels) + offset));
+	ShineHelper* shineHelper = new ShineHelper(this, 0, 0, 0, lightMap + offset, ((Uint32*)lightScreen->pixels) + offset);
 
-	while (!queue.empty())
+	pushIfValid(shineHelper);
+
+	while (queue.try_pop(shineHelper))
 	{
-		queue.top().shine();
-		queue.pop();
+		shineHelper->shine();
+		delete shineHelper;
 	}
 }
 
 void Light::pushIfValid(ShineHelper* shineHelper)
 {
-	if (shineHelper->isValidPosition())
+	if (shineHelper->isValidPosition)
 	{
-		queue.push(*shineHelper);
+		queue.push(shineHelper);
 	}
 	else
 	{
