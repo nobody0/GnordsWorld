@@ -31,6 +31,7 @@ uint16_t mouseY;
 
 float deltaTime = 0;
 float totalTime = 0;
+bool doShadeScreen = true;
 
 World world;
 
@@ -297,6 +298,10 @@ int main( int argc, char* args[] )
 				{
 					quit = true;
 				}
+				else if ( event.key.keysym.sym == SDLK_c )
+				{
+					doShadeScreen = !doShadeScreen;
+				}
 				break;
 			case SDL_MOUSEMOTION :
 				mouseX = event.motion.x;
@@ -325,7 +330,10 @@ int main( int argc, char* args[] )
 		world.update();
 
 		//lighting demo
-		shade_screen();
+		if (doShadeScreen)
+		{
+			shade_screen();
+		}
 
 		//font demo
 		SDL_Color color = {0,255,255};

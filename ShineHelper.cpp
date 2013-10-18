@@ -3,35 +3,35 @@
 #include "main.h"
 #include "Light.h"
 
-ShineHelper::ShineHelper(Light* light, int lightX, int lightY, int wallness, Uint32* lightMapIt, Uint32* lightPixelsIt) : light(light), lightX(lightX), lightY(lightY), wallness(wallness), lightMapIt(lightMapIt), lightPixelsIt(lightPixelsIt)
+ShineHelper::ShineHelper(Light* light, int screenX, int screenY, int wallness,int* distanceOffsetIt,  int* pixelLockIt, Uint32* lightMapIt, Uint32* lightPixelsIt) : light(light), screenX(screenX), screenY(screenY), wallness(wallness), distanceOffsetIt(distanceOffsetIt), pixelLockIt(pixelLockIt), lightMapIt(lightMapIt), lightPixelsIt(lightPixelsIt)
 {
 	isValidPosition = false;
 
-	screenX = light->x + lightX;
 	if (screenX < 0 || screenX >= SCREEN_WIDTH)
 	{
 		return;
 	}
 
-	screenY = light->y + lightY;
 	if (screenY < 0 || screenY >= SCREEN_HEIGHT)
 	{
 		return;
 	}
 
-	absX = abs(lightX);
-	if (absX >= light->range)
+	if ((*pixelLockIt) <= wallness)
 	{
 		return;
 	}
-
-	absY = abs(lightY);
-	if (absY >= light->range)
+	else
 	{
-		return;
+		(*pixelLockIt) = wallness;
 	}
 
-	distance = light->distanceMap[absY * light->range + absX] + wallness;
+	if ((*lightPixelsIt))
+	{
+		this->wallness += 2;
+	}
+
+	distance = (*distanceOffsetIt) + this->wallness;
 	if (distance >= light->range)
 	{
 		return;
@@ -45,15 +45,6 @@ ShineHelper::~ShineHelper(void)
 
 }
 
-bool ShineHelper::operator<(const ShineHelper &that) const
-{
-	return this->distance > that.distance;
-}
-bool ShineHelper::operator>(const ShineHelper &that) const
-{
-	return this->distance < that.distance;
-}
-
 void ShineHelper::shine()
 {
 	Uint32 color = light->colorMap[distance];
@@ -61,16 +52,38 @@ void ShineHelper::shine()
 	{
 		return;
 	}
-
-	if ((*lightPixelsIt))
-	{
-		wallness += 2;
-	}
 	
 	(*lightMapIt) = color;
 
-	light->pushIfValid(new ShineHelper(light, lightX+1, lightY, wallness, lightMapIt+1, lightPixelsIt+1));
-	light->pushIfValid(new ShineHelper(light, lightX, lightY+1, wallness, lightMapIt+SCREEN_WIDTH, lightPixelsIt+SCREEN_WIDTH));
-	light->pushIfValid(new ShineHelper(light, lightX-1, lightY, wallness, lightMapIt-1, lightPixelsIt-1));
-	light->pushIfValid(new ShineHelper(light, lightX, lightY-1, wallness, lightMapIt-SCREEN_WIDTH, lightPixelsIt-SCREEN_WIDTH));
+	if (screenX > light->x)
+	{
+		light->pushIfValid(new ShineHelper(light, screenX+1, screenY, wallness, distanceOffsetIt+1, pixelLockIt+1, lightMapIt+1, lightPixelsIt+1));
+		light->pushIfValid(new ShineHelper(light, screenX-1, screenY, wallness, distanceOffsetIt-1, pixelLockIt-1, lightMapIt-1, lightPixelsIt-1));
+	}
+	else if (screenX < light->x)
+	{
+		light->pushIfValid(new ShineHelper(light, screenX+1, screenY, wallness, distanceOffsetIt-1, pixelLockIt+1, lightMapIt+1, lightPixelsIt+1));
+		light->pushIfValid(new ShineHelper(light, screenX-1, screenY, wallness, distanceOffsetIt+1, pixelLockIt-1, lightMapIt-1, lightPixelsIt-1));
+	}
+	else
+	{
+		light->pushIfValid(new ShineHelper(light, screenX+1, screenY, wallness, distanceOffsetIt+1, pixelLockIt+1, lightMapIt+1, lightPixelsIt+1));
+		light->pushIfValid(new ShineHelper(light, screenX-1, screenY, wallness, distanceOffsetIt+1, pixelLockIt-1, lightMapIt-1, lightPixelsIt-1));
+	}
+
+	if (screenY > light->y)
+	{
+		light->pushIfValid(new ShineHelper(light, screenX, screenY+1, wallness, distanceOffsetIt+light->rangePP, pixelLockIt+SCREEN_WIDTH, lightMapIt+SCREEN_WIDTH, lightPixelsIt+SCREEN_WIDTH));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY-1, wallness, distanceOffsetIt-light->rangePP, pixelLockIt-SCREEN_WIDTH, lightMapIt-SCREEN_WIDTH, lightPixelsIt-SCREEN_WIDTH));
+	}
+	else if (screenY < light->y)
+	{
+		light->pushIfValid(new ShineHelper(light, screenX, screenY+1, wallness, distanceOffsetIt-light->rangePP, pixelLockIt+SCREEN_WIDTH, lightMapIt+SCREEN_WIDTH, lightPixelsIt+SCREEN_WIDTH));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY-1, wallness, distanceOffsetIt+light->rangePP, pixelLockIt-SCREEN_WIDTH, lightMapIt-SCREEN_WIDTH, lightPixelsIt-SCREEN_WIDTH));
+	}
+	else
+	{
+		light->pushIfValid(new ShineHelper(light, screenX, screenY+1, wallness, distanceOffsetIt+light->rangePP, pixelLockIt+SCREEN_WIDTH, lightMapIt+SCREEN_WIDTH, lightPixelsIt+SCREEN_WIDTH));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY-1, wallness, distanceOffsetIt+light->rangePP, pixelLockIt-SCREEN_WIDTH, lightMapIt-SCREEN_WIDTH, lightPixelsIt-SCREEN_WIDTH));
+	}
 }

@@ -47,6 +47,8 @@ extern uint16_t mouseY;
 extern float deltaTime;
 extern float totalTime;
 
+extern bool doShadeScreen;
+
 extern World world;
 
 extern int32_t MY_RAND_SEED;

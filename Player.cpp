@@ -86,7 +86,7 @@ void Player::init(const int32_t &x, const int32_t &y)
 
 	SDL_PixelFormat* fmt = screen->format;
 	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
-	light.init(100, color);
+	light.init(200, color);
 }
 
 

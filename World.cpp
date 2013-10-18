@@ -259,31 +259,34 @@ void World::update()
 
 	player.draw(true);
 
-	for( int i = pixelCount-1; i >= 0; i--)
+	if (doShadeScreen)
 	{
-		lightMap[i] = 0;
-	}
-
-	for (x=updateXStart; x<updateXEnd; x++)
-	{
-		for (y=updateYStart; y<updateYEnd; y++)
+		for( int i = pixelCount-1; i >= 0; i--)
 		{
-			xy64 = int64FromXY(x, y);
+			lightMap[i] = 0;
+		}
 
-			backIt = mapBack.find(xy64);
-			if (backIt != mapBack.end())
+		for (x=updateXStart; x<updateXEnd; x++)
+		{
+			for (y=updateYStart; y<updateYEnd; y++)
 			{
-				if (backIt->second != NULL)
+				xy64 = int64FromXY(x, y);
+
+				backIt = mapBack.find(xy64);
+				if (backIt != mapBack.end())
 				{
-					backIt->second->shine();
+					if (backIt->second != NULL)
+					{
+						backIt->second->shine();
+					}
 				}
-			}
 
-			frontItPair = mapFront.equal_range(xy64);
-			for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
-			{
-				if (frontIt->second != NULL) {
-					frontIt->second->shine();
+				frontItPair = mapFront.equal_range(xy64);
+				for (frontIt=frontItPair.first; frontIt!=frontItPair.second; ++frontIt)
+				{
+					if (frontIt->second != NULL) {
+						frontIt->second->shine();
+					}
 				}
 			}
 		}

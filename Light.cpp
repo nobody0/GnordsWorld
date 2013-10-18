@@ -17,9 +17,11 @@ Light::~Light(void)
 void Light::init(const int &range, const Uint32 &color)
 {
 	this->range = range;
+	rangePP = range + 1;
 
 	colorMap = new Uint32[range];
-	distanceMap = new int[range*range];
+	distanceMap = new int[rangePP*rangePP+rangePP];
+	pixelLock = new int[pixelCount];
 
 	Uint8* colorMapIt = (Uint8*)colorMap;
 	Uint8* colorIt = (Uint8*)&color;
@@ -35,12 +37,18 @@ void Light::init(const int &range, const Uint32 &color)
 		}
 	}
 
-	for (int x = range - 1; x >= 0 ; x--)
+	for (int x = rangePP - 1; x >= 0 ; x--)
 	{
-		for (int y = range - 1; y >= 0 ; y--)
+		for (int y = rangePP - 1; y >= 0 ; y--)
 		{
-			distanceMap[y * range + x] = (int)sqrt(x*x + y*y);
+			distanceMap[y * rangePP + x] = (int)sqrt(x*x + y*y);
 		}
+	}
+
+	//overflow area
+	for (int z = rangePP - 1; z >= 0 ; z--)
+	{
+		distanceMap[rangePP*rangePP+z] = range+1;
 	}
 }
 
@@ -51,12 +59,19 @@ void Light::shine(int x, int y)
 
 	int offset = y*SCREEN_WIDTH + x;
 
-	ShineHelper* shineHelper = new ShineHelper(this, 0, 0, 0, lightMap + offset, ((Uint32*)lightScreen->pixels) + offset);
-
-	pushIfValid(shineHelper);
-
-	while (queue.try_pop(shineHelper))
+	for (int i = pixelCount - 1; i >= 0 ; i--)
 	{
+		pixelLock[i] = range;
+	}
+
+	pushIfValid(new ShineHelper(this, x, y, 0, distanceMap, pixelLock+offset, lightMap+offset, ((Uint32*)lightScreen->pixels)+offset));
+	
+	ShineHelper* shineHelper;
+
+	while (!queue.empty())
+	{
+		shineHelper = queue.top();
+		queue.pop();
 		shineHelper->shine();
 		delete shineHelper;
 	}

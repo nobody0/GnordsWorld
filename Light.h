@@ -2,8 +2,7 @@
 
 #include "SDL.h"
 #include "ShineHelper.h"
-#include "concurrent_queue.h"
-#include "concurrent_priority_queue.h"
+#include <queue>
 
 struct CompareShineHelpers : public std::binary_function<ShineHelper*, ShineHelper*, bool>                                                                                     
 {
@@ -18,13 +17,15 @@ class Light
 public:
 	Light(void);
 	~Light(void);
-
+	
 	int range;
+	int rangePP;
+
 	Uint32* colorMap; //get color by distance
 	int* distanceMap; //get floored distance by [y*width+x]
+	int* pixelLock; //which pixel do already have a job queued
 	
-	//concurrency::concurrent_queue<ShineHelper*> queue;
-	concurrency::concurrent_priority_queue<ShineHelper*, CompareShineHelpers> queue;
+	std::priority_queue<ShineHelper*, std::vector<ShineHelper*>, CompareShineHelpers> queue;
 
 	int x;
 	int y;
