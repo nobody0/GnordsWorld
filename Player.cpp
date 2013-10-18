@@ -20,15 +20,15 @@ void Player::draw(bool forceRedraw)
 	{
 		if (flip)
 		{
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fellFlipped, screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, armFlipped[armAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, fellFlipped, screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, armFlipped[armAnimIndex], screen);
 		}
 		else
 		{
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fell, screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, fell, screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
 		}
 
 		lastDraw = totalTime;
@@ -86,7 +86,7 @@ void Player::init(const int32_t &x, const int32_t &y)
 
 	SDL_PixelFormat* fmt = screen->format;
 	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
-	light.init(200, color);
+	light.init(250, color);
 }
 
 
@@ -245,7 +245,7 @@ void Player::shine()
 	}
 	lastShine = totalTime;
 
-	light.shine(SCREEN_WIDTH/2+15, SCREEN_HEIGHT/2+29);
+	light.shine(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 }
 
 void Player::useTool(Field* target, const int32_t &x, const int32_t &y)

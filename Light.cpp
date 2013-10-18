@@ -5,6 +5,10 @@
 
 Light::Light(void)
 {
+	precisionShift = 3;
+	precisionAdd = 1<<precisionShift;
+	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
+
 	colorMap = NULL;
 	distanceMap = NULL;
 }
@@ -17,7 +21,7 @@ Light::~Light(void)
 void Light::init(const int &range, const Uint32 &color)
 {
 	this->range = range;
-	rangePP = range + 1;
+	rangePP = (range<<precisionShift) + 1;
 
 	colorMap = new Uint32[range];
 	distanceMap = new int[rangePP*rangePP+rangePP];
@@ -41,7 +45,7 @@ void Light::init(const int &range, const Uint32 &color)
 	{
 		for (int y = rangePP - 1; y >= 0 ; y--)
 		{
-			distanceMap[y * rangePP + x] = (int)sqrt(x*x + y*y);
+			distanceMap[y * rangePP + x] = (int)sqrt(x*x + y*y)<<precisionShift;
 		}
 	}
 
@@ -54,6 +58,9 @@ void Light::init(const int &range, const Uint32 &color)
 
 void Light::shine(int x, int y)
 {
+	x -= ((int32_t)world.player.x)%precisionAdd;
+	y -= ((int32_t)world.player.y)%precisionAdd;
+
 	this->x = x;
 	this->y = y;
 

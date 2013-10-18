@@ -18,6 +18,10 @@ public:
 	Light(void);
 	~Light(void);
 	
+	int precisionShift;
+	int precisionAdd;
+	int precisionScreenWidth;
+	
 	int range;
 	int rangePP;
 
