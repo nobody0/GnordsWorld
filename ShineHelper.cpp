@@ -7,37 +7,99 @@ ShineHelper::ShineHelper(Light* light, int screenX, int screenY, int wallness,in
 {
 	isValidPosition = false;
 
-	if (screenX < 0 || screenX >= SCREEN_WIDTH)
+	if (screenX < 0)
+	{
+		if (screenX+light->precisionAdd <= 0)
+		{
+			return;
+		}
+
+		xStart = 0;
+
+		//adjust the pointers
+		_distanceOffsetIt = distanceOffsetIt - screenX;
+		_pixelLockIt = pixelLockIt - screenX;
+		_lightMapIt = lightMapIt - screenX;
+		_lightPixelsIt = lightPixelsIt - screenX;
+	}
+	else
+	{
+		xStart = screenX;
+
+		_distanceOffsetIt = distanceOffsetIt;
+		_pixelLockIt = pixelLockIt;
+		_lightMapIt = lightMapIt;
+		_lightPixelsIt = lightPixelsIt;
+	}
+	xEnd = screenX+light->precisionAdd;
+	if (xEnd >= SCREEN_WIDTH)
+	{
+		xEnd = SCREEN_WIDTH;
+	}
+	xRange = xEnd - xStart;
+	if (xRange <= 0)
 	{
 		return;
 	}
 
-	if (screenY < 0 || screenY >= SCREEN_HEIGHT)
+	if (screenY < 0)
+	{
+		if (screenY+light->precisionAdd <= 0)
+		{
+			return;
+		}
+
+		yStart = 0;
+
+		//adjust the pointers
+		int correction = screenY*SCREEN_WIDTH;
+		_distanceOffsetIt = _distanceOffsetIt - screenY*light->rangePP;
+		_pixelLockIt = _pixelLockIt - correction;
+		_lightMapIt = _lightMapIt - correction;
+		_lightPixelsIt = _lightPixelsIt - correction;
+	}
+	else
+	{
+		yStart = screenY;
+	}
+	yEnd = screenY+light->precisionAdd;
+	if (yEnd >= SCREEN_HEIGHT)
+	{
+		yEnd = SCREEN_HEIGHT;
+	}
+	yRange = yEnd - yStart;
+	if (yRange <= 0)
 	{
 		return;
 	}
 
-	if ((*pixelLockIt) <= wallness)
+
+	if ((*_pixelLockIt) <= wallness)
 	{
 		return;
 	}
 	else
 	{
-		(*pixelLockIt) = wallness;
-	}
-	
-	for (int x=0; x<light->precisionAdd; x++)
-	{
-		for (int y=0; y<light->precisionAdd; y++)
-		{
-			if (lightPixelsIt[y*SCREEN_WIDTH+x])
-			{
-				this->wallness += 2;
-			}
-		}
+		(*_pixelLockIt) = wallness;
 	}
 
-	distance = (*distanceOffsetIt) + this->wallness;
+	int wallnessAdd = 0;
+	for (int x=xStart; x<xEnd; x++)
+	{
+		for (int y=yStart; y<yEnd; y++)
+		{
+			if ((*_lightPixelsIt))
+			{
+				wallnessAdd += 2;
+			}
+			_lightPixelsIt += SCREEN_WIDTH;
+		}
+		_lightPixelsIt -= SCREEN_WIDTH*yRange;
+		_lightPixelsIt++;
+	}
+	this->wallness += wallnessAdd / ((xRange + yRange) / 2);
+
+	distance = (*_distanceOffsetIt) + this->wallness;
 	if (distance >= light->range)
 	{
 		return;
@@ -53,23 +115,33 @@ ShineHelper::~ShineHelper(void)
 
 void ShineHelper::shine()
 {
-	Uint32 color = light->colorMap[distance];
-
 	bool coloredAtleastOnePixel = false;
-	Uint32* lightMapIt2 = lightMapIt;
-	for (int x=0; x<light->precisionAdd; x++)
+
+	Uint32 color;
+	for (int x=xStart; x<xEnd; x++)
 	{
-		for (int y=0; y<light->precisionAdd; y++)
+		for (int y=yStart; y<yEnd; y++)
 		{
-			if ((*lightMapIt2) < color)
+			distance = (*_distanceOffsetIt) + this->wallness;
+			if (distance < light->range)
 			{
-				(*lightMapIt2) = color;
-				coloredAtleastOnePixel = true;
+				color = light->colorMap[distance];
+				if ((*_lightMapIt) < color)
+				{
+					(*_lightMapIt) = color;
+					coloredAtleastOnePixel = true;
+				}
 			}
-			lightMapIt2 += SCREEN_WIDTH;
+
+			_distanceOffsetIt += light->rangePP;
+
+			_lightMapIt += SCREEN_WIDTH;
 		}
-		lightMapIt2 -= SCREEN_WIDTH<<light->precisionShift;
-		lightMapIt2++;
+		_distanceOffsetIt -= light->rangePP*yRange;
+		_distanceOffsetIt++;
+
+		_lightMapIt -= SCREEN_WIDTH*yRange;
+		_lightMapIt++;
 	}
 
 	if (!coloredAtleastOnePixel)
@@ -77,35 +149,36 @@ void ShineHelper::shine()
 		return;
 	}
 
+
 	if (screenX > light->x)
 	{
-		light->pushIfValid(new ShineHelper(light, screenX+light->precisionAdd, screenY, wallness, distanceOffsetIt+1, pixelLockIt+light->precisionAdd, lightMapIt+light->precisionAdd, lightPixelsIt+light->precisionAdd));
-		light->pushIfValid(new ShineHelper(light, screenX-light->precisionAdd, screenY, wallness, distanceOffsetIt-1, pixelLockIt-light->precisionAdd, lightMapIt-light->precisionAdd, lightPixelsIt-light->precisionAdd));
+		light->pushIfValid(new ShineHelper(light, screenX+light->precisionAdd, screenY, wallness, distanceOffsetIt+light->precisionAdd, pixelLockIt+light->precisionAdd, lightMapIt+light->precisionAdd, lightPixelsIt+light->precisionAdd));
+		light->pushIfValid(new ShineHelper(light, screenX-light->precisionAdd, screenY, wallness, distanceOffsetIt-light->precisionAdd, pixelLockIt-light->precisionAdd, lightMapIt-light->precisionAdd, lightPixelsIt-light->precisionAdd));
 	}
 	else if (screenX < light->x)
 	{
-		light->pushIfValid(new ShineHelper(light, screenX+light->precisionAdd, screenY, wallness, distanceOffsetIt-1, pixelLockIt+light->precisionAdd, lightMapIt+light->precisionAdd, lightPixelsIt+light->precisionAdd));
-		light->pushIfValid(new ShineHelper(light, screenX-light->precisionAdd, screenY, wallness, distanceOffsetIt+1, pixelLockIt-light->precisionAdd, lightMapIt-light->precisionAdd, lightPixelsIt-light->precisionAdd));
+		light->pushIfValid(new ShineHelper(light, screenX+light->precisionAdd, screenY, wallness, distanceOffsetIt-light->precisionAdd, pixelLockIt+light->precisionAdd, lightMapIt+light->precisionAdd, lightPixelsIt+light->precisionAdd));
+		light->pushIfValid(new ShineHelper(light, screenX-light->precisionAdd, screenY, wallness, distanceOffsetIt+light->precisionAdd, pixelLockIt-light->precisionAdd, lightMapIt-light->precisionAdd, lightPixelsIt-light->precisionAdd));
 	}
 	else
 	{
-		light->pushIfValid(new ShineHelper(light, screenX+light->precisionAdd, screenY, wallness, distanceOffsetIt+1, pixelLockIt+light->precisionAdd, lightMapIt+light->precisionAdd, lightPixelsIt+light->precisionAdd));
-		light->pushIfValid(new ShineHelper(light, screenX-light->precisionAdd, screenY, wallness, distanceOffsetIt+1, pixelLockIt-light->precisionAdd, lightMapIt-light->precisionAdd, lightPixelsIt-light->precisionAdd));
+		light->pushIfValid(new ShineHelper(light, screenX+light->precisionAdd, screenY, wallness, distanceOffsetIt+light->precisionAdd, pixelLockIt+light->precisionAdd, lightMapIt+light->precisionAdd, lightPixelsIt+light->precisionAdd));
+		light->pushIfValid(new ShineHelper(light, screenX-light->precisionAdd, screenY, wallness, distanceOffsetIt+light->precisionAdd, pixelLockIt-light->precisionAdd, lightMapIt-light->precisionAdd, lightPixelsIt-light->precisionAdd));
 	}
 
 	if (screenY > light->y)
 	{
-		light->pushIfValid(new ShineHelper(light, screenX, screenY+light->precisionAdd, wallness, distanceOffsetIt+light->rangePP, pixelLockIt+light->precisionScreenWidth, lightMapIt+light->precisionScreenWidth, lightPixelsIt+light->precisionScreenWidth));
-		light->pushIfValid(new ShineHelper(light, screenX, screenY-light->precisionAdd, wallness, distanceOffsetIt-light->rangePP, pixelLockIt-light->precisionScreenWidth, lightMapIt-light->precisionScreenWidth, lightPixelsIt-light->precisionScreenWidth));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY+light->precisionAdd, wallness, distanceOffsetIt+(light->rangePP<<light->precisionShift), pixelLockIt+light->precisionScreenWidth, lightMapIt+light->precisionScreenWidth, lightPixelsIt+light->precisionScreenWidth));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY-light->precisionAdd, wallness, distanceOffsetIt-(light->rangePP<<light->precisionShift), pixelLockIt-light->precisionScreenWidth, lightMapIt-light->precisionScreenWidth, lightPixelsIt-light->precisionScreenWidth));
 	}
 	else if (screenY < light->y)
 	{
-		light->pushIfValid(new ShineHelper(light, screenX, screenY+light->precisionAdd, wallness, distanceOffsetIt-light->rangePP, pixelLockIt+light->precisionScreenWidth, lightMapIt+light->precisionScreenWidth, lightPixelsIt+light->precisionScreenWidth));
-		light->pushIfValid(new ShineHelper(light, screenX, screenY-light->precisionAdd, wallness, distanceOffsetIt+light->rangePP, pixelLockIt-light->precisionScreenWidth, lightMapIt-light->precisionScreenWidth, lightPixelsIt-light->precisionScreenWidth));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY+light->precisionAdd, wallness, distanceOffsetIt-(light->rangePP<<light->precisionShift), pixelLockIt+light->precisionScreenWidth, lightMapIt+light->precisionScreenWidth, lightPixelsIt+light->precisionScreenWidth));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY-light->precisionAdd, wallness, distanceOffsetIt+(light->rangePP<<light->precisionShift), pixelLockIt-light->precisionScreenWidth, lightMapIt-light->precisionScreenWidth, lightPixelsIt-light->precisionScreenWidth));
 	}
 	else
 	{
-		light->pushIfValid(new ShineHelper(light, screenX, screenY+light->precisionAdd, wallness, distanceOffsetIt+light->rangePP, pixelLockIt+light->precisionScreenWidth, lightMapIt+light->precisionScreenWidth, lightPixelsIt+light->precisionScreenWidth));
-		light->pushIfValid(new ShineHelper(light, screenX, screenY-light->precisionAdd, wallness, distanceOffsetIt+light->rangePP, pixelLockIt-light->precisionScreenWidth, lightMapIt-light->precisionScreenWidth, lightPixelsIt-light->precisionScreenWidth));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY+light->precisionAdd, wallness, distanceOffsetIt+(light->rangePP<<light->precisionShift), pixelLockIt+light->precisionScreenWidth, lightMapIt+light->precisionScreenWidth, lightPixelsIt+light->precisionScreenWidth));
+		light->pushIfValid(new ShineHelper(light, screenX, screenY-light->precisionAdd, wallness, distanceOffsetIt+(light->rangePP<<light->precisionShift), pixelLockIt-light->precisionScreenWidth, lightMapIt-light->precisionScreenWidth, lightPixelsIt-light->precisionScreenWidth));
 	}
 }

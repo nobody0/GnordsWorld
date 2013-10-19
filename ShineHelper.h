@@ -9,17 +9,33 @@ class ShineHelper
 public:
 	Light* light;
 
+	//stuff which is passed down to the siblings
 	int wallness;
 	int* pixelLockIt;
 	Uint32* lightMapIt;
 	Uint32* lightPixelsIt;
-
 	int screenX;
 	int screenY;
 	int* distanceOffsetIt;
-	int distance; //euclid distance + wallness
+
+
+	//caluclated stuff for this node only
+	int distance; //euclid distance + wallness, used for sorting
+
+	int xStart;
+	int xEnd;
+	int yStart;
+	int yEnd;
+	int xRange;
+	int yRange;
+
+	int* _distanceOffsetIt;
+	int* _pixelLockIt;
+	Uint32* _lightMapIt;
+	Uint32* _lightPixelsIt;
 
 	bool isValidPosition;
+
 
 	ShineHelper(Light* light, int screenX, int screenY, int wallness, int* distanceOffsetIt, int* pixelLockIt, Uint32* lightMapIt, Uint32* lightPixelsIt);
 	~ShineHelper(void);
