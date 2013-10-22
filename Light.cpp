@@ -1,6 +1,6 @@
 #include "Light.h"
 #include "main.h"
-#include "ShineHelper.h"
+#include "LightHelper.h"
 
 
 Light::Light(void)
@@ -58,6 +58,11 @@ void Light::init(const int &range, const Uint32 &color)
 
 void Light::shine(int x, int y)
 {
+	for (int i = pixelCount - 1; i >= 0 ; i--)
+	{
+		pixelLock[i] = range;
+	}
+
 	x -= ((int32_t)world.player.x)%precisionAdd;
 	y -= ((int32_t)world.player.y)%precisionAdd;
 
@@ -66,32 +71,27 @@ void Light::shine(int x, int y)
 
 	int offset = y*SCREEN_WIDTH + x;
 
-	for (int i = pixelCount - 1; i >= 0 ; i--)
-	{
-		pixelLock[i] = range;
-	}
-
-	pushIfValid(new ShineHelper(this, x, y, 0, distanceMap, pixelLock+offset, lightMap+offset, ((Uint32*)lightScreen->pixels)+offset));
+	pushIfValid(new LightHelper(this, x, y, 0, distanceMap, pixelLock+offset, lightMap+offset, ((Uint32*)lightScreen->pixels)+offset));
 	
-	ShineHelper* shineHelper;
+	LightHelper* LightHelper;
 
 	while (!queue.empty())
 	{
-		shineHelper = queue.top();
+		LightHelper = queue.top();
 		queue.pop();
-		shineHelper->shine();
-		delete shineHelper;
+		LightHelper->shine();
+		delete LightHelper;
 	}
 }
 
-void Light::pushIfValid(ShineHelper* shineHelper)
+void Light::pushIfValid(LightHelper* LightHelper)
 {
-	if (shineHelper->isValidPosition)
+	if (LightHelper->isValidPosition)
 	{
-		queue.push(shineHelper);
+		queue.push(LightHelper);
 	}
 	else
 	{
-		delete shineHelper;
+		delete LightHelper;
 	}
 }

@@ -29,6 +29,7 @@ int64_t World::int64FromXY(const int32_t &x, const int32_t &y)
 void World::init()
 {
 	player.init(0, -64);
+	sunLight.init();
 }
 
 void World::generateBack(const int32_t &x, const int32_t &y)
@@ -265,6 +266,8 @@ void World::update()
 		{
 			lightMap[i] = 0;
 		}
+
+		sunLight.shine();
 
 		for (x=updateXStart; x<updateXEnd; x++)
 		{

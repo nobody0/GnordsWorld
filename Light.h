@@ -1,12 +1,12 @@
 #pragma once
 
 #include "SDL.h"
-#include "ShineHelper.h"
+#include "LightHelper.h"
 #include <queue>
 
-struct CompareShineHelpers : public std::binary_function<ShineHelper*, ShineHelper*, bool>                                                                                     
+struct CompareLightHelpers : public std::binary_function<LightHelper*, LightHelper*, bool>                                                                                     
 {
-  bool operator()(const ShineHelper* lhs, const ShineHelper* rhs) const
+  bool operator()(const LightHelper* lhs, const LightHelper* rhs) const
   {
 	  return lhs->distance > rhs->distance;
   }
@@ -16,7 +16,7 @@ class Light
 {
 public:
 	Light(void);
-	~Light(void);
+	virtual ~Light(void);
 	
 	int precisionShift;
 	int precisionAdd;
@@ -29,7 +29,7 @@ public:
 	int* distanceMap; //get floored distance by [y*width+x]
 	int* pixelLock; //which pixel do already have a job queued
 	
-	std::priority_queue<ShineHelper*, std::vector<ShineHelper*>, CompareShineHelpers> queue;
+	std::priority_queue<LightHelper*, std::vector<LightHelper*>, CompareLightHelpers> queue;
 
 	int x;
 	int y;
@@ -38,5 +38,5 @@ public:
 
 	void shine(int x, int y);
 
-	void pushIfValid(ShineHelper* shineHelper);
+	void pushIfValid(LightHelper* LightHelper);
 };

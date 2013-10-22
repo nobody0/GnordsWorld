@@ -64,7 +64,13 @@
     <ClCompile Include="Light.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="ShineHelper.cpp">
+    <ClCompile Include="LightHelper.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SunLight.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SunLightHelper.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
   </ItemGroup>
@@ -135,7 +141,13 @@
     <ClInclude Include="Light.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="ShineHelper.h">
+    <ClInclude Include="LightHelper.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SunLight.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SunLightHelper.h">
       <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>

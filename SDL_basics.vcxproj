@@ -183,7 +183,9 @@
     <ClCompile Include="Paralax.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rect.cpp" />
-    <ClCompile Include="ShineHelper.cpp" />
+    <ClCompile Include="LightHelper.cpp" />
+    <ClCompile Include="SunLight.cpp" />
+    <ClCompile Include="SunLightHelper.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -200,7 +202,9 @@
     <ClInclude Include="FieldFront.h" />
     <ClInclude Include="Fists.h" />
     <ClInclude Include="Light.h" />
-    <ClInclude Include="ShineHelper.h" />
+    <ClInclude Include="LightHelper.h" />
+    <ClInclude Include="SunLight.h" />
+    <ClInclude Include="SunLightHelper.h" />
     <ClInclude Include="ToolTypes.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryEarth.h" />

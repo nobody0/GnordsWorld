@@ -6,6 +6,7 @@
 #include "FieldBack.h"
 #include "FieldFront.h"
 #include "Player.h"
+#include "SunLight.h"
 
 using namespace std;
 
@@ -16,6 +17,8 @@ public:
 	virtual ~World(void);
 	
 	Player player;
+
+	SunLight sunLight;
 	
 	unordered_map<int64_t, FieldBack*> mapBack;
 
