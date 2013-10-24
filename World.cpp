@@ -267,8 +267,6 @@ void World::update()
 			lightMap[i] = 0;
 		}
 
-		sunLight.shine();
-
 		for (x=updateXStart; x<updateXEnd; x++)
 		{
 			for (y=updateYStart; y<updateYEnd; y++)
@@ -293,5 +291,7 @@ void World::update()
 				}
 			}
 		}
+
+		sunLight.shine();
 	}
 }

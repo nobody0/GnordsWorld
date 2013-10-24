@@ -3,7 +3,7 @@
 #include "main.h"
 #include "SunLight.h"
 
-SunLightHelper::SunLightHelper(SunLight* sunLight, int screenX, int screenY, int wallness, int* pixelLockIt, Uint32* sunLightMapIt, Uint32* sunLightPixelsIt) : sunLight(sunLight), screenX(screenX), screenY(screenY), wallness(wallness), pixelLockIt(pixelLockIt), sunLightMapIt(sunLightMapIt), sunLightPixelsIt(sunLightPixelsIt)
+SunLightHelper::SunLightHelper(SunLight* sunLight, const int screenX, const int screenY, int wallness, int* pixelLockIt, Uint32* sunLightMapIt, Uint32* sunLightPixelsIt) : sunLight(sunLight), screenX(screenX), screenY(screenY), wallness(wallness), pixelLockIt(pixelLockIt), sunLightMapIt(sunLightMapIt), sunLightPixelsIt(sunLightPixelsIt)
 {
 	isValidPosition = false;
 
@@ -97,7 +97,7 @@ SunLightHelper::SunLightHelper(SunLight* sunLight, int screenX, int screenY, int
 		_sunLightPixelsIt -= SCREEN_WIDTH*yRange;
 		_sunLightPixelsIt++;
 	}
-	this->wallness += wallnessAdd / ((xRange + yRange) / 2);
+	this->wallness += wallnessAdd / min(xRange, yRange);
 
 	if (this->wallness >= sunLight->range)
 	{
@@ -142,9 +142,9 @@ void SunLightHelper::shine()
 		return;
 	}
 
-	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX+sunLight->precisionAdd, screenY, wallness, pixelLockIt+sunLight->precisionAdd, sunLightMapIt+sunLight->precisionAdd, sunLightPixelsIt+sunLight->precisionAdd));
-	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX-sunLight->precisionAdd, screenY, wallness, pixelLockIt-sunLight->precisionAdd, sunLightMapIt-sunLight->precisionAdd, sunLightPixelsIt-sunLight->precisionAdd));
+	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX+sunLight->precisionAdd, screenY, wallness+1, pixelLockIt+sunLight->precisionAdd, sunLightMapIt+sunLight->precisionAdd, sunLightPixelsIt+sunLight->precisionAdd));
+	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX-sunLight->precisionAdd, screenY, wallness+1, pixelLockIt-sunLight->precisionAdd, sunLightMapIt-sunLight->precisionAdd, sunLightPixelsIt-sunLight->precisionAdd));
 
 	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX, screenY+sunLight->precisionAdd, wallness, pixelLockIt+sunLight->precisionScreenWidth, sunLightMapIt+sunLight->precisionScreenWidth, sunLightPixelsIt+sunLight->precisionScreenWidth));
-	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX, screenY-sunLight->precisionAdd, wallness, pixelLockIt-sunLight->precisionScreenWidth, sunLightMapIt-sunLight->precisionScreenWidth, sunLightPixelsIt-sunLight->precisionScreenWidth));
+	sunLight->pushIfValid(new SunLightHelper(sunLight, screenX, screenY-sunLight->precisionAdd, wallness+1, pixelLockIt-sunLight->precisionScreenWidth, sunLightMapIt-sunLight->precisionScreenWidth, sunLightPixelsIt-sunLight->precisionScreenWidth));
 }

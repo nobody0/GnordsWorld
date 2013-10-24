@@ -100,7 +100,7 @@ LightHelper::LightHelper(Light* light, int screenX, int screenY, int wallness,in
 		_lightPixelsIt -= SCREEN_WIDTH*yRange;
 		_lightPixelsIt++;
 	}
-	this->wallness += wallnessAdd / ((xRange + yRange) / 2);
+	this->wallness += wallnessAdd / min(xRange, yRange);
 
 	//calculate distance
 	distance = (*_distanceOffsetIt) + this->wallness;

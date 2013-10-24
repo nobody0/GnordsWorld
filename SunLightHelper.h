@@ -33,7 +33,7 @@ public:
 	bool isValidPosition;
 
 
-	SunLightHelper(SunLight* sunLight, int screenX, int screenY, int wallness, int* pixelLockIt, Uint32* sunLightMapIt, Uint32* sunLightPixelsIt);
+	SunLightHelper(SunLight* sunLight, const int screenX, const int screenY, int wallness, int* pixelLockIt, Uint32* sunLightMapIt, Uint32* sunLightPixelsIt);
 	~SunLightHelper(void);
 
 	void shine();

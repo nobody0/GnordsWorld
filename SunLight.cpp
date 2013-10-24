@@ -4,7 +4,7 @@
 
 SunLight::SunLight(void)
 {
-	precisionShift = 2;
+	precisionShift = 4;
 	precisionAdd = 1<<precisionShift;
 	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
 
@@ -51,8 +51,8 @@ void SunLight::shine()
 	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
 
 	int32_t worldXStart = (int32_t)world.player.x - SCREEN_WIDTH/2;
-	int32_t worldXStartGridded = (int32_t)floor(worldXStart / GRID_SIZE);
-	int32_t worldXEndGridded = worldXStartGridded + (int32_t)ceil(SCREEN_WIDTH / GRID_SIZE);
+	int32_t worldXStartGridded = (int32_t)floor(worldXStart / GRID_SIZE) - 1;
+	int32_t worldXEndGridded = worldXStartGridded + (int32_t)ceil(SCREEN_WIDTH / GRID_SIZE) + 1;
 	
 	int32_t worldYStart = (int32_t)world.player.y - SCREEN_HEIGHT/2;
 	int32_t worldYStartGridded = (int32_t)floor(worldYStart / GRID_SIZE);
@@ -101,9 +101,9 @@ void SunLight::shine()
 			{
 				for (int i = 0; i<backIt->second->metricsLength; i++)
 				{
-					if (backIt->second->metrics[i].collidesWith(xGriddedWorld*GRID_SIZE, worldYStartGridded*GRID_SIZE))
+					if (backIt->second->metrics[i].intersectsWith(xGriddedWorld*GRID_SIZE, worldYStartGridded*GRID_SIZE))
 					{
-						wallness += GRID_SIZE - worldYStart%GRID_SIZE;
+						wallness += precisionAdd - worldYStart%precisionAdd;
 					}
 				}
 			}
@@ -111,17 +111,24 @@ void SunLight::shine()
 
 		if (wallness < range)
 		{
+			int yOffset = -((int32_t)world.player.y)%precisionAdd;
+			int yOffsetTimesWidth = yOffset*SCREEN_WIDTH;
+
 			//push start nodes
 			int xStart = xGriddedWorld*GRID_SIZE-worldXStart;
 			int xEnd = xGriddedWorld*GRID_SIZE-worldXStart+GRID_SIZE;
 			for (int x = xStart; x < xEnd; x += precisionAdd)
 			{
-				pushIfValid(new SunLightHelper(this, x, 0, wallness, pixelLock+x, lightMap+x, ((Uint32*)lightScreen->pixels)+x));
+				pushIfValid(new SunLightHelper(this, x, yOffset, wallness, pixelLock+yOffsetTimesWidth+x, lightMap+yOffsetTimesWidth+x, ((Uint32*)lightScreen->pixels)+yOffsetTimesWidth+x));
 			}
 		}
 	}
 
 	SunLightHelper* sunLightHelper;
+
+	Uint32 start = SDL_GetTicks();
+	counter1 = 0;
+	counter2 = 0;
 
 	while (!queue.empty())
 	{
@@ -130,16 +137,20 @@ void SunLight::shine()
 		sunLightHelper->shine();
 		delete sunLightHelper;
 	}
+
+	cout << SDL_GetTicks()-start << " : " << counter1 << " : " << counter2 << endl;
 }
 
 void SunLight::pushIfValid(SunLightHelper* sunLightHelper)
 {
 	if (sunLightHelper->isValidPosition)
 	{
+		counter1++;
 		queue.push(sunLightHelper);
 	}
 	else
 	{
+		counter2++;
 		delete sunLightHelper;
 	}
 }
