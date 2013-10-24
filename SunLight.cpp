@@ -4,7 +4,7 @@
 
 SunLight::SunLight(void)
 {
-	precisionShift = 4;
+	precisionShift = 2;
 	precisionAdd = 1<<precisionShift;
 	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
 

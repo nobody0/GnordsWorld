@@ -147,7 +147,7 @@ void World::onClick()
 		}
 	}
 
-	player.useTool(NULL, x, y);
+	//player.useTool(NULL, x, y);
 }
 
 void World::update()
