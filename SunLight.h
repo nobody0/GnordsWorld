@@ -15,8 +15,7 @@ struct CompareSunLightHelpers : public std::binary_function<SunLightHelper*, Sun
 class SunLight
 {
 public:
-	int counter1;
-	int counter2;
+	int dayTimeTestCounter;
 
 	SunLight(void);
 	virtual ~SunLight(void);
@@ -28,6 +27,9 @@ public:
 	int range;
 	int rangePP;
 
+	int dayTimePixelCount;
+	
+	Uint32* dayTimeColorMap; //get color by distance
 	Uint32* colorMap; //get color by distance
 	int* pixelLock; //which pixel do already have a job queued
 	

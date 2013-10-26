@@ -123,10 +123,18 @@ void SunLightHelper::shine()
 		{
 			for (int y=yStart; y<yEnd; y++)
 			{
-				if ((*_sunLightMapIt) < color)
+				Uint8* _sunLightMapIt8 = (Uint8*)_sunLightMapIt;
+				Uint8* color8 = (Uint8*)&color;
+
+				for (int i=0; i<4; i++)
 				{
-					(*_sunLightMapIt) = color;
-					coloredAtleastOnePixel = true;
+					if ((*_sunLightMapIt8) < (*color8))
+					{
+						(*_sunLightMapIt8) = (*color8);
+						coloredAtleastOnePixel = true;
+					}
+					_sunLightMapIt8++;
+					color8++;
 				}
 
 				_sunLightMapIt += SCREEN_WIDTH;

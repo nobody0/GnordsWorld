@@ -8,6 +8,7 @@ SunLight::SunLight(void)
 	precisionAdd = 1<<precisionShift;
 	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
 
+	dayTimeColorMap = NULL;
 	colorMap = NULL;
 }
 
@@ -18,26 +19,30 @@ SunLight::~SunLight(void)
 
 void SunLight::init()
 {
-	SDL_PixelFormat* fmt = screen->format;
-	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
+	SDL_Surface* dayTime = load_image("Paralax/Tageszeiten.png");
+	dayTimePixelCount = dayTime->h * dayTime->w;
 
 	range = 100;
 	rangePP = range + precisionAdd;
-
-	colorMap = new Uint32[range];
+	
+	dayTimeColorMap = new Uint32[range * dayTimePixelCount];
 	pixelLock = new int[pixelCount];
 
-	Uint8* colorMapIt = (Uint8*)colorMap;
-	Uint8* colorIt = (Uint8*)&color;
+	Uint32* dayTimePixels = (Uint32*)dayTime->pixels;
+	Uint8* dayTimeColorMapIt = (Uint8*)dayTimeColorMap;
+	Uint8* colorIt = (Uint8*)&dayTimePixels;
 
-	for (int i=0; i<range; i++)
+	for (int colorI = 0; colorI<dayTimePixelCount; colorI++)
 	{
-		colorIt = (Uint8*)&color;
-		for (int j=0; j<4; j++)
+		for (int i=0; i<range; i++)
 		{
-			(*colorMapIt) = ((*colorIt)*range - (*colorIt)*i)/range;
-			colorMapIt++;
-			colorIt++;
+			colorIt = (Uint8*)&dayTimePixels[colorI];
+			for (int j=0; j<4; j++)
+			{
+				(*dayTimeColorMapIt) = ((*colorIt)*range - (*colorIt)*i)/range;
+				dayTimeColorMapIt++;
+				colorIt++;
+			}
 		}
 	}
 }
@@ -47,9 +52,6 @@ void SunLight::shine()
 	int64_t xy64;
 	unordered_map<int64_t, FieldBack*>::const_iterator backIt;
 
-	SDL_PixelFormat* fmt = screen->format;
-	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
-
 	int32_t worldXStart = (int32_t)world.player.x - SCREEN_WIDTH/2;
 	int32_t worldXStartGridded = (int32_t)floor(worldXStart / GRID_SIZE) - 1;
 	int32_t worldXEndGridded = worldXStartGridded + (int32_t)ceil(SCREEN_WIDTH / GRID_SIZE) + 1;
@@ -57,6 +59,9 @@ void SunLight::shine()
 	int32_t worldYStart = (int32_t)world.player.y - SCREEN_HEIGHT/2;
 	int32_t worldYStartGridded = (int32_t)floor(worldYStart / GRID_SIZE);
 	int32_t worldYEndGridded = worldYStartGridded + (int32_t)ceil(SCREEN_HEIGHT / GRID_SIZE);
+
+	dayTimeTestCounter = (dayTimeTestCounter+1) % dayTimePixelCount;
+	colorMap = &dayTimeColorMap[range * dayTimeTestCounter];
 
 	for (int i = pixelCount - 1; i >= 0 ; i--)
 	{
@@ -127,8 +132,6 @@ void SunLight::shine()
 	SunLightHelper* sunLightHelper;
 
 	Uint32 start = SDL_GetTicks();
-	counter1 = 0;
-	counter2 = 0;
 
 	while (!queue.empty())
 	{
@@ -137,20 +140,16 @@ void SunLight::shine()
 		sunLightHelper->shine();
 		delete sunLightHelper;
 	}
-
-	cout << SDL_GetTicks()-start << " : " << counter1 << " : " << counter2 << endl;
 }
 
 void SunLight::pushIfValid(SunLightHelper* sunLightHelper)
 {
 	if (sunLightHelper->isValidPosition)
 	{
-		counter1++;
 		queue.push(sunLightHelper);
 	}
 	else
 	{
-		counter2++;
 		delete sunLightHelper;
 	}
 }
