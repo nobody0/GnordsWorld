@@ -1,4 +1,5 @@
 #include "main.h"
+#include <time.h>
 
 int32_t SCREEN_WIDTH = 1024;
 int32_t SCREEN_HEIGHT = 768;
@@ -35,7 +36,7 @@ bool doShadeScreen = true;
 
 World world;
 
-int32_t MY_RAND_SEED = 123456;
+int32_t MY_RAND_SEED = time(NULL);
 int32_t myRand(int32_t x)
 {
     x = (x*362436069+521288629) ^ MY_RAND_SEED;
@@ -266,6 +267,7 @@ SDL_Surface* flip_surface( SDL_Surface *surface, int flags )
     return flipped;
 }
 
+
 int main( int argc, char* args[] )
 {
 	float sinceStartTick;
@@ -338,6 +340,23 @@ int main( int argc, char* args[] )
 		//font demo
 		SDL_Color color = {0,255,255};
 		apply_font(100, 100, screen, load_font("arial.ttf", 55), "Hallo Gnord ich bin dein Gott", color);
+
+		//perlin demo
+		/*
+		SDL_Surface* perlin;
+
+		perlin = PerlinNoise::Render_Clouds(0, 0, 100, 100, 75, 0.25);
+		apply_surface(0, 0, perlin, screen);
+		SDL_FreeSurface(perlin);
+
+		perlin = PerlinNoise::Render_Clouds(100, 0, 100, 100, 75, 0.25);
+		apply_surface(100, 0, perlin, screen);
+		SDL_FreeSurface(perlin);
+
+		perlin = PerlinNoise::Render_Clouds(200, 0, 100, 100, 75, 0.25);
+		apply_surface(200, 0, perlin, screen);
+		SDL_FreeSurface(perlin);
+		*/
 
 		if( SDL_Flip( screen ) == -1 )
 		{

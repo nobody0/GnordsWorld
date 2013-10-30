@@ -16,9 +16,6 @@
     <ClCompile Include="FieldFront.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -73,6 +70,10 @@
     <ClCompile Include="SunLightHelper.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -150,6 +151,7 @@
     <ClInclude Include="SunLightHelper.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinNoise.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

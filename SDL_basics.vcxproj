@@ -181,6 +181,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Paralax.cpp" />
+    <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="LightHelper.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="Fists.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightHelper.h" />
+    <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="SunLight.h" />
     <ClInclude Include="SunLightHelper.h" />
     <ClInclude Include="ToolTypes.h" />
