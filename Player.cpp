@@ -20,15 +20,15 @@ void Player::draw(bool forceRedraw)
 	{
 		if (flip)
 		{
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fellFlipped, screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, armFlipped[armAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, fellFlipped, screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, armFlipped[armAnimIndex], screen);
 		}
 		else
 		{
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, fell, screen);
-			apply_surface((int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2, (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, fell, screen);
+			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
 		}
 
 		lastDraw = totalTime;
@@ -83,6 +83,10 @@ void Player::init(const int32_t &x, const int32_t &y)
 
 	armAnimStart = -1;
 	armAnimIndex = 0;
+
+	SDL_PixelFormat* fmt = screen->format;
+	Uint32 color = SDL_MapRGBA(fmt, 255, 255, 255, 0);
+	light.init(250, color);
 }
 
 
@@ -239,43 +243,9 @@ void Player::shine()
 	if (lastShine == totalTime) {
 		return;
 	}
-
 	lastShine = totalTime;
 
-	SDL_PixelFormat* fmt = screen->format;
-	Uint32 shade = SDL_MapRGBA(fmt, 255, 255, 255, 0);
-	Uint32 shade2 = SDL_MapRGBA(fmt, 32, 32, 32, 0);
-
-	int xStart = SCREEN_WIDTH/2 - 200;
-	int xEnd = xStart + 400;
-	int yStart = SCREEN_HEIGHT/2- 200;
-	int yEnd = yStart + 400;
-
-	Uint32* lightPixels = (Uint32*)lightScreen->pixels;
-
-	int x, y;
-	Uint32* offsetPixel = NULL;
-	Uint32* offsetMap = NULL;
-	for (x = xStart; x < xEnd; x++)
-	{
-		offsetPixel = lightPixels + yStart * SCREEN_WIDTH + x;
-		offsetMap = lightMap + yStart * SCREEN_WIDTH + x;
-
-		for (y = yStart; y < yEnd; y++)
-		{
-			offsetPixel += SCREEN_WIDTH;
-			offsetMap += SCREEN_WIDTH;
-
-			if ((*offsetPixel) == 0)
-			{
-				(*offsetMap) = shade;
-			}
-			else
-			{
-				(*offsetMap) = shade2;
-			}
-		}
-	}
+	light.shine(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
 }
 
 void Player::useTool(Field* target, const int32_t &x, const int32_t &y)

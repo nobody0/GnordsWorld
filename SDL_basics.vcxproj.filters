@@ -16,9 +16,6 @@
     <ClCompile Include="FieldFront.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Framework</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
@@ -61,6 +58,22 @@
     <ClCompile Include="Fists.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="LightHelper.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SunLight.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SunLightHelper.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -126,6 +139,19 @@
     <ClInclude Include="ToolTypes.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="LightHelper.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SunLight.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SunLightHelper.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -1,4 +1,5 @@
 #include "main.h"
+#include <time.h>
 
 #define FRAME_VALUES 10
 
@@ -35,10 +36,11 @@ bool showFrames = false;
 
 float deltaTime = 0;
 float totalTime = 0;
+bool doShadeScreen = true;
 
 World world;
 
-int32_t MY_RAND_SEED = 123456;
+int32_t MY_RAND_SEED = time(NULL);
 int32_t myRand(int32_t x)
 {
     x = (x*362436069+521288629) ^ MY_RAND_SEED;
@@ -270,6 +272,7 @@ SDL_Surface* flip_surface( SDL_Surface *surface, int flags )
     return flipped;
 }
 
+
 Uint32 frameTimes [FRAME_VALUES];
 Uint32 frameTimeLast;
 Uint32 frameCount;
@@ -317,7 +320,6 @@ void FpsLogic()
 	framesPerSecound = 1000.f / framesPerSecound;
 }
 
-
 int main( int argc, char* args[] )
 {
 	float sinceStartTick;
@@ -352,9 +354,13 @@ int main( int argc, char* args[] )
 				{
 					quit = true;
 				}
-				if (event.key.keysym.sym == SDLK_f)
+				else if (event.key.keysym.sym == SDLK_f)
 				{
 					showFrames = !showFrames;
+				}
+				else if ( event.key.keysym.sym == SDLK_c )
+				{
+					doShadeScreen = !doShadeScreen;
 				}
 				break;
 			case SDL_MOUSEMOTION :
@@ -384,7 +390,10 @@ int main( int argc, char* args[] )
 		world.update();
 
 		//lighting demo
-		shade_screen();
+		if (doShadeScreen)
+		{
+			shade_screen();
+		}
 
 		//fps
 		if (showFrames == true)
@@ -392,6 +401,23 @@ int main( int argc, char* args[] )
 			SDL_Color color = {0,255,255};
 			apply_font(100, 100, screen, load_font("arial.ttf", 55), to_string(framesPerSecound) , color);
 		}
+
+		//perlin demo
+		/*
+		SDL_Surface* perlin;
+
+		perlin = PerlinNoise::Render_Clouds(0, 0, 100, 100, 75, 0.25);
+		apply_surface(0, 0, perlin, screen);
+		SDL_FreeSurface(perlin);
+
+		perlin = PerlinNoise::Render_Clouds(100, 0, 100, 100, 75, 0.25);
+		apply_surface(100, 0, perlin, screen);
+		SDL_FreeSurface(perlin);
+
+		perlin = PerlinNoise::Render_Clouds(200, 0, 100, 100, 75, 0.25);
+		apply_surface(200, 0, perlin, screen);
+		SDL_FreeSurface(perlin);
+		*/
 
 		if( SDL_Flip( screen ) == -1 )
 		{

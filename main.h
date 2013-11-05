@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_TTF.h"
+#include "PerlinNoise.h"
 #include "World.h"
 #include <iostream>
 
@@ -50,6 +51,8 @@ extern uint16_t mouseY;
 
 extern float deltaTime;
 extern float totalTime;
+
+extern bool doShadeScreen;
 
 extern World world;
 
