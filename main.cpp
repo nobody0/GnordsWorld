@@ -1,5 +1,7 @@
 #include "main.h"
 
+#define FRAME_VALUES 10
+
 int32_t SCREEN_WIDTH = 1024;
 int32_t SCREEN_HEIGHT = 768;
 
@@ -28,6 +30,8 @@ Uint8 *keystates;
 bool mouseDown = false;
 uint16_t mouseX;
 uint16_t mouseY;
+
+bool showFrames = false;
 
 float deltaTime = 0;
 float totalTime = 0;
@@ -201,6 +205,7 @@ void apply_font( const int32_t &x, const int32_t &y, SDL_Surface* destination, T
 	SDL_FreeSurface(textSurface);
 }
 
+
 SDL_Surface* flip_surface( SDL_Surface *surface, int flags )
 {
     //Pointer to the soon to be flipped surface
@@ -265,6 +270,54 @@ SDL_Surface* flip_surface( SDL_Surface *surface, int flags )
     return flipped;
 }
 
+Uint32 frameTimes [FRAME_VALUES];
+Uint32 frameTimeLast;
+Uint32 frameCount;
+float framesPerSecound;
+
+void FpsInit()
+{
+	memset (frameTimes, 0, sizeof(frameTimes));
+	frameCount = 0;
+	framesPerSecound = 0;
+	frameTimeLast = SDL_GetTicks();
+}
+
+void FpsLogic()
+{
+	Uint32 frameTimeIndex;
+	Uint32 getTicks;
+	Uint32 count;
+	//Uint32 i;
+
+	frameTimeIndex = frameCount % FRAME_VALUES;
+	getTicks = SDL_GetTicks();
+	frameTimes[frameTimeIndex] = getTicks - frameTimeLast;
+	frameTimeLast = getTicks;
+	frameCount++;
+
+	if (frameCount < FRAME_VALUES)
+	{
+		count = frameCount;
+	}
+	else
+		count = FRAME_VALUES;
+
+	framesPerSecound = 0;
+	for (int i = 0; i < count; i++)
+	{
+		framesPerSecound += frameTimes[i];
+
+
+
+
+	}
+
+	framesPerSecound /= count;
+	framesPerSecound = 1000.f / framesPerSecound;
+}
+
+
 int main( int argc, char* args[] )
 {
 	float sinceStartTick;
@@ -276,6 +329,8 @@ int main( int argc, char* args[] )
     }
 
 	world.init();
+
+	
 
     while( !quit )
     {
@@ -296,6 +351,10 @@ int main( int argc, char* args[] )
 				if ( event.key.keysym.sym == SDLK_ESCAPE )
 				{
 					quit = true;
+				}
+				if (event.key.keysym.sym == SDLK_f)
+				{
+					showFrames = !showFrames;
 				}
 				break;
 			case SDL_MOUSEMOTION :
@@ -327,14 +386,20 @@ int main( int argc, char* args[] )
 		//lighting demo
 		shade_screen();
 
-		//font demo
-		SDL_Color color = {0,255,255};
-		apply_font(100, 100, screen, load_font("arial.ttf", 55), "Hallo Gnord ich bin dein Gott", color);
+		//fps
+		if (showFrames == true)
+		{
+			SDL_Color color = {0,255,255};
+			apply_font(100, 100, screen, load_font("arial.ttf", 55), to_string(framesPerSecound) , color);
+		}
 
 		if( SDL_Flip( screen ) == -1 )
 		{
 			return 1;
 		}
+
+		FpsLogic();
+		
     }
 	
 	TTF_Quit();

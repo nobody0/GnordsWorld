@@ -24,6 +24,10 @@ const int32_t SCREEN_BPP = 32;
 extern const string BASE_IMAGE_PATH;
 extern const string BASE_FONT_PATH;
 
+extern void FpsLogic();
+
+extern void FpsInit();
+
 //Flip flags
 const int FLIP_VERTICAL = 1;
 const int FLIP_HORIZONTAL = 2;
