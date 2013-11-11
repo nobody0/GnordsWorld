@@ -304,16 +304,14 @@ void FpsLogic()
 		count = frameCount;
 	}
 	else
+	{
 		count = FRAME_VALUES;
+	}
 
 	framesPerSecound = 0;
-	for (int i = 0; i < count; i++)
+	for (Uint32 i = 0; i < count; i++)
 	{
 		framesPerSecound += frameTimes[i];
-
-
-
-
 	}
 
 	framesPerSecound /= count;
