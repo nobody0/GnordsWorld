@@ -15,8 +15,6 @@ struct CompareSunLightHelpers : public std::binary_function<SunLightHelper*, Sun
 class SunLight
 {
 public:
-	int dayTimeTestCounter;
-
 	SunLight(void);
 	virtual ~SunLight(void);
 	

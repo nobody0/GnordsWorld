@@ -66,8 +66,8 @@ void SunLight::shine()
 	int32_t worldYStartGridded = (int32_t)floor(worldYStart / GRID_SIZE);
 	int32_t worldYEndGridded = worldYStartGridded + (int32_t)ceil(SCREEN_HEIGHT / GRID_SIZE);
 
-	dayTimeTestCounter = (dayTimeTestCounter+1) % dayTimePixelCount;
-	colorMap = &dayTimeColorMap[range * dayTimeTestCounter];
+	int dayTimeIndex = (int)((double)dayTime/dayTimeMax * dayTimePixelCount);
+	colorMap = &dayTimeColorMap[dayTimeIndex * range];
 
 	for (int i = pixelCount - 1; i >= 0 ; i--)
 	{

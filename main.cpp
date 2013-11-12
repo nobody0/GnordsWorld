@@ -24,6 +24,8 @@ int lightPrecision = 4;
 
 Uint32* lightMap = NULL;
 
+int dayTime = 0;
+
 int pixelCount = 0;
 
 SDL_Event event;
@@ -340,6 +342,8 @@ int main( int argc, char* args[] )
 		deltaTime = sinceStartTick/1000 - totalTime;
 		totalTime = sinceStartTick/1000;
 
+		dayTime = (int)(totalTime*100 + dayTimeMax/2) % (dayTimeMax+1);
+
 		keystates = SDL_GetKeyState( NULL );
 
         while( SDL_PollEvent( &event ) )
@@ -389,7 +393,6 @@ int main( int argc, char* args[] )
 
 		world.update();
 
-		//lighting demo
 		if (doShadeScreen)
 		{
 			shade_screen();
@@ -399,8 +402,28 @@ int main( int argc, char* args[] )
 		if (showFrames == true)
 		{
 			SDL_Color color = {0,255,255};
-			apply_font(100, 100, screen, load_font("arial.ttf", 55), to_string(framesPerSecound) , color);
+			apply_font(100, 100, screen, load_font("arial.ttf", 55), to_string(framesPerSecound), color);
 		}
+
+		//day time
+		int hour = dayTime/60;
+		string hourString = "";
+		if (hour < 10)
+		{
+			hourString = "0";
+		}
+		hourString += to_string(hour);
+
+		int minute = dayTime % 60;
+		string minuteString = "";
+		if (minute < 10)
+		{
+			minuteString = "0";
+		}
+		minuteString += to_string(minute);
+		
+		SDL_Color color = {0,0,0};
+		apply_font(10, 10, screen, load_font("arial.ttf", 13), hourString + ":" + minuteString, color);
 
 		//perlin demo
 		/*
