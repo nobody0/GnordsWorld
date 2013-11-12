@@ -36,6 +36,8 @@ public:
 
 	void init(const int &range, const Uint32 &color);
 
+	void updatePrecision();
+
 	void shine(int x, int y);
 
 	void pushIfValid(LightHelper* LightHelper);

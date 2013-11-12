@@ -5,12 +5,6 @@
 
 Light::Light(void)
 {
-	precisionShift = 2;
-	precisionAdd = 1<<precisionShift;
-	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
-
-	colorMap = NULL;
-	distanceMap = NULL;
 }
 
 
@@ -21,10 +15,8 @@ Light::~Light(void)
 void Light::init(const int &range, const Uint32 &color)
 {
 	this->range = range;
-	rangePP = range + precisionAdd;
 
 	colorMap = new Uint32[range];
-	distanceMap = new int[rangePP*rangePP+rangePP+rangePP];
 	pixelLock = new int[pixelCount];
 
 	Uint8* colorMapIt = (Uint8*)colorMap;
@@ -40,6 +32,20 @@ void Light::init(const int &range, const Uint32 &color)
 			colorIt++;
 		}
 	}
+
+	updatePrecision();
+}
+
+void Light::updatePrecision()
+{
+	precisionShift = lightPrecision;
+	precisionAdd = 1<<precisionShift;
+	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
+
+	rangePP = range + precisionAdd;
+
+	delete[] distanceMap;
+	distanceMap = new int[rangePP*rangePP+rangePP+rangePP];
 
 	for (int x = rangePP+rangePP - 1; x >= 0 ; x--)
 	{
@@ -58,6 +64,10 @@ void Light::init(const int &range, const Uint32 &color)
 
 void Light::shine(int x, int y)
 {
+	if (lightPrecision != precisionShift) {
+		updatePrecision();
+	}
+
 	for (int i = pixelCount - 1; i >= 0 ; i--)
 	{
 		pixelLock[i] = range;

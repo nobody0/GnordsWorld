@@ -37,6 +37,8 @@ extern SDL_Surface *screen;
 
 extern SDL_Surface *lightScreen;
 
+extern int lightPrecision;
+
 extern Uint32* lightMap;
 
 extern int pixelCount;

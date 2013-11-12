@@ -1,7 +1,7 @@
 #include "PerlinNoise.h"
 #include "main.h"
 
-inline double PerlinNoise::findnoise(double x, double y)
+double PerlinNoise::findnoise(double x, double y)
 {
 	int n=((int)x+(int)y*57) ^ MY_RAND_SEED;
 	n=(n<<13)^n;
@@ -9,7 +9,7 @@ inline double PerlinNoise::findnoise(double x, double y)
 	return 1.0-((double)nn/1073741824.0);
 }
 
-inline double PerlinNoise::interpolate(double a, double b, double x)
+double PerlinNoise::interpolate(double a, double b, double x)
 {
 	double ft=x * 3.1415927;
 	double f=(1.0-cos(ft))* 0.5;
@@ -30,7 +30,7 @@ double PerlinNoise::noise(double x,double y)
 	return interpolate(int1,int2,y-floory);
 }
 
-inline double PerlinNoise::perlinNoise(const int x, const int y, const double zoom, const double p)
+double PerlinNoise::perlinNoise(const int x, const int y, const double zoom, const double p)
 {
 	int octaves = 3;
 

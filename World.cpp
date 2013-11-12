@@ -294,6 +294,8 @@ void World::update()
 
 	if (doShadeScreen)
 	{
+		Uint32 shadeStart = SDL_GetTicks();
+
 		for( int i = pixelCount-1; i >= 0; i--)
 		{
 			lightMap[i] = 0;
@@ -325,5 +327,22 @@ void World::update()
 		}
 
 		sunLight.shine();
+
+		Uint32 diff = SDL_GetTicks() - shadeStart;
+
+		if (diff > 26)
+		{
+			if (lightPrecision < 4)
+			{
+				lightPrecision++;
+			}
+		}
+		else if (diff < 12)
+		{
+			if (lightPrecision > 0)
+			{
+				lightPrecision--;
+			}
+		}
 	}
 }

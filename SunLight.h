@@ -25,7 +25,6 @@ public:
 	int precisionScreenWidth;
 	
 	int range;
-	int rangePP;
 
 	int dayTimePixelCount;
 	
@@ -39,6 +38,8 @@ public:
 	int y;
 	
 	void init();
+
+	void updatePrecision();
 
 	void shine();
 

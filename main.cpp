@@ -20,6 +20,8 @@ SDL_Surface * screen = NULL;
 
 SDL_Surface * lightScreen = NULL;
 
+int lightPrecision = 4;
+
 Uint32* lightMap = NULL;
 
 int pixelCount = 0;
@@ -40,7 +42,7 @@ bool doShadeScreen = true;
 
 World world;
 
-int32_t MY_RAND_SEED = time(NULL);
+int32_t MY_RAND_SEED = (int32_t)time(NULL);
 int32_t myRand(int32_t x)
 {
     x = (x*362436069+521288629) ^ MY_RAND_SEED;

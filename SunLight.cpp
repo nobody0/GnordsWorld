@@ -4,12 +4,6 @@
 
 SunLight::SunLight(void)
 {
-	precisionShift = 2;
-	precisionAdd = 1<<precisionShift;
-	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
-
-	dayTimeColorMap = NULL;
-	colorMap = NULL;
 }
 
 
@@ -23,7 +17,6 @@ void SunLight::init()
 	dayTimePixelCount = dayTime->h * dayTime->w;
 
 	range = 100;
-	rangePP = range + precisionAdd;
 	
 	dayTimeColorMap = new Uint32[range * dayTimePixelCount];
 	pixelLock = new int[pixelCount];
@@ -45,10 +38,23 @@ void SunLight::init()
 			}
 		}
 	}
+
+	updatePrecision();
+}
+
+void SunLight::updatePrecision()
+{
+	precisionShift = lightPrecision;
+	precisionAdd = 1<<precisionShift;
+	precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
 }
 
 void SunLight::shine()
 {
+	if (lightPrecision != precisionShift) {
+		updatePrecision();
+	}
+
 	int64_t xy64;
 	unordered_map<int64_t, FieldBack*>::const_iterator backIt;
 
