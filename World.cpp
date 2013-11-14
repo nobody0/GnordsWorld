@@ -45,68 +45,58 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 	}
 	else
 	{
-		double zoom = 25;
-		double p = 0.6;
-		double maxRand = 16384;
-		int32_t r1 = (int32_t)(PerlinNoise::perlinNoise(x, y, zoom, p)*maxRand);
-		int32_t r2 = (int32_t)(PerlinNoise::perlinNoise(x+1, y, zoom, p)*maxRand);
-		int32_t r3 = (int32_t)(PerlinNoise::perlinNoise(x, y+1, zoom, p)*maxRand);
+		//2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139
+		double zoom = 5;
+		double p = 0.5;
+		
+		double r1 = PerlinNoise::perlinNoise(x, y, 1, zoom, p);
+		double r2 = PerlinNoise::perlinNoise(x, y, 3, zoom, p);
+		double r3 = PerlinNoise::perlinNoise(x, y, 5, zoom, p);
+		double r4 = PerlinNoise::perlinNoise(x, y, 7, zoom, p);
+		double r5 = PerlinNoise::perlinNoise(x, y, 11, zoom, p);
 
-		if ((r1>r2 && r1>r3)
-			|| (r1<r2 && r1<r3))
+		zoom = 20;
+		p = 0.7;
+
+		double r6 = PerlinNoise::perlinNoise(x, y, 13, zoom, p);
+		double r7 = PerlinNoise::perlinNoise(x, y, 17, zoom, p);
+		double r7y = PerlinNoise::perlinNoise(x, y+1, 17, zoom, p);
+
+		if (r1 > 0.991)
 		{
-			if (r1 > 0 && r1 < 100
-				|| r1 > 5000 && r1 < 5100
-				|| r1 > 9000 && r1 < 9300
-				|| r1 > 10000 && r1 < 10400
-				|| r1 > 14000 && r1 < 14200
-				|| r1 > 16000 && r1 < 16300)
-			{
-				FieldBackStone* fieldBackStone = new FieldBackStone();
-				fieldBackStone->init(x*GRID_SIZE, y*GRID_SIZE);
-			}
-			else if (r1 > 2000 && r1 < 2100
-				|| r1 > 3000 && r1 < 3200
-				|| r1 > 12000 && r1 < 12300
-				|| r1 > 7000 && r1 < 7200)
-			{
-				FieldBackCoal* fieldBackCoal = new FieldBackCoal();
-				fieldBackCoal->init(x*GRID_SIZE, y*GRID_SIZE);
-			}
-			else if (r1 > 8000 && r1 < 8100
-				|| r1 > 4000 && r1 < 4200
-				|| r1 > 1000 && r1 < 1100)
-			{
-				FieldBackCopper* fieldBackCopper = new FieldBackCopper();
-				fieldBackCopper->init(x*GRID_SIZE, y*GRID_SIZE);
-			}
-			else if (r1 > 13000 && r1 < 13100
-				|| r1 > 11000 && r1 < 11200)
-			{
-				FieldBackIron* fieldBackIron = new FieldBackIron();
-				fieldBackIron->init(x*GRID_SIZE, y*GRID_SIZE);
-			}
-			else if (r1 > 15000 && r1 < 15100)
-			{
-				FieldBackSilver* fieldBackSilver = new FieldBackSilver();
-				fieldBackSilver->init(x*GRID_SIZE, y*GRID_SIZE);
-			}
-			else if (r1 > 6000 && r1 < 7000)
-			{
-				world.mapBack.insert(
-					make_pair(
-						world.int64FromXY(x, y),
-						(FieldBack*) NULL
-					)
-				);
-			}
-			else
-			{
-				FieldBackEarth* fieldBackEarth = new FieldBackEarth();
-				fieldBackEarth->init(x*GRID_SIZE, y*GRID_SIZE);
-			}
+			FieldBackStone* fieldBackStone = new FieldBackStone();
+			fieldBackStone->init(x*GRID_SIZE, y*GRID_SIZE);
 		}
-		else if (r1 > 6000 && r1 < 6600)
+		else if (r2 > 0.992)
+		{
+			FieldBackCoal* fieldBackCoal = new FieldBackCoal();
+			fieldBackCoal->init(x*GRID_SIZE, y*GRID_SIZE);
+		}
+		else if (r3 > 0.993)
+		{
+			FieldBackCopper* fieldBackCopper = new FieldBackCopper();
+			fieldBackCopper->init(x*GRID_SIZE, y*GRID_SIZE);
+		}
+		else if (r4 > 0.994)
+		{
+			FieldBackIron* fieldBackIron = new FieldBackIron();
+			fieldBackIron->init(x*GRID_SIZE, y*GRID_SIZE);
+		}
+		else if (r5 > 0.995)
+		{
+			FieldBackSilver* fieldBackSilver = new FieldBackSilver();
+			fieldBackSilver->init(x*GRID_SIZE, y*GRID_SIZE);
+		}
+		else if (r6 > 0.95)
+		{
+			world.mapBack.insert(
+				make_pair(
+					world.int64FromXY(x, y),
+					(FieldBack*) NULL
+				)
+			);
+		}
+		else if (r7 > r7y && r7 > 0.9)
 		{
 			world.mapBack.insert(
 				make_pair(
@@ -332,15 +322,21 @@ void World::update()
 
 		if (diff > 26)
 		{
-			if (lightPrecision < 4)
+			lightPrecisionDelta += diff-26;
+
+			if (lightPrecisionDelta > 1000 && lightPrecision < 4)
 			{
+				lightPrecisionDelta = 0;
 				lightPrecision++;
 			}
 		}
 		else if (diff < 12)
 		{
-			if (lightPrecision > 0)
+			lightPrecisionDelta += diff-12;
+
+			if (lightPrecisionDelta < -1000 && lightPrecision > 0)
 			{
+				lightPrecisionDelta = 0;
 				lightPrecision--;
 			}
 		}

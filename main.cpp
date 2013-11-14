@@ -21,6 +21,7 @@ SDL_Surface * screen = NULL;
 SDL_Surface * lightScreen = NULL;
 
 int lightPrecision = 4;
+int lightPrecisionDelta = 0;
 
 Uint32* lightMap = NULL;
 

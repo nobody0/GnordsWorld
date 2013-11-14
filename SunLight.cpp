@@ -66,7 +66,7 @@ void SunLight::shine()
 	int32_t worldYStartGridded = (int32_t)floor(worldYStart / GRID_SIZE);
 	int32_t worldYEndGridded = worldYStartGridded + (int32_t)ceil(SCREEN_HEIGHT / GRID_SIZE);
 
-	int dayTimeIndex = (int)((double)dayTime/dayTimeMax * dayTimePixelCount);
+	int dayTimeIndex = (int)((double)dayTime/dayTimeMax * (dayTimePixelCount-1));
 	colorMap = &dayTimeColorMap[dayTimeIndex * range];
 
 	for (int i = pixelCount - 1; i >= 0 ; i--)
@@ -78,7 +78,7 @@ void SunLight::shine()
 	{
 		int wallness = 0;
 
-		for (int32_t worldYGridded = worldYStartGridded-100; worldYGridded < worldYStartGridded; worldYGridded++)
+		for (int32_t worldYGridded = worldYStartGridded-300; worldYGridded < worldYStartGridded; worldYGridded++)
 		{
 			//collsion test outside viewport
 			xy64 = world.int64FromXY(xGriddedWorld, worldYGridded);
@@ -123,6 +123,7 @@ void SunLight::shine()
 		if (wallness < range)
 		{
 			int yOffset = -((int32_t)world.player.y)%precisionAdd;
+
 			int yOffsetTimesWidth = yOffset*SCREEN_WIDTH;
 
 			//push start nodes
