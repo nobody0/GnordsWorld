@@ -18,6 +18,11 @@ void Player::draw(bool forceRedraw)
 {
 	if (forceRedraw)
 	{
+		if (activeTool != NULL)
+		{
+			activeTool->drawActive(0, 0);
+		}
+
 		if (flip)
 		{
 			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
