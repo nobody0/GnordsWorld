@@ -18,22 +18,70 @@ void Player::draw(bool forceRedraw)
 {
 	if (forceRedraw)
 	{
+		int32_t drawX = SCREEN_WIDTH/2;
+		int32_t drawY = SCREEN_HEIGHT/2;
+
 		if (activeTool != NULL)
 		{
-			activeTool->drawActive(0, 0);
+			int32_t activeToolOffsetX = 0;
+			int32_t activeToolOffsetY = 0;
+
+			switch(armAnimIndex)
+			{
+			case 0:
+				activeToolOffsetX = 4;
+				activeToolOffsetY = 14;
+				break;
+			case 1:
+				activeToolOffsetX = 8;
+				activeToolOffsetY = 11;
+				break;
+			case 2:
+				activeToolOffsetX = 11;
+				activeToolOffsetY = 8;
+				break;
+			case 3:
+				activeToolOffsetX = 11;
+				activeToolOffsetY = 5;
+				break;
+			case 4:
+				activeToolOffsetX = 13;
+				activeToolOffsetY = -1;
+				break;
+			case 5:
+				activeToolOffsetX = 11;
+				activeToolOffsetY = 4;
+				break;
+			case 6:
+				activeToolOffsetX = 12;
+				activeToolOffsetY = 8;
+				break;
+			case 7:
+				activeToolOffsetX = 8;
+				activeToolOffsetY = 11;
+				break;
+			}
+
+			if (flip)
+			{
+				activeToolOffsetX = -activeToolOffsetX;
+			}
+
+			//add 16 to x and 32 to y to center it, activeToolOffsetX and activeToolOffsetY are supposed to be how far we ahve to move out of that center
+			activeTool->drawActive(drawX + activeToolOffsetX + 16, drawY + activeToolOffsetY + 32);
 		}
 
 		if (flip)
 		{
-			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, bodyFlipped[bodyAnimIndex], screen);
-			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, fellFlipped, screen);
-			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, armFlipped[armAnimIndex], screen);
+			apply_surface(drawX, drawY, bodyFlipped[bodyAnimIndex], screen);
+			apply_surface(drawX, drawY, fellFlipped, screen);
+			apply_surface(drawX, drawY, armFlipped[armAnimIndex], screen);
 		}
 		else
 		{
-			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, body[bodyAnimIndex], screen);
-			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, fell, screen);
-			apply_surface(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, arm[armAnimIndex], screen);
+			apply_surface(drawX, drawY, body[bodyAnimIndex], screen);
+			apply_surface(drawX, drawY, fell, screen);
+			apply_surface(drawX, drawY, arm[armAnimIndex], screen);
 		}
 
 		lastDraw = totalTime;

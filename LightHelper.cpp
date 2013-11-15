@@ -122,6 +122,27 @@ void LightHelper::shine()
 	bool coloredAtleastOnePixel = false;
 
 	Uint32 color;
+	int distanceXAdd = light->rangePP;
+	int distanceYAdd = light->rangePP*yRange;
+
+	if (screenX > light->x)
+	{
+		
+	}
+	else
+	{
+
+	}
+
+	if (screenY > light->y)
+	{
+		
+	}
+	else
+	{
+		
+	}
+
 	for (int x=xStart; x<xEnd; x++)
 	{
 		for (int y=yStart; y<yEnd; y++)
@@ -137,11 +158,11 @@ void LightHelper::shine()
 				}
 			}
 
-			_distanceOffsetIt += light->rangePP;
+			_distanceOffsetIt += distanceXAdd;
 
 			_lightMapIt += SCREEN_WIDTH;
 		}
-		_distanceOffsetIt -= light->rangePP*yRange;
+		_distanceOffsetIt -= distanceYAdd;
 		_distanceOffsetIt++;
 
 		_lightMapIt -= SCREEN_WIDTH*yRange;
