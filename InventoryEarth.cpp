@@ -11,6 +11,7 @@ InventoryEarth::InventoryEarth(void)
 InventoryEarth::InventoryEarth(int32_t amount)
 {
 	this->amount = amount;
+	imageActive = load_image("Background/Erze/Erde/Erde01.png");
 }
 
 
