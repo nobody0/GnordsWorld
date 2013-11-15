@@ -400,6 +400,8 @@ int main( int argc, char* args[] )
 			shade_screen();
 		}
 
+		world.player.inventory.draw();
+
 		//fps
 		if (showFrames == true)
 		{

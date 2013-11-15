@@ -2,6 +2,8 @@
 
 #include "InventoryObject.h"
 #include <string>
+#include "SDL.h"
+#include "SDL_image.h"
 
 class Inventory
 {
@@ -18,8 +20,7 @@ public:
 	bool add(InventoryObject* inventoryObject);
 
 	bool remove(std::string name, int deltaAmount);
-	//True wenn erfolgreich entfernt.
-	//Bein null aus inventar Toolbar und active tool löschen. Darf nicht unter null
+
 	bool hasObject(std::string name, int amount);
 
 	void update();

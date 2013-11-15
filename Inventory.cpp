@@ -95,8 +95,17 @@ bool Inventory::hasObject(std::string name, int amount)
 	return false;
 }
 
+void Inventory::draw()
+{
+	SDL_Surface* background = NULL;
+	background = load_image("GUI/InventoryBackground.png");
+	apply_surface(0, 0, background, screen);
+	
 
-
-//Ich benutze ein Erde. 
-//Stacksize im Inventar soll sich um deltaAmount reduzieren
-//Wenn Stack dadurch auf null reduziert wird soll das Objekt aus dem Inventar, aus der toolbar und als Active tool entfernt werden.
+	//TODO Draw background SCREEN_WIDTH SCREEN_HEIGHT 
+	//TODO Über alle Objekte iterieren und von jedem die Draw aufrufen. Jedem in ScreenKoordinaten sagen wo es sich zeichnen soll
+	//TODO Draw Active (Fehlt logic)
+	//TODO Draw Border
+	//TODO Draw Toolbar
+}
+//282
