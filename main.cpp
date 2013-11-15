@@ -137,7 +137,8 @@ unordered_map<string, TTF_Font*> loadedFonts;
 
 TTF_Font* load_font( const string &filename, const int size )
 {
-	unordered_map<string, TTF_Font*>::const_iterator it = loadedFonts.find (filename);
+	string fontHash = filename + "##" + to_string(size);
+	unordered_map<string, TTF_Font*>::const_iterator it = loadedFonts.find (fontHash);
 
 	if (it != loadedFonts.end())
 	{
@@ -152,7 +153,7 @@ TTF_Font* load_font( const string &filename, const int size )
 		throw new exception("file couldnt be loaded");
 	}
 
-	loadedFonts.insert(make_pair(filename + "##" + to_string(size), font));
+	loadedFonts.insert(make_pair(fontHash, font));
 
 	return font;
 }
@@ -343,7 +344,7 @@ int main( int argc, char* args[] )
 		deltaTime = sinceStartTick/1000 - totalTime;
 		totalTime = sinceStartTick/1000;
 
-		dayTime = (int)(totalTime*100 + dayTimeMax/2) % (dayTimeMax+1);
+		dayTime = (int)(totalTime*20 + dayTimeMax/2) % (dayTimeMax+1);
 
 		keystates = SDL_GetKeyState( NULL );
 
@@ -423,7 +424,7 @@ int main( int argc, char* args[] )
 		}
 		minuteString += to_string(minute);
 		
-		SDL_Color color = {0,0,0};
+		SDL_Color color = {255,255,255};
 		apply_font(10, 10, screen, load_font("arial.ttf", 13), hourString + ":" + minuteString, color);
 
 		//perlin demo

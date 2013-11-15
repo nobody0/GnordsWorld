@@ -118,8 +118,8 @@ void Player::updateMetrics(Rect* const &metrics, int64_t* const &affectedGrids, 
 
 void Player::myUpdate()
 {
-	float speed = 100;
-	float jumpHeight = 200;
+	float speed = 120;
+	float jumpHeight = 210;
 	float fallSpeed = 500;
 	float maxFallSpeed = 600;
 	Vector2 moveVector;

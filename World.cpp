@@ -46,8 +46,8 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 	else
 	{
 		//2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139
-		double zoom = 5;
-		double p = 0.5;
+		double zoom = 4;
+		double p = 0.3;
 		
 		double r1 = PerlinNoise::perlinNoise(x, y, 1, zoom, p);
 		double r2 = PerlinNoise::perlinNoise(x, y, 3, zoom, p);
@@ -87,7 +87,7 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 			FieldBackSilver* fieldBackSilver = new FieldBackSilver();
 			fieldBackSilver->init(x*GRID_SIZE, y*GRID_SIZE);
 		}
-		else if (r6 > 0.95)
+		else if (r6 > 0.95 && world.player.y > 5)
 		{
 			world.mapBack.insert(
 				make_pair(
@@ -96,7 +96,16 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 				)
 			);
 		}
-		else if (r7 > r7y && r7 > 0.9)
+		else if (r7 > r7y && r7 > 0.5 && r7 < 0.65)
+		{
+			world.mapBack.insert(
+				make_pair(
+					world.int64FromXY(x, y),
+					(FieldBack*) NULL
+				)
+			);
+		}
+		else if (r7y > r7 && r7y > 0.5 && r7y < 0.65)
 		{
 			world.mapBack.insert(
 				make_pair(
