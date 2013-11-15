@@ -43,6 +43,8 @@ float deltaTime = 0;
 float totalTime = 0;
 bool doShadeScreen = true;
 
+bool showInventory = false;
+
 World world;
 
 int32_t MY_RAND_SEED = (int32_t)time(NULL);
@@ -368,6 +370,10 @@ int main( int argc, char* args[] )
 				{
 					doShadeScreen = !doShadeScreen;
 				}
+				else if ( event.key.keysym.sym == SDLK_i )
+				{
+					showInventory = !showInventory;
+				}
 				break;
 			case SDL_MOUSEMOTION :
 				mouseX = event.motion.x;
@@ -400,8 +406,12 @@ int main( int argc, char* args[] )
 			shade_screen();
 		}
 
-		world.player.inventory.draw();
+		world.player.inventory.drawToolbar();
 
+		if( showInventory == true )
+		{
+		world.player.inventory.draw();
+		}
 		//fps
 		if (showFrames == true)
 		{
@@ -445,6 +455,7 @@ int main( int argc, char* args[] )
 		apply_surface(200, 0, perlin, screen);
 		SDL_FreeSurface(perlin);
 		*/
+
 
 		if( SDL_Flip( screen ) == -1 )
 		{
