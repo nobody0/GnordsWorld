@@ -99,13 +99,24 @@ void Inventory::draw()
 {
 	SDL_Surface* background = NULL;
 	background = load_image("GUI/InventoryBackground.png");
-	apply_surface(0, 0, background, screen);
+	apply_surface(SCREEN_WIDTH/2-282,SCREEN_HEIGHT/2-130, background, screen);
 	
+	//Hier kommt Die Draw aller Objekte und danach die Draw Active hin.
+	
+	SDL_Surface* border = NULL;
+	border = load_image("GUI/InventoryBackgroundRamen.png");
+	apply_surface(SCREEN_WIDTH/2-282, SCREEN_HEIGHT/2-130, border, screen);
+}
 
-	//TODO Draw background SCREEN_WIDTH SCREEN_HEIGHT 
+void Inventory::drawToolbar()
+{
+	SDL_Surface* inventoryToolbar = NULL;
+	inventoryToolbar = load_image("GUI/InventoryToolbar.png");
+	apply_surface(SCREEN_WIDTH/2-372, SCREEN_HEIGHT-160, inventoryToolbar, screen);
+}
 	//TODO Über alle Objekte iterieren und von jedem die Draw aufrufen. Jedem in ScreenKoordinaten sagen wo es sich zeichnen soll
 	//TODO Draw Active (Fehlt logic)
 	//TODO Draw Border
 	//TODO Draw Toolbar
-}
+
 //282
