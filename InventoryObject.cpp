@@ -24,3 +24,8 @@ void InventoryObject::drawActive(int x, int y)
 {
 
 }
+
+void InventoryObject::draw(int x, int y)
+{
+
+}

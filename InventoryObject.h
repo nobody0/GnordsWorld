@@ -23,7 +23,7 @@ public:
 
 	virtual void onUse(Field* target, const int32_t &x, const int32_t &y);
 
-	//virtual void draw(int x, int y);
+	virtual void draw(int x, int y);
 	virtual void drawActive(int x, int y);
 };
 
