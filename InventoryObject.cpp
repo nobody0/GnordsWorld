@@ -25,3 +25,9 @@ void InventoryObject::drawActive(int x, int y)
 {
 	apply_surface(x-imageActive->w/2, y-imageActive->h/2, imageActive, screen);
 }
+
+
+void InventoryObject::draw(int x, int y)
+{
+	apply_surface(x, y, image, screen);
+}

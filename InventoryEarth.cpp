@@ -6,12 +6,15 @@
 InventoryEarth::InventoryEarth(void)
 {
 	amount = 1;
+	imageActive = load_image("Background/Erze/Erde/Erde01.png");
+	image = load_image("Background/Erze/Erde/Erde01.png");
 }
 
 InventoryEarth::InventoryEarth(int32_t amount)
 {
 	this->amount = amount;
 	imageActive = load_image("Background/Erze/Erde/Erde01.png");
+	image = load_image("Background/Erze/Erde/Erde01.png");
 }
 
 

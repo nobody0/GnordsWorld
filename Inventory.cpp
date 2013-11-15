@@ -97,10 +97,23 @@ bool Inventory::hasObject(std::string name, int amount)
 
 void Inventory::draw()
 {
+	int backgroundX = SCREEN_WIDTH/2-282;
+	int backgroundY = SCREEN_HEIGHT/2-130;
+	int columnCount = 8;
+
 	SDL_Surface* background = NULL;
 	background = load_image("GUI/InventoryBackground.png");
-	apply_surface(SCREEN_WIDTH/2-282,SCREEN_HEIGHT/2-130, background, screen);
+	apply_surface(backgroundX, backgroundY, background, screen);
 	
+	for (int32_t i = 0; i<inventorySize; i++)
+	{
+		if (objects[i] != NULL)
+		{
+			int itemX = i%columnCount;
+			int itemY = i/columnCount;
+			objects[i]->draw(backgroundX + itemX*64+28, backgroundY + itemY*64+28);
+		}
+	}
 	//Hier kommt Die Draw aller Objekte und danach die Draw Active hin.
 	
 	SDL_Surface* border = NULL;
@@ -116,7 +129,4 @@ void Inventory::drawToolbar()
 }
 	//TODO Über alle Objekte iterieren und von jedem die Draw aufrufen. Jedem in ScreenKoordinaten sagen wo es sich zeichnen soll
 	//TODO Draw Active (Fehlt logic)
-	//TODO Draw Border
-	//TODO Draw Toolbar
-
-//282
+	
