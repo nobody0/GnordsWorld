@@ -8,8 +8,10 @@ class InventoryObject
 {
 public:
 	int32_t amount;
+	int maxAmount;
 
 	SDL_Surface* image;
+	SDL_Surface* imageActive;
 
 	string name;
 
@@ -20,5 +22,8 @@ public:
 	~InventoryObject(void);
 
 	virtual void onUse(Field* target, const int32_t &x, const int32_t &y);
+
+	void draw(int x, int y);
+	void drawActive(int x, int y);
 };
 

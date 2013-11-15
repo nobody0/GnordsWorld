@@ -19,3 +19,8 @@ void InventoryObject::onUse(Field* target, const int32_t &x, const int32_t &y)
 		target->onUsed(toolType, toolLevel);
 	}
 }
+
+void InventoryObject::drawActive(int x, int y)
+{
+
+}
