@@ -111,7 +111,7 @@ void Inventory::draw()
 		{
 			int itemX = i%columnCount;
 			int itemY = i/columnCount;
-			objects[i]->draw(backgroundX + itemX*64, backgroundY + itemY*64);
+			objects[i]->draw(backgroundX + itemX*64+28, backgroundY + itemY*64+28);
 		}
 	}
 	//Hier kommt Die Draw aller Objekte und danach die Draw Active hin.
