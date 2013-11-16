@@ -40,8 +40,8 @@ void InventoryEarth::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 3;
-	name = "erde";
+	maxAmount = 9;
+	name = "Erde";
 
 	imageActive = load_image("Background/Erze/Erde/Erde01.png");
 	image = load_image("Background/Erze/Erde/Erde01.png");

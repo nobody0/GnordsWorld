@@ -1,43 +1,84 @@
-#include "FieldBackIron.h"
+#include "FieldBackSilver.h"
 #include "main.h"
+#include "InventorySilver.h"
 
 
-FieldBackIron::FieldBackIron(void)
+FieldBackSilver::FieldBackSilver(void)
 {
 }
 
-FieldBackIron::~FieldBackIron(void)
+FieldBackSilver::~FieldBackSilver(void)
 {
 }
 
-void FieldBackIron::init(const int32_t &x, const int32_t &y)
+void FieldBackSilver::init(const int32_t &x, const int32_t &y)
 {
 	FieldBack::init(x, y);
 
 	switch (myRand(x ^ (y<<2)) % 6)
 	{
 	case 0:
-		image = load_image("Background/Erze/Eisen/Eisen01.png");
+		image = load_image("Background/Erze/Silber/Silber01.png");
 		break;
 	case 1:
-		image = load_image("Background/Erze/Eisen/Eisen02.png");
+		image = load_image("Background/Erze/Silber/Silber02.png");
 		break;
 	case 2:
-		image = load_image("Background/Erze/Eisen/Eisen03.png");
+		image = load_image("Background/Erze/Silber/Silber03.png");
 		break;
 	case 3:
-		image = load_image("Background/Erze/Eisen/Eisen04.png");
+		image = load_image("Background/Erze/Silber/Silber04.png");
 		break;
 	case 4:
-		image = load_image("Background/Erze/Eisen/Eisen05.png");
+		image = load_image("Background/Erze/Silber/Silber05.png");
 		break;
 	case 5:
-		image = load_image("Background/Erze/Eisen/Eisen06.png");
+		image = load_image("Background/Erze/Silber/Silber06.png");
 		break;
 	}
 }
 
-void FieldBackIron::myUpdate()
+void FieldBackSilver::myUpdate()
 {
+	if (updateCounter > 2) {
+		unordered_map<int64_t, FieldBack*>::iterator backIt = world.mapBack.find(world.int64FromXY(xGridded, yGridded-1));
 
+		if (backIt != world.mapBack.end())
+		{
+			if (backIt->second == NULL)
+			{
+				removeFromMap();
+				delete this;
+				return;
+			}
+		}
+		updateCounter = 0;
+	} 
+	else 
+	{
+		updateCounter += deltaTime;
+	}
+}
+
+void FieldBackSilver::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
+{
+	if (toolType == appropriateTool)
+	{
+		health -= 2*toolLevel*deltaTime;
+	}
+	else
+	{
+		health -= toolLevel*deltaTime;
+	}
+
+	if (health <= 0)
+	{
+		InventoryObject* inventoryObject = new InventorySilver(1);
+		world.player.inventory.add(inventoryObject);
+
+		removeFromMap();
+
+		delete this;
+		return;
+	}
 }
