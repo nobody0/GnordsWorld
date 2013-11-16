@@ -7,5 +7,7 @@ class Fists :
 public:
 	Fists(void);
 	~Fists(void);
+
+	void init();
 };
 

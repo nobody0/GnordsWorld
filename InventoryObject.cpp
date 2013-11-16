@@ -4,8 +4,6 @@
 
 InventoryObject::InventoryObject(void)
 {
-	toolType = Default;
-	toolLevel = 1;
 }
 
 

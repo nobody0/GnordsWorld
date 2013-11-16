@@ -372,7 +372,7 @@ int main( int argc, char* args[] )
 				}
 				else if ( event.key.keysym.sym == SDLK_i )
 				{
-					showInventory = !showInventory;
+					showInventory = !showInventory;		
 				}
 				break;
 			case SDL_MOUSEMOTION :
@@ -393,13 +393,22 @@ int main( int argc, char* args[] )
 				break;
 			}
         }
-
+		//Hier alles so geändert das ich nichts abbauen oder bauen kann wärend das Inventar offen ist.
+		
 		if (mouseDown)
 		{
-			world.onClick();
+			if (showInventory)
+			{
+				//TODO Inventory onClick aufrufen
+			}
+			else
+			{
+				world.onClick();
+			}
 		}
-
+		
 		world.update();
+		
 
 		if (doShadeScreen)
 		{

@@ -5,16 +5,14 @@
 
 InventoryEarth::InventoryEarth(void)
 {
+	init();
 	amount = 1;
-	imageActive = load_image("Background/Erze/Erde/Erde01.png");
-	image = load_image("Background/Erze/Erde/Erde01.png");
 }
 
 InventoryEarth::InventoryEarth(int32_t amount)
 {
+	init();
 	this->amount = amount;
-	imageActive = load_image("Background/Erze/Erde/Erde01.png");
-	image = load_image("Background/Erze/Erde/Erde01.png");
 }
 
 
@@ -34,3 +32,16 @@ void InventoryEarth::onUse(Field* target, const int32_t &x, const int32_t &y)
 		fieldBackEarth->init(x*GRID_SIZE, y*GRID_SIZE);
 	}
 }
+
+void InventoryEarth::init()
+{
+	toolType = Default;
+	toolLevel = 1;
+
+	maxAmount = 2;
+	name = "erde";
+
+	imageActive = load_image("Background/Erze/Erde/Erde01.png");
+	image = load_image("Background/Erze/Erde/Erde01.png");
+}
+

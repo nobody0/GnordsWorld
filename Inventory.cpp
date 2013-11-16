@@ -21,7 +21,6 @@ Inventory::~Inventory(void)
 
 bool Inventory::add(InventoryObject* inventoryObject)
 {
-	const type_info &newType = typeid(*inventoryObject);
 	int32_t firstEmptySlot = -1;
 
 	for (int32_t i = 0; i<inventorySize; i++)
@@ -33,7 +32,7 @@ bool Inventory::add(InventoryObject* inventoryObject)
 				firstEmptySlot = i;
 			}
 		}
-		else if (newType == typeid(*objects[i]))
+		else if (objects[i]->name == inventoryObject->name && objects[i]->amount + inventoryObject->amount <= objects[i]->maxAmount) 
 		{
 			objects[i]->amount += inventoryObject->amount;
 			delete inventoryObject;
@@ -113,9 +112,7 @@ void Inventory::draw()
 			int itemY = i/columnCount;
 			objects[i]->draw(backgroundX + itemX*64+28, backgroundY + itemY*64+28);
 		}
-	}
-	//Hier kommt Die Draw aller Objekte und danach die Draw Active hin.
-	
+	}	
 	SDL_Surface* border = NULL;
 	border = load_image("GUI/InventoryBackgroundRamen.png");
 	apply_surface(SCREEN_WIDTH/2-282, SCREEN_HEIGHT/2-130, border, screen);
@@ -127,6 +124,6 @@ void Inventory::drawToolbar()
 	inventoryToolbar = load_image("GUI/InventoryToolbar.png");
 	apply_surface(SCREEN_WIDTH/2-372, SCREEN_HEIGHT-160, inventoryToolbar, screen);
 }
-	//TODO Über alle Objekte iterieren und von jedem die Draw aufrufen. Jedem in ScreenKoordinaten sagen wo es sich zeichnen soll
+	
 	//TODO Draw Active (Fehlt logic)
 	
