@@ -4,6 +4,7 @@
 #include <string>
 #include "SDL.h"
 #include "SDL_image.h"
+#include "Actionbar.h"
 
 class Inventory
 {
@@ -11,11 +12,10 @@ public:
 	Inventory(void);
 	~Inventory(void);
 
-	int32_t inventorySize;
-	int toolBarSize;
-	InventoryObject** objects;
-	InventoryObject** toolBar;
+	Actionbar actionbar;
 
+	int32_t inventorySize;
+	InventoryObject** objects;
 
 	bool add(InventoryObject* inventoryObject);
 

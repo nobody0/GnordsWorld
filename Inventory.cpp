@@ -36,14 +36,13 @@ bool Inventory::add(InventoryObject* inventoryObject)
 		{
 			objects[i]->amount += inventoryObject->amount;
 			delete inventoryObject;
-			//TODO Maximalgröße der stacks.
 			return true;
 		}
 	}
 
 	if (firstEmptySlot != -1)
 	{
-		world.player.activeTool = inventoryObject;
+		actionbar.barObjects[0] = inventoryObject;
 		objects[firstEmptySlot] = inventoryObject;
 		return true;
 	}
@@ -63,10 +62,12 @@ bool Inventory::remove(std::string name, int deltaAmount)
 				objects[i]->amount -= deltaAmount;
 				if (objects[i]->amount == 0)
 				{	
-					//TODO Überprüfen ob in der Toolbar wenn ja auch dort entfernen
-					if (objects[i] == world.player.activeTool)
+					for (int32_t ii = 0; ii<actionbar.actionbarSize; ii++)
 					{
-						world.player.activeTool = NULL;
+						if (objects[ii] == objects[i])
+						{
+							actionbar.remove(ii);
+						}
 					}
 					delete objects[i];
 					objects[i] = NULL;
@@ -120,9 +121,7 @@ void Inventory::draw()
 
 void Inventory::drawToolbar()
 {
-	SDL_Surface* inventoryToolbar = NULL;
-	inventoryToolbar = load_image("GUI/InventoryToolbar.png");
-	apply_surface(SCREEN_WIDTH/2-372, SCREEN_HEIGHT-160, inventoryToolbar, screen);
+	actionbar.draw();
 }
 	
 	//TODO Draw Active (Fehlt logic)

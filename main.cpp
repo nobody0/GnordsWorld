@@ -417,10 +417,11 @@ int main( int argc, char* args[] )
 
 		world.player.inventory.drawToolbar();
 
-		if( showInventory == true )
+		if (showInventory)
 		{
-		world.player.inventory.draw();
+			world.player.inventory.draw();
 		}
+
 		//fps
 		if (showFrames == true)
 		{

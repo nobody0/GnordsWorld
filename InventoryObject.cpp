@@ -1,5 +1,6 @@
 #include "InventoryObject.h"
 #include "main.h"
+#include "SDL_TTF.h"
 
 
 InventoryObject::InventoryObject(void)
@@ -28,4 +29,15 @@ void InventoryObject::drawActive(int x, int y)
 void InventoryObject::draw(int x, int y)
 {
 	apply_surface(x, y, image, screen);
+	SDL_Color color = {0,0,0};
+	apply_font(x+30, y+45, screen, load_font("arial.ttf", 15), to_string(this->amount), color);
 }
+
+void InventoryObject::actionbarDraw(int x, int y, int index)
+{
+	
+	apply_surface(x, y, image, screen);
+	SDL_Color color = {0,0,0};
+	apply_font(x+30, y+45, screen, load_font("arial.ttf", 15), to_string(index+1), color);
+}
+//TODO Wenn zeit Namen einblenden

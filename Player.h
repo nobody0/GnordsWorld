@@ -8,7 +8,7 @@ class Player : public FieldFront
 {
 public:
 	Inventory inventory;
-	InventoryObject* activeTool;
+	int activeAction;
 	Fists defaultTool;
 
 	float lastShine;
