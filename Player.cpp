@@ -21,7 +21,7 @@ void Player::draw(bool forceRedraw)
 		int32_t drawX = SCREEN_WIDTH/2;
 		int32_t drawY = SCREEN_HEIGHT/2;
 
-		if (activeTool != NULL)
+		if (inventory.actionbar.barObjects[activeAction] != NULL)
 		{
 			int32_t activeToolOffsetX = 0;
 			int32_t activeToolOffsetY = 0;
@@ -68,7 +68,7 @@ void Player::draw(bool forceRedraw)
 			}
 
 			//add 16 to x and 32 to y to center it, activeToolOffsetX and activeToolOffsetY are supposed to be how far we ahve to move out of that center
-			activeTool->drawActive(drawX + activeToolOffsetX + 16, drawY + activeToolOffsetY + 32);
+			inventory.actionbar.barObjects[activeAction]->drawActive(drawX + activeToolOffsetX + 16, drawY + activeToolOffsetY + 32);
 		}
 
 		if (flip)
@@ -92,7 +92,7 @@ void Player::init(const int32_t &x, const int32_t &y)
 {
 	FieldFront::init(x, y, 1, 12);
 
-	activeTool = NULL;
+	activeAction = 0;
 	
 	body[0] = load_image("Foreground/Gnord/walk_1.png");
 	body[1] = load_image("Foreground/Gnord/walk_2.png");
@@ -303,9 +303,9 @@ void Player::shine()
 
 void Player::useTool(Field* target, const int32_t &x, const int32_t &y)
 {
-	if (activeTool != NULL)
+	if (inventory.actionbar.barObjects[activeAction] != NULL)
 	{
-		activeTool->onUse(target, x, y);
+		inventory.actionbar.barObjects[activeAction]->onUse(target, x, y);
 	}
 	else
 	{
