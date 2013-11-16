@@ -33,11 +33,9 @@ void InventoryObject::draw(int x, int y)
 	apply_font(x+30, y+45, screen, load_font("arial.ttf", 15), to_string(this->amount), color);
 }
 
-void InventoryObject::actionbarDraw(int x, int y, int index)
+void InventoryObject::drawDragging(int x, int y)
 {
-	
-	apply_surface(x, y, image, screen);
-	SDL_Color color = {0,0,0};
-	apply_font(x+30, y+45, screen, load_font("arial.ttf", 15), to_string(index+1), color);
+	apply_surface(x-imageActive->w/2, y-imageActive->h/2, image, screen);
 }
+
 //TODO Wenn zeit Namen einblenden

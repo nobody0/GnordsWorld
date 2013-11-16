@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actionbar.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FieldBack.cpp" />
     <ClCompile Include="FieldBackEarth.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actionbar.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="FieldBack.h" />
     <ClInclude Include="FieldBackEarth.h" />

@@ -76,6 +76,9 @@
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Actionbar.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -154,6 +157,9 @@
       <Filter>Framework</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Actionbar.h">
       <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,6 +30,8 @@ void InventoryEarth::onUse(Field* target, const int32_t &x, const int32_t &y)
 	{
 		FieldBackEarth* fieldBackEarth = new FieldBackEarth();
 		fieldBackEarth->init(x*GRID_SIZE, y*GRID_SIZE);
+
+		world.player.inventory.remove(this, 1);
 	}
 }
 
@@ -38,7 +40,7 @@ void InventoryEarth::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 2;
+	maxAmount = 3;
 	name = "erde";
 
 	imageActive = load_image("Background/Erze/Erde/Erde01.png");

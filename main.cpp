@@ -374,6 +374,38 @@ int main( int argc, char* args[] )
 				{
 					showInventory = !showInventory;		
 				}
+				else if ( event.key.keysym.sym == SDLK_1 )
+				{
+					world.player.activeAction = 0;
+				}
+				else if ( event.key.keysym.sym == SDLK_2 )
+				{
+					world.player.activeAction = 1;
+				}
+				else if ( event.key.keysym.sym == SDLK_3 )
+				{
+					world.player.activeAction = 2;
+				}
+				else if ( event.key.keysym.sym == SDLK_4 )
+				{
+					world.player.activeAction = 3;
+				}
+				else if ( event.key.keysym.sym == SDLK_5 )
+				{
+					world.player.activeAction = 4;
+				}
+				else if ( event.key.keysym.sym == SDLK_6 )
+				{
+					world.player.activeAction = 5;
+				}
+				else if ( event.key.keysym.sym == SDLK_7 )
+				{
+					world.player.activeAction = 6;
+				}
+				else if ( event.key.keysym.sym == SDLK_8 )
+				{
+					world.player.activeAction = 7;
+				}
 				break;
 			case SDL_MOUSEMOTION :
 				mouseX = event.motion.x;
@@ -383,29 +415,43 @@ int main( int argc, char* args[] )
 				if(event.button.button == SDL_BUTTON_LEFT)
 				{
 					mouseDown = true;
+					if (showInventory)
+					{
+						world.player.inventory.onMouseDown();
+					}
+					else
+					{
+						world.player.inventory.actionbar.onMouseDown();
+					}
 				}
 				break;
 			case SDL_MOUSEBUTTONUP:
 				if(event.button.button == SDL_BUTTON_LEFT)
 				{
 					mouseDown = false;
+					if (showInventory)
+					{
+						world.player.inventory.onMouseUp();
+					}
+					else
+					{
+						world.player.inventory.actionbar.onMouseUp();
+					}
 				}
 				break;
 			}
         }
-		//Hier alles so geändert das ich nichts abbauen oder bauen kann wärend das Inventar offen ist.
-		
+
+		//do not ifnorm the world about a click event when the ivnentory is open
 		if (mouseDown)
 		{
-			if (showInventory)
-			{
-				//TODO Inventory onClick aufrufen
-			}
-			else
+			if (!showInventory)
 			{
 				world.onClick();
 			}
 		}
+		
+		world.player.inventory.update();
 		
 		world.update();
 		
@@ -415,7 +461,7 @@ int main( int argc, char* args[] )
 			shade_screen();
 		}
 
-		world.player.inventory.drawToolbar();
+		world.player.inventory.actionbar.draw();
 
 		if (showInventory)
 		{

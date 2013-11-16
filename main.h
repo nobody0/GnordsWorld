@@ -60,6 +60,8 @@ extern float totalTime;
 
 extern bool doShadeScreen;
 
+extern bool showInventory;
+
 extern World world;
 
 extern int32_t MY_RAND_SEED;

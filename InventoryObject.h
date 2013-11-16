@@ -25,6 +25,6 @@ public:
 
 	virtual void draw(int x, int y);
 	virtual void drawActive(int x, int y);
-	void actionbarDraw(int x, int y, int index);
+	void drawDragging(int x, int y);
 };
 

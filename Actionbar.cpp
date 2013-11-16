@@ -6,7 +6,15 @@
 
 Actionbar::Actionbar(void)
 {
-	actionbarSize = 9;
+	actionbarX = SCREEN_WIDTH/2-372;
+	actionbarY = SCREEN_HEIGHT-160;
+
+	objectsStartOffsetX = 120;
+	objectsStartOffsetY = 100;
+
+	objectSize = 64;
+
+	actionbarSize = 8;
 	barObjects = new InventoryObject*[actionbarSize];
 	for (int32_t i = 0; i<actionbarSize; i++)
 	{
@@ -32,9 +40,6 @@ void Actionbar::remove(int index)
 
 void Actionbar::draw()
 {
-	int actionbarX = SCREEN_WIDTH/2-372;
-	int actionbarY = SCREEN_HEIGHT-160;
-
 	SDL_Surface* inventoryToolbar = NULL;
 	inventoryToolbar = load_image("GUI/InventoryToolbar.png");
 	apply_surface(actionbarX, actionbarY, inventoryToolbar, screen);
@@ -42,11 +47,46 @@ void Actionbar::draw()
 	{
 		if (barObjects[i] != NULL)
 		{
-			barObjects[i]->actionbarDraw(actionbarX+120+(i*64), actionbarY+100, i);
+			barObjects[i]->draw(actionbarX+objectsStartOffsetX+i*objectSize, actionbarY+objectsStartOffsetY);
 		}
 	}
+
+	apply_surface(actionbarX+objectsStartOffsetX+world.player.activeAction*objectSize, actionbarY+objectsStartOffsetY, load_image("GUI/inventoryActive.png"), screen);
 }
 
 
+void Actionbar::onMouseDown()
+{
+	int xRelativeToItems = mouseX - actionbarX - objectsStartOffsetX;
+	int yRelativeToItems = mouseY - actionbarY - objectsStartOffsetY;
 
+	if (xRelativeToItems < 0 || xRelativeToItems > actionbarSize*objectSize
+		|| yRelativeToItems<0 || yRelativeToItems > objectSize )
+	{
+		return;
+	}
+
+	int droppedIndex = xRelativeToItems/objectSize;
+
+	world.player.activeAction = droppedIndex;
+}
+
+void Actionbar::onMouseUp()
+{
+	int xRelativeToItems = mouseX - actionbarX - objectsStartOffsetX;
+	int yRelativeToItems = mouseY - actionbarY - objectsStartOffsetY;
+
+	if (xRelativeToItems < 0 || xRelativeToItems > actionbarSize*objectSize
+		|| yRelativeToItems<0 || yRelativeToItems > objectSize )
+	{
+		return;
+	}
+
+	int droppedIndex = xRelativeToItems/objectSize;
+
+	if (world.player.inventory.draggingIndex != -1)
+	{
+		barObjects[droppedIndex] = world.player.inventory.objects[world.player.inventory.draggingIndex];
+	}
+}
 	
