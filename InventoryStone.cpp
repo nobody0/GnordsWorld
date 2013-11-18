@@ -43,7 +43,7 @@ void InventoryStone::init()
 	maxAmount = 9;
 	name = "Steine";
 
-	imageActive = load_image("Background/Erze/Steine/Steine01.png");
-	image = load_image("Background/Erze/Steine/Steine01.png");
+	imageActive = load_image("Hand/Steine.png");
+	image = load_image("Inventar/Erze/Steine.png");
 }
 

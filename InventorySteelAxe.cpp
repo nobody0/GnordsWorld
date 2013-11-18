@@ -37,5 +37,5 @@ void InventorySteelAxe::init()
 	name = "Stahlaxt";
 
 	imageActive = load_image("Inventar/Werkzeug/Stahlaxt.png");
-	image = load_image("Inventar/Werkzeug/Stahlaxt.png");
+	image = load_image("GUI/Werkzeug/Stahlaxt.png");
 }

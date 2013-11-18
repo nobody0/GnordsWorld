@@ -36,6 +36,6 @@ void InventorySteelSlice::init()
 	maxAmount = 1;
 	name = "Stahlsichel";
 
-	imageActive = load_image("Inventar/Werkzeug/Stahlsichel.png");
-	image = load_image("Inventar/Werkzeug/Stahlsichel.png");
+	imageActive = load_image("Inventar//Werkzeug/Stahlsichel.png");
+	image = load_image("GUI/Werkzeug/Stahlsichel.png");
 }

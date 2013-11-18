@@ -43,7 +43,7 @@ void InventorySilver::init()
 	maxAmount = 9;
 	name = "Silber";
 
-	imageActive = load_image("Background/Erze/Silber/Silber01.png");
-	image = load_image("Background/Erze/Silber/Silber01.png");
+	imageActive = load_image("Hand/Silber.png");
+	image = load_image("Inventar/Erze/Silber.png");
 }
 

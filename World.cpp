@@ -8,6 +8,11 @@
 #include "FieldBackCopper.h"
 #include "FieldBackSilver.h"
 #include "FieldBackStone.h"
+#include "InventorySteelAxe.h"
+#include "InventorySteelPick.h"
+#include "InventorySteelSlice.h"
+#include "InventoryObject.h"
+#include "Inventory.h"
 
 
 World::World(void)
@@ -30,6 +35,13 @@ void World::init()
 {
 	player.init(0, -64);
 	sunLight.init();
+	InventorySteelAxe *inventorySteelAxe = new InventorySteelAxe;
+	world.player.inventory.add(inventorySteelAxe);
+	InventorySteelPick *inventorySteelPick = new InventorySteelPick;
+	world.player.inventory.add(inventorySteelPick);
+	InventorySteelSlice *inventorySteelSlice = new InventorySteelSlice;
+	world.player.inventory.add(inventorySteelSlice);
+	
 }
 
 void World::generateBack(const int32_t &x, const int32_t &y)

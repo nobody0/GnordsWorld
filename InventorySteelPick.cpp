@@ -37,5 +37,5 @@ void InventorySteelPick::init()
 	name = "Stahlhacke";
 
 	imageActive = load_image("Inventar/Werkzeug/Stahlhacke.png");
-	image = load_image("Inventar/Werkzeug/Stahlhacke.png");
+	image = load_image("GUI/Werkzeug/Stahlhacke.png");
 }

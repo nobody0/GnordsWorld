@@ -43,7 +43,7 @@ void InventoryCopper::init()
 	maxAmount = 9;
 	name = "Kupfer";
 
-	imageActive = load_image("Background/Erze/Kupfer/Kupfer01.png");
-	image = load_image("Background/Erze/Kupfer/Kupfer01.png");
+	imageActive = load_image("Hand/Kupfer.png");
+	image = load_image("Inventar/Erze/Kupfer.png");
 }
 

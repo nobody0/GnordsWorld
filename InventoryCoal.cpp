@@ -43,7 +43,7 @@ void InventoryCoal::init()
 	maxAmount = 9;
 	name = "Kohle";
 
-	imageActive = load_image("Background/Erze/Kohle/Kohle01.png");
-	image = load_image("Background/Erze/Kohle/Kohle01.png");
+	imageActive = load_image("Hand/Kohle.png");
+	image = load_image("Inventar/Erze/Kohle.png");
 }
 

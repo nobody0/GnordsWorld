@@ -43,7 +43,7 @@ void InventoryEarth::init()
 	maxAmount = 9;
 	name = "Erde";
 
-	imageActive = load_image("Background/Erze/Erde/Erde01.png");
-	image = load_image("Background/Erze/Erde/Erde01.png");
+	imageActive = load_image("Hand/Erde.png");
+	image = load_image("Inventar/Erze/Erde.png");
 }
 
