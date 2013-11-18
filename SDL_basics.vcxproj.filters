@@ -79,14 +79,30 @@
     <ClCompile Include="Actionbar.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryIron.cpp" />
-    <ClCompile Include="InventoryCoal.cpp" />
-    <ClCompile Include="InventoryCopper.cpp" />
-    <ClCompile Include="InventorySilver.cpp" />
-    <ClCompile Include="InventoryStone.cpp" />
-    <ClCompile Include="InventorySteelAxe.cpp" />
-    <ClCompile Include="InventorySteelPick.cpp" />
-    <ClCompile Include="InventorySteelSlice.cpp" />
+    <ClCompile Include="InventoryCoal.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopper.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryIron.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySilver.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelAxe.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelPick.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelSlice.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryStone.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -170,14 +186,30 @@
     <ClInclude Include="Actionbar.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryIron.h" />
-    <ClInclude Include="InventoryCoal.h" />
-    <ClInclude Include="InventoryCopper.h" />
-    <ClInclude Include="InventorySilver.h" />
-    <ClInclude Include="InventoryStone.h" />
-    <ClInclude Include="InventorySteelAxe.h" />
-    <ClInclude Include="InventorySteelPick.h" />
-    <ClInclude Include="InventorySteelSlice.h" />
+    <ClInclude Include="InventoryCoal.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopper.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryIron.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySilver.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelAxe.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelPick.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelSlice.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryStone.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

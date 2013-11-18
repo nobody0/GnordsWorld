@@ -101,7 +101,7 @@ bool Inventory::remove(int i, int deltaAmount)
 		{	
 			for (int32_t ii = 0; ii<actionbar.actionbarSize; ii++)
 			{
-				if (objects[ii] == objects[i])
+				if (actionbar.barObjects[ii] == objects[i])
 				{
 					actionbar.remove(ii);
 				}
@@ -223,7 +223,8 @@ void Inventory::onMouseUp()
 
 	int droppedIndex = (yRelativeToItems/objectSize)*columnCount + xRelativeToItems/objectSize;
 
-	swap(draggingIndex, droppedIndex);
+	if (draggingIndex != droppedIndex)
+		swap(draggingIndex, droppedIndex);
 
 	draggingIndex = -1;
 }
