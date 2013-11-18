@@ -79,6 +79,14 @@
     <ClCompile Include="Actionbar.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="InventoryIron.cpp" />
+    <ClCompile Include="InventoryCoal.cpp" />
+    <ClCompile Include="InventoryCopper.cpp" />
+    <ClCompile Include="InventorySilver.cpp" />
+    <ClCompile Include="InventoryStone.cpp" />
+    <ClCompile Include="InventorySteelAxe.cpp" />
+    <ClCompile Include="InventorySteelPick.cpp" />
+    <ClCompile Include="InventorySteelSlice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -162,6 +170,14 @@
     <ClInclude Include="Actionbar.h">
       <Filter>Framework</Filter>
     </ClInclude>
+    <ClInclude Include="InventoryIron.h" />
+    <ClInclude Include="InventoryCoal.h" />
+    <ClInclude Include="InventoryCopper.h" />
+    <ClInclude Include="InventorySilver.h" />
+    <ClInclude Include="InventoryStone.h" />
+    <ClInclude Include="InventorySteelAxe.h" />
+    <ClInclude Include="InventorySteelPick.h" />
+    <ClInclude Include="InventorySteelSlice.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
