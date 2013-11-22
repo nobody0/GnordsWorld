@@ -6,6 +6,7 @@
 #include "SDL_image.h"
 #include "Actionbar.h"
 #include "Rect.h"
+#include "Crafting.h"
 
 class Inventory
 {
@@ -14,6 +15,7 @@ public:
 	~Inventory(void);
 
 	Actionbar actionbar;
+	Crafting* crafting;
 
 	int32_t inventorySize;
 	InventoryObject** objects;

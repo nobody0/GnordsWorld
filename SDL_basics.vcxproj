@@ -165,6 +165,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actionbar.cpp" />
+    <ClCompile Include="Crafting.cpp" />
+    <ClCompile Include="CraftingRecipe.cpp" />
+    <ClCompile Include="CraftingRecipeRequirement.cpp" />
+    <ClCompile Include="CraftingRecipeTest.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FieldBack.cpp" />
     <ClCompile Include="FieldBackEarth.cpp" />
@@ -201,6 +205,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actionbar.h" />
+    <ClInclude Include="Crafting.h" />
+    <ClInclude Include="CraftingRecipe.h" />
+    <ClInclude Include="CraftingRecipeRequirement.h" />
+    <ClInclude Include="CraftingRecipeTest.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="FieldBack.h" />
     <ClInclude Include="FieldBackEarth.h" />

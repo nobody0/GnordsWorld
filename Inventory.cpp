@@ -23,11 +23,14 @@ Inventory::Inventory(void)
 	}
 
 	draggingIndex = -1;
+
+	crafting = new Crafting();
 }
 
 
 Inventory::~Inventory(void)
 {
+	delete crafting;
 }
 
 
@@ -157,9 +160,7 @@ void Inventory::swap(int index1, int index2)
 
 void Inventory::draw()
 {
-	SDL_Surface* background = NULL;
-	background = load_image("GUI/InventoryBackground.png");
-	apply_surface(backgroundX, backgroundY, background, screen);
+	apply_surface(backgroundX, backgroundY, load_image("GUI/InventoryBackground.png"), screen);
 	
 	for (int32_t i = 0; i<inventorySize; i++)
 	{
@@ -169,10 +170,11 @@ void Inventory::draw()
 			int itemY = i/columnCount;
 			objects[i]->draw(backgroundX + itemX*objectSize+objectsStartOffsetX, backgroundY + itemY*objectSize+objectsStartOffsetY);
 		}
-	}	
-	SDL_Surface* border = NULL;
-	border = load_image("GUI/InventoryBackgroundRamen.png");
-	apply_surface(SCREEN_WIDTH/2-282, SCREEN_HEIGHT/2-130, border, screen);
+	}
+
+	apply_surface(SCREEN_WIDTH/2-282, SCREEN_HEIGHT/2-130, load_image("GUI/InventoryBackgroundRamen.png"), screen);
+	
+	crafting->draw();
 
 	if (draggingIndex != -1 && objects[draggingIndex] != NULL)
 	{
@@ -197,6 +199,7 @@ void Inventory::onMouseDown()
 		|| yRelativeToItems<0 || yRelativeToItems > rowCount*objectSize )
 	{
 		actionbar.onMouseDown();
+		crafting->onMouseDown();
 		return;
 	}
 

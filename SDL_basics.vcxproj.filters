@@ -103,6 +103,18 @@
     <ClCompile Include="InventoryStone.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Crafting.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipe.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeRequirement.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeTest.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -210,6 +222,18 @@
     <ClInclude Include="InventoryStone.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Crafting.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipe.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeRequirement.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeTest.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -223,6 +247,9 @@
     </Filter>
     <Filter Include="InvenotryObjects">
       <UniqueIdentifier>{faef8041-5bb6-40cd-a397-2bc89e099cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CraftingRecipes">
+      <UniqueIdentifier>{71137fd1-622f-4365-ab91-e0f958606e89}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
