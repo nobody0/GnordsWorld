@@ -40,24 +40,7 @@ void FieldBackCoal::init(const int32_t &x, const int32_t &y)
 
 void FieldBackCoal::myUpdate()
 {
-	if (updateCounter > 2) {
-		unordered_map<int64_t, FieldBack*>::iterator backIt = world.mapBack.find(world.int64FromXY(xGridded, yGridded-1));
 
-		if (backIt != world.mapBack.end())
-		{
-			if (backIt->second == NULL)
-			{
-				removeFromMap();
-				delete this;
-				return;
-			}
-		}
-		updateCounter = 0;
-	} 
-	else 
-	{
-		updateCounter += deltaTime;
-	}
 }
 
 void FieldBackCoal::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)

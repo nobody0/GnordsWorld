@@ -7,8 +7,6 @@ public:
 	FieldBackCopper(void);
 	~FieldBackCopper(void);
 
-	float updateCounter;
-
 	void init(const int32_t &x, const int32_t &y);
 
 	void myUpdate();

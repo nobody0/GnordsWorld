@@ -7,8 +7,6 @@ public:
 	FieldBackStone(void);
 	~FieldBackStone(void);
 
-	float updateCounter;
-
 	void init(const int32_t &x, const int32_t &y);
 
 	void myUpdate();
