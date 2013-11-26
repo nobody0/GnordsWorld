@@ -167,6 +167,7 @@
     <ClCompile Include="Actionbar.cpp" />
     <ClCompile Include="Crafting.cpp" />
     <ClCompile Include="CraftingRecipe.cpp" />
+    <ClCompile Include="CraftingRecipeIronAxe.cpp" />
     <ClCompile Include="CraftingRecipeRequirement.cpp" />
     <ClCompile Include="CraftingRecipeTest.cpp" />
     <ClCompile Include="Field.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryCoal.cpp" />
     <ClCompile Include="InventoryCopper.cpp" />
+    <ClCompile Include="InventoryCopperIngot.cpp" />
     <ClCompile Include="InventoryEarth.cpp" />
     <ClCompile Include="InventoryIron.cpp" />
     <ClCompile Include="InventoryObject.cpp" />
@@ -207,6 +209,7 @@
     <ClInclude Include="Actionbar.h" />
     <ClInclude Include="Crafting.h" />
     <ClInclude Include="CraftingRecipe.h" />
+    <ClInclude Include="CraftingRecipeIronAxe.h" />
     <ClInclude Include="CraftingRecipeRequirement.h" />
     <ClInclude Include="CraftingRecipeTest.h" />
     <ClInclude Include="Field.h" />
@@ -222,6 +225,7 @@
     <ClInclude Include="Fists.h" />
     <ClInclude Include="InventoryCoal.h" />
     <ClInclude Include="InventoryCopper.h" />
+    <ClInclude Include="InventoryCopperIngot.h" />
     <ClInclude Include="InventoryIron.h" />
     <ClInclude Include="InventorySilver.h" />
     <ClInclude Include="InventorySteelAxe.h" />

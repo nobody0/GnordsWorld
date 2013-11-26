@@ -115,6 +115,10 @@
     <ClCompile Include="CraftingRecipeTest.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
+    <ClCompile Include="CraftingRecipeIronAxe.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopperIngot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -234,6 +238,10 @@
     <ClInclude Include="CraftingRecipeTest.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
+    <ClInclude Include="CraftingRecipeIronAxe.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopperIngot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

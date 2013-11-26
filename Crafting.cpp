@@ -8,6 +8,8 @@ Crafting::Crafting(void)
 	craftingX = world.player.inventory.backgroundX + 525;
 	craftingY = world.player.inventory.backgroundY + 15;
 
+
+
 	listOffsetX = 30;
 	listOffsetY = 40;
 
@@ -16,6 +18,12 @@ Crafting::Crafting(void)
 
 	craftingRecipeHeight = 20;
 	craftingRecipeWidth = 100;
+	
+	craftingButtonOffsetX = 20;
+	craftingButtonOffsetY = 150;
+	craftingButtonHeight = 20;
+	craftingButtonWidth = 100;
+
 	activeRecipeIndex = -1;
 	craftingListPage = 0;
 	craftingListEntriesPerPage = 16;
@@ -77,9 +85,23 @@ void Crafting::onMouseDown()
 	int xRelativeToList = mouseX - craftingX - listOffsetX;
 	int yRelativeToList = mouseY - craftingY - listOffsetY;
 
-	if (xRelativeToList < 0 || xRelativeToList > craftingListEntriesPerPage*craftingRecipeHeight
-		|| yRelativeToList<0 || yRelativeToList > craftingRecipeWidth)
+	if (xRelativeToList < 0 || xRelativeToList > craftingRecipeWidth
+		|| yRelativeToList < 0 || yRelativeToList > craftingListEntriesPerPage*craftingRecipeHeight)
 	{
+		int xRelativeToCraftingButton = mouseX - craftingX - activeOffsetX - craftingButtonOffsetX;
+		int yRelativeToCraftingButton = mouseY - craftingY - activeOffsetY - craftingButtonOffsetY;
+
+		if (activeRecipeIndex != -1)
+		{
+			if (xRelativeToCraftingButton < 0 || xRelativeToCraftingButton > craftingButtonWidth
+				|| yRelativeToCraftingButton < 0 || yRelativeToCraftingButton > craftingButtonHeight)
+			{
+				return;
+			}
+
+			recipes[activeRecipeIndex]->doCraft();
+		}
+
 		return;
 	}
 
