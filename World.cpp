@@ -8,6 +8,7 @@
 #include "FieldBackCopper.h"
 #include "FieldBackSilver.h"
 #include "FieldBackStone.h"
+#include "FieldBackWater.h"
 #include "InventorySteelAxe.h"
 #include "InventorySteelPick.h"
 #include "InventorySteelSlice.h"
@@ -73,7 +74,9 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 		double r6 = PerlinNoise::perlinNoise(x, y, 13, zoom, p);
 		double r7 = PerlinNoise::perlinNoise(x, y, 17, zoom, p);
 		double r7y = PerlinNoise::perlinNoise(x, y+1, 17, zoom, p);
+		double r8 = PerlinNoise::perlinNoise(x, y, 19, zoom, p);
 
+		//minerals
 		if (r1 > 0.991)
 		{
 			FieldBackStone* fieldBackStone = new FieldBackStone();
@@ -99,6 +102,13 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 			FieldBackSilver* fieldBackSilver = new FieldBackSilver();
 			fieldBackSilver->init(x*GRID_SIZE, y*GRID_SIZE);
 		}
+		//water
+		else if (r8 > 0.95)
+		{
+			FieldBackWater* fieldBackWater = new FieldBackWater();
+			fieldBackWater->init(x*GRID_SIZE, y*GRID_SIZE);
+		}
+		//caves
 		else if (r6 > 0.95 && world.player.y > 5)
 		{
 			world.mapBack.insert(
@@ -108,6 +118,7 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 				)
 			);
 		}
+		//tunnels
 		else if (r7 > r7y && r7 > 0.5 && r7 < 0.65)
 		{
 			world.mapBack.insert(
@@ -126,6 +137,7 @@ void World::generateBack(const int32_t &x, const int32_t &y)
 				)
 			);
 		}
+		//default to earth
 		else
 		{
 			FieldBackEarth* fieldBackEarth = new FieldBackEarth();

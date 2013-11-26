@@ -11,7 +11,7 @@ public:
 	float updateCounter;
 
 	int waterLevel;
-	int maxWaterLevel;
+	static const int maxWaterLevel = 8;
 
 	void init(const int32_t &x, const int32_t &y);
 
