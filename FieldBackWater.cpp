@@ -15,7 +15,9 @@ FieldBackWater::~FieldBackWater(void)
 void FieldBackWater::init(const int32_t &x, const int32_t &y)
 {
 	FieldBack::init(x, y);
-	
+
+	liquid = true;
+
 	setWaterLevel(maxWaterLevel);
 
 	updateCounter = 0;
@@ -23,7 +25,7 @@ void FieldBackWater::init(const int32_t &x, const int32_t &y)
 
 void FieldBackWater::myUpdate()
 {
-	if (updateCounter > 0.5) {
+	if (updateCounter > 0.2) {
 		unordered_map<int64_t, FieldBack*>::iterator backItBottom = world.mapBack.find(world.int64FromXY(xGridded, yGridded+1));
 
 		if (backItBottom != world.mapBack.end())
@@ -77,11 +79,13 @@ void FieldBackWater::myUpdate()
 					FieldBackWater* fieldBackWater = new FieldBackWater();
 					fieldBackWater->init((xGridded-1)*GRID_SIZE, yGridded*GRID_SIZE);
 
+					fieldBackWater->waterLevel = 0;
+
 					otherWaterLeft = fieldBackWater;
 				}
 				else
 				{
-					FieldBackWater* otherWater = dynamic_cast<FieldBackWater*>(backItBottom->second);
+					FieldBackWater* otherWater = dynamic_cast<FieldBackWater*>(backItLeft->second);
 					if (otherWater && otherWater->waterLevel < maxWaterLevel)
 					{
 						otherWaterLeft = otherWater;
@@ -101,11 +105,13 @@ void FieldBackWater::myUpdate()
 					FieldBackWater* fieldBackWater = new FieldBackWater();
 					fieldBackWater->init((xGridded+1)*GRID_SIZE, yGridded*GRID_SIZE);
 
+					fieldBackWater->waterLevel = 0;
+
 					otherWaterRight = fieldBackWater;
 				}
 				else
 				{
-					FieldBackWater* otherWater = dynamic_cast<FieldBackWater*>(backItBottom->second);
+					FieldBackWater* otherWater = dynamic_cast<FieldBackWater*>(backItRight->second);
 					if (otherWater && otherWater->waterLevel < maxWaterLevel)
 					{
 						otherWaterRight = otherWater;
@@ -183,6 +189,10 @@ void FieldBackWater::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
 
 void FieldBackWater::setWaterLevel(int newWaterLevel)
 {
+	int metricsOffset = GRID_SIZE/maxWaterLevel * (maxWaterLevel-newWaterLevel);
+	metrics[0].y = y + metricsOffset;
+	metrics[0].h = GRID_SIZE - metricsOffset;
+
 	waterLevel = newWaterLevel;
 
 	image = load_image("Background/Wasser/Wasser_"+to_string(waterLevel)+".png");

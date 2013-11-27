@@ -33,6 +33,9 @@ void Field::init(const int32_t &x, const int32_t &y, const int32_t &metricsLengt
 	xGridded = (int32_t)floor(this->x / GRID_SIZE);
 	yGridded = (int32_t)floor(this->y / GRID_SIZE);
 
+	liquid = false;
+
+	swimming = false;
 	grounded = false;
 
 	this->metricsLength = metricsLength;
@@ -92,7 +95,7 @@ void Field::applyCollisionToVector(Vector2 &moveVector)
 		backIt = world.mapBack.find(xy64);
 		if (backIt != world.mapBack.end())
 		{
-			if (backIt->second != NULL && backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
+			if (backIt->second != NULL && backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2) && !backIt->second->liquid) //TODO prevent double checking the same object!
 			{
 				for (i = 0; i<metricsLength; i++)
 				{
@@ -191,6 +194,7 @@ void Field::applyCollision()
 	int32_t ii;
 	int32_t ai;
 
+	swimming = false;
 	grounded = false;
 
 	for (ai = 0; ai<affectedGridsLength; ai++)
@@ -200,7 +204,7 @@ void Field::applyCollision()
 		backIt = world.mapBack.find(xy64);
 		if (backIt != world.mapBack.end() && backIt->second != NULL)
 		{
-			if (backIt->second != this && (colidingLayer !=3 || backIt->second->colidingLayer == 2)) //TODO prevent double checking the same object!
+			if (backIt->second != this && ((colidingLayer !=3 || backIt->second->colidingLayer == 2) || backIt->second->liquid)) //TODO prevent double checking the same object!
 			{
 				for (i = 0; i<metricsLength; i++)
 				{
@@ -208,7 +212,12 @@ void Field::applyCollision()
 					{
 						if ( metrics[i].collidesWith(backIt->second->metrics[ii]) )
 						{
-							if ( !grounded
+							if ( backIt->second->liquid
+								&& (metrics[i].y + metrics[i].h/2) >= (backIt->second->metrics[ii].y) )
+							{
+								swimming = true;
+							}
+							else if ( !grounded
 								&& (metrics[i].y + metrics[i].h) <= (backIt->second->metrics[ii].y)
 								&& (metrics[i].x + metrics[i].w) > (backIt->second->metrics[ii].x)
 								&& (metrics[i].x) < (backIt->second->metrics[ii].x + backIt->second->metrics[ii].w) )

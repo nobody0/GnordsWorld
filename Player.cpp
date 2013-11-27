@@ -196,18 +196,29 @@ void Player::myUpdate()
 			moveVector.x = myDeltaTime * -speed;
 		}
 
-		if (grounded)
+		if (swimming)
 		{
 			if (keystates[SDLK_UP] || keystates[SDLK_w] || keystates[SDLK_SPACE])
 			{
-				velocity.y = -jumpHeight;
+				velocity.y = -jumpHeight/2;
 				grounded = false;
+			}
+		}
+		else
+		{
+			if (grounded)
+			{
+				if (keystates[SDLK_UP] || keystates[SDLK_w] || keystates[SDLK_SPACE])
+				{
+					velocity.y = -jumpHeight;
+					grounded = false;
+				}
 			}
 		}
 
 		if (moveVector.x != 0)
 		{
-			if (grounded)
+			if (grounded && !swimming)
 			{
 				if (bodyAnimStart == -1)
 				{
@@ -254,8 +265,17 @@ void Player::myUpdate()
 			armAnimIndex = 0;
 			armAnimStart = -1;
 		}
-		velocity.y += myDeltaTime * fallSpeed;
-		if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
+
+		if (swimming)
+		{
+			velocity.y += myDeltaTime * fallSpeed/3;
+			if (velocity.y > maxFallSpeed/2) velocity.y = maxFallSpeed/2;
+		}
+		else
+		{
+			velocity.y += myDeltaTime * fallSpeed;
+			if (velocity.y > maxFallSpeed) velocity.y = maxFallSpeed;
+		}
 
 		if (velocity.y != 0)
 		{

@@ -16,8 +16,11 @@ public:
 	int32_t yGridded;
 
 	Vector2 velocity;
+	
+	bool liquid;
 
 	bool grounded;
+	bool swimming;
 	
 	int32_t metricsLength;
 	int32_t affectedGridsLength;
