@@ -2,7 +2,6 @@
 #include "InventoryEarth.h"
 #include "FieldBackEarth.h"
 
-
 InventoryEarth::InventoryEarth(void)
 {
 	init();
@@ -46,4 +45,3 @@ void InventoryEarth::init()
 	imageActive = load_image("Hand/Erde.png");
 	image = load_image("Inventar/Erze/Erde.png");
 }
-

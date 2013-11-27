@@ -15,7 +15,5 @@ public:
 	void myUpdate();
 
 	void onUsed(const ToolTypes &toolType, const int32_t &toolLevel);
-
-	
 };
 

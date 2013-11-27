@@ -13,6 +13,7 @@
 #include "InventorySteelSlice.h"
 #include "InventoryObject.h"
 #include "Inventory.h"
+#include "InventoryStoneSlice.h"
 
 
 World::World(void)
@@ -37,11 +38,15 @@ void World::init()
 	sunLight.init();
 	InventorySteelAxe *inventorySteelAxe = new InventorySteelAxe;
 	world.player.inventory.add(inventorySteelAxe);
+
 	InventorySteelPick *inventorySteelPick = new InventorySteelPick;
 	world.player.inventory.add(inventorySteelPick);
+
 	InventorySteelSlice *inventorySteelSlice = new InventorySteelSlice;
 	world.player.inventory.add(inventorySteelSlice);
-	
+
+	InventoryStoneSlice *inventoryStoneSlice = new InventoryStoneSlice;
+	world.player.inventory.add(inventoryStoneSlice);
 }
 
 void World::generateBack(const int32_t &x, const int32_t &y)

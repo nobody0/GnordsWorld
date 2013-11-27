@@ -179,6 +179,7 @@
     <ClCompile Include="FieldBackSilver.cpp" />
     <ClCompile Include="FieldBackIron.cpp" />
     <ClCompile Include="FieldBackGrass.cpp" />
+    <ClCompile Include="FieldBackWater.cpp" />
     <ClCompile Include="FieldFront.cpp" />
     <ClCompile Include="Fists.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="InventoryEarth.cpp" />
     <ClCompile Include="InventoryIron.cpp" />
     <ClCompile Include="InventoryObject.cpp" />
+    <ClCompile Include="InventoryWater.cpp" />
     <ClCompile Include="InventorySilver.cpp" />
     <ClCompile Include="InventorySteelAxe.cpp" />
     <ClCompile Include="InventorySteelPick.cpp" />
@@ -221,12 +223,14 @@
     <ClInclude Include="FieldBackSilver.h" />
     <ClInclude Include="FieldBackIron.h" />
     <ClInclude Include="FieldBackGrass.h" />
+    <ClInclude Include="FieldBackWater.h" />
     <ClInclude Include="FieldFront.h" />
     <ClInclude Include="Fists.h" />
     <ClInclude Include="InventoryCoal.h" />
     <ClInclude Include="InventoryCopper.h" />
     <ClInclude Include="InventoryCopperIngot.h" />
     <ClInclude Include="InventoryIron.h" />
+    <ClInclude Include="InventoryWater.h" />
     <ClInclude Include="InventorySilver.h" />
     <ClInclude Include="InventorySteelAxe.h" />
     <ClInclude Include="InventorySteelPick.h" />

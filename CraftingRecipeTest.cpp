@@ -29,8 +29,9 @@ void CraftingRecipeTest::doCraft()
 		for (int i = 0; i < requirements.size(); i++)
 		{
 			world.player.inventory.remove(requirements[i]->name, requirements[i]->amount);	
-			InventorySteelAxe *inventorySteelAxe = new InventorySteelAxe;
-			world.player.inventory.add(inventorySteelAxe);
+			
 		}
+		InventorySteelAxe *inventorySteelAxe = new InventorySteelAxe;
+		world.player.inventory.add(inventorySteelAxe);
 	}
 }
