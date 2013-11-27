@@ -42,6 +42,6 @@ void InventoryWater::init()
 	maxAmount = 9;
 	name = "Wasser";
 
-	imageActive = load_image("Hand/Erde.png");
-	image = load_image("Inventar/Erze/Erde.png");
+	imageActive = load_image("Background/Wasser/Wasser_8.png");
+	image = load_image("Background/Wasser/Wasser_8.png");
 }
