@@ -36,7 +36,7 @@ void CraftingRecipeCopperAxe::doCraft()
 {
 	if (canBeCrafted())
 	{
-		for (int i = 0; i < requirements.size(); i++)
+		for (unsigned int i = 0; i < requirements.size(); i++)
 		{
 			world.player.inventory.remove(requirements[i]->name, requirements[i]->amount);	
 			
