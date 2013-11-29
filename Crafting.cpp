@@ -26,7 +26,11 @@ Crafting::Crafting(void)
 
 	activeRecipeIndex = -1;
 	craftingListPage = 0;
-	craftingListEntriesPerPage = 16;
+	craftingListEntriesPerPage = 15;
+
+	pagginationXButtonLeft = 25;
+	pagginationXButtonRight = 110;
+	pagginationYButton = 350;
 	
 	recipes.push_back(new CraftingRecipeTest());
 	recipes.push_back(new CraftingRecipeTest());
@@ -56,6 +60,36 @@ Crafting::Crafting(void)
 	recipes.push_back(new CraftingRecipeTest());
 	recipes.push_back(new CraftingRecipeTest());
 	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+	recipes.push_back(new CraftingRecipeTest());
+
+	craftingListPages = recipes.size() / craftingListEntriesPerPage;
 }
 
 
@@ -63,6 +97,8 @@ Crafting::~Crafting(void)
 {
 	
 }
+
+
 
 void Crafting::draw()
 {
@@ -78,23 +114,56 @@ void Crafting::draw()
 	{
 		recipes[activeRecipeIndex]->drawActive(craftingX+activeOffsetX, craftingY+activeOffsetY);
 	}
+
+	if (craftingListPage > 0)
+	{
+		apply_surface(craftingX+pagginationXButtonLeft, craftingY+pagginationYButton, load_image("CraftingGUI/left.jpg"), screen);
+	}
+
+	if (craftingListPage < craftingListPages)
+	{
+		apply_surface(craftingX+pagginationXButtonRight, craftingY+pagginationYButton, load_image("CraftingGUI/right.jpg"), screen);
+	}
+
+	SDL_Color color = {0,0,0};
+	apply_font(craftingX+pagginationXButtonLeft+35, craftingY+pagginationYButton, screen, load_font("arial.ttf", 15), to_string(craftingListPage) + "/" + to_string(craftingListPages), color);
 }
 
 void Crafting::onMouseDown()
 {
-	int xRelativeToList = mouseX - craftingX - listOffsetX;
-	int yRelativeToList = mouseY - craftingY - listOffsetY;
+	int xRelativeTo = mouseX - craftingX - listOffsetX;
+	int yRelativeTo = mouseY - craftingY - listOffsetY;
 
-	if (xRelativeToList < 0 || xRelativeToList > craftingRecipeWidth
-		|| yRelativeToList < 0 || yRelativeToList > craftingListEntriesPerPage*craftingRecipeHeight)
+	if (xRelativeTo < 0 || xRelativeTo > craftingRecipeWidth
+		|| yRelativeTo < 0 || yRelativeTo > craftingListEntriesPerPage*craftingRecipeHeight)
 	{
-		int xRelativeToCraftingButton = mouseX - craftingX - activeOffsetX - craftingButtonOffsetX;
-		int yRelativeToCraftingButton = mouseY - craftingY - activeOffsetY - craftingButtonOffsetY;
+		Rect coliderRect;
+		coliderRect.x = craftingX+pagginationXButtonLeft;
+		coliderRect.y = craftingY+pagginationYButton;
+		coliderRect.h = 13;
+		coliderRect.w = 13;
+
+
+		if (craftingListPage > 0 && coliderRect.collidesWith(mouseX, mouseY))
+		{
+			craftingListPage--;
+			return;
+		}
+
+		coliderRect.x = craftingX+pagginationXButtonRight;
+		if (craftingListPage < craftingListPages && coliderRect.collidesWith(mouseX, mouseY))
+		{
+			craftingListPage++;
+			return;
+		}
+
+		xRelativeTo = mouseX - craftingX - activeOffsetX - craftingButtonOffsetX;
+		yRelativeTo = mouseY - craftingY - activeOffsetY - craftingButtonOffsetY;
 
 		if (activeRecipeIndex != -1)
 		{
-			if (xRelativeToCraftingButton < 0 || xRelativeToCraftingButton > craftingButtonWidth
-				|| yRelativeToCraftingButton < 0 || yRelativeToCraftingButton > craftingButtonHeight)
+			if (xRelativeTo < 0 || xRelativeTo > craftingButtonWidth
+				|| yRelativeTo < 0 || yRelativeTo > craftingButtonHeight)
 			{
 				return;
 			}
@@ -105,6 +174,5 @@ void Crafting::onMouseDown()
 		return;
 	}
 
-	activeRecipeIndex = (yRelativeToList/craftingRecipeHeight) + craftingListPage*craftingListEntriesPerPage;
-	int x = 123;
+	activeRecipeIndex = (yRelativeTo/craftingRecipeHeight) + craftingListPage*craftingListEntriesPerPage;
 }
