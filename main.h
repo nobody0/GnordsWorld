@@ -45,7 +45,7 @@ extern Uint32* lightMap;
 #define dayTimeMax 1440
 extern int dayTime;
 
-extern int pixelCount;
+extern unsigned int pixelCount;
 
 extern SDL_Event event;
 

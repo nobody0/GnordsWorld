@@ -37,7 +37,8 @@ public:
 	std::vector<CraftingRecipe*> recipes;
 
 	int craftingListPages;
-	
+
+	void setScreenSize();
 
 	void draw();
 

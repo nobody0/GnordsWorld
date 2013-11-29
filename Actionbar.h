@@ -20,6 +20,11 @@ public:
 	int objectsStartOffsetY;
 
 	int objectSize;
+	
+	int32_t SCREEN_HEIGHT_old;
+	int32_t SCREEN_WIDTH_old;
+
+	void setScreenSize();
 
 	void add(InventoryObject* inventoryObject, int index);
 

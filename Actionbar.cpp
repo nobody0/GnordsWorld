@@ -6,20 +6,19 @@
 
 Actionbar::Actionbar(void)
 {
-	actionbarX = SCREEN_WIDTH/2-372;
-	actionbarY = SCREEN_HEIGHT-160;
+	barObjects = NULL;
 
 	objectsStartOffsetX = 120;
 	objectsStartOffsetY = 100;
-
+	
 	objectSize = 64;
 
 	actionbarSize = 8;
-	barObjects = new InventoryObject*[actionbarSize];
-	for (int32_t i = 0; i<actionbarSize; i++)
-	{
-		barObjects[i] = NULL;
-	}
+
+	SCREEN_HEIGHT_old = 0;
+	SCREEN_WIDTH_old = 0;
+
+	setScreenSize();
 }
 
 
@@ -27,6 +26,26 @@ Actionbar::~Actionbar(void)
 {
 }
 
+void Actionbar::setScreenSize()
+{
+
+	if (SCREEN_WIDTH_old != SCREEN_WIDTH || SCREEN_WIDTH_old != SCREEN_WIDTH)
+	{
+		SCREEN_WIDTH_old = SCREEN_WIDTH;
+		SCREEN_WIDTH_old = SCREEN_WIDTH;
+
+		actionbarX = SCREEN_WIDTH/2-372;
+		actionbarY = SCREEN_HEIGHT-160;
+	
+		delete[] barObjects;
+
+		barObjects = new InventoryObject*[actionbarSize];
+		for (int32_t i = 0; i<actionbarSize; i++)
+		{
+			barObjects[i] = NULL;
+		}
+	}
+}
 
 void Actionbar::add(InventoryObject* inventoryObject, int index)
 {
@@ -40,6 +59,8 @@ void Actionbar::remove(int index)
 
 void Actionbar::draw()
 {
+	setScreenSize();
+
 	SDL_Surface* inventoryToolbar = NULL;
 	inventoryToolbar = load_image("GUI/InventoryToolbar.png");
 	apply_surface(actionbarX, actionbarY, inventoryToolbar, screen);

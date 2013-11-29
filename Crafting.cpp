@@ -27,9 +27,6 @@
 
 Crafting::Crafting(void)
 {
-	craftingX = world.player.inventory.backgroundX + 525;
-	craftingY = world.player.inventory.backgroundY + 15;
-
 	listOffsetX = 30;
 	listOffsetY = 40;
 
@@ -85,10 +82,16 @@ Crafting::~Crafting(void)
 	
 }
 
-
+void Crafting::setScreenSize()
+{
+	craftingX = world.player.inventory.backgroundX + 525;
+	craftingY = world.player.inventory.backgroundY + 15;
+}
 
 void Crafting::draw()
 {
+	setScreenSize();
+
 	apply_surface(craftingX, craftingY, load_image("CraftingGUI/G_W_crafting_liste.png"), screen);
 
 	unsigned int pos = 0;

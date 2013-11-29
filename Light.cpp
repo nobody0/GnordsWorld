@@ -12,12 +12,32 @@ Light::~Light(void)
 {
 }
 
+void Light::setScreenSize()
+{
+	if (SCREEN_WIDTH_old != SCREEN_WIDTH || pixelCount_old != pixelCount)
+	{
+		SCREEN_WIDTH_old = SCREEN_WIDTH;
+		pixelCount_old = pixelCount;
+
+		delete[] pixelLock;
+
+		pixelLock = new int[pixelCount];
+
+		precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
+	}
+}
+
 void Light::init(const int &range, const Uint32 &color)
 {
 	this->range = range;
-
+	
 	colorMap = new Uint32[range];
-	pixelLock = new int[pixelCount];
+
+	pixelLock = NULL;
+	
+	SCREEN_WIDTH_old = -1;
+
+	setScreenSize();
 
 	Uint8* colorMapIt = (Uint8*)colorMap;
 	Uint8* colorIt = (Uint8*)&color;
@@ -64,9 +84,12 @@ void Light::updatePrecision()
 
 void Light::shine(int x, int y)
 {
-	if (lightPrecision != precisionShift) {
+	if (lightPrecision != precisionShift)
+	{
 		updatePrecision();
 	}
+
+	setScreenSize();
 
 	for (int i = pixelCount - 1; i >= 0 ; i--)
 	{

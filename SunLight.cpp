@@ -19,7 +19,12 @@ void SunLight::init()
 	range = 100;
 	
 	dayTimeColorMap = new Uint32[range * dayTimePixelCount];
-	pixelLock = new int[pixelCount];
+	
+	pixelLock = NULL;
+
+	SCREEN_WIDTH_old = -1;
+
+	setScreenSize();
 
 	Uint32* dayTimePixels = (Uint32*)dayTime->pixels;
 	Uint8* dayTimeColorMapIt = (Uint8*)dayTimeColorMap;
@@ -42,6 +47,21 @@ void SunLight::init()
 	updatePrecision();
 }
 
+void SunLight::setScreenSize()
+{
+	if (SCREEN_WIDTH_old != SCREEN_WIDTH || pixelCount_old != pixelCount)
+	{
+		SCREEN_WIDTH_old = SCREEN_WIDTH;
+		pixelCount_old = pixelCount;
+
+		delete[] pixelLock;
+
+		pixelLock = new int[pixelCount];
+
+		precisionScreenWidth = SCREEN_WIDTH<<precisionShift;
+	}
+}
+
 void SunLight::updatePrecision()
 {
 	precisionShift = lightPrecision;
@@ -51,9 +71,12 @@ void SunLight::updatePrecision()
 
 void SunLight::shine()
 {
-	if (lightPrecision != precisionShift) {
+	if (lightPrecision != precisionShift)
+	{
 		updatePrecision();
 	}
+
+	setScreenSize();
 
 	int64_t xy64;
 	unordered_map<int64_t, FieldBack*>::const_iterator backIt;

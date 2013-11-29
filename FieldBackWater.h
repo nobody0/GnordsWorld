@@ -13,6 +13,8 @@ public:
 	int waterLevel;
 	static const int maxWaterLevel = 8;
 
+	void draw(bool forceRedraw = false);
+
 	void init(const int32_t &x, const int32_t &y);
 
 	void myUpdate();

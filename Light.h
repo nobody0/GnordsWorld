@@ -29,13 +29,18 @@ public:
 	int* distanceMap; //get floored distance by [y*width+x]
 	int* pixelLock; //which pixel do already have a job queued
 	
+	unsigned int pixelCount_old;
+	int32_t SCREEN_WIDTH_old;
+	
 	std::priority_queue<LightHelper*, std::vector<LightHelper*>, CompareLightHelpers> queue;
+
+	void setScreenSize();
 
 	int x;
 	int y;
 
 	void init(const int &range, const Uint32 &color);
-
+	
 	void updatePrecision();
 
 	void shine(int x, int y);
