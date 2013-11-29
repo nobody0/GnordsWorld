@@ -1,8 +1,13 @@
 #pragma once
-class CraftingRecipeMetalBucket
+#include "craftingrecipe.h"
+
+class CraftingRecipeMetalBucket :
+	public CraftingRecipe
 {
 public:
 	CraftingRecipeMetalBucket(void);
 	~CraftingRecipeMetalBucket(void);
+
+	void doCraft();
 };
 

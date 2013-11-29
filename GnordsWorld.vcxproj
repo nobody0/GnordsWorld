@@ -173,8 +173,6 @@
     <ClCompile Include="CraftingRecipeCopperIngot.cpp" />
     <ClCompile Include="CraftingRecipeCopperPick.cpp" />
     <ClCompile Include="CraftingRecipeCopperSlice.cpp" />
-    <ClCompile Include="CraftingRecipeDirektHealingPotion.cpp" />
-    <ClCompile Include="CraftingRecipeHealOverTimeHealingPotion.cpp" />
     <ClCompile Include="CraftingRecipeMetalBucket.cpp" />
     <ClCompile Include="CraftingRecipePumpkin.cpp" />
     <ClCompile Include="CraftingRecipeRequirement.cpp" />
@@ -271,8 +269,6 @@
     <ClInclude Include="CraftingRecipeCopperIngot.h" />
     <ClInclude Include="CraftingRecipeCopperPick.h" />
     <ClInclude Include="CraftingRecipeCopperSlice.h" />
-    <ClInclude Include="CraftingRecipeDirektHealingPotion.h" />
-    <ClInclude Include="CraftingRecipeHealOverTimeHealingPotion.h" />
     <ClInclude Include="CraftingRecipeMetalBucket.h" />
     <ClInclude Include="CraftingRecipePumpkin.h" />
     <ClInclude Include="CraftingRecipeRequirement.h" />
