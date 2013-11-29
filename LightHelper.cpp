@@ -131,6 +131,7 @@ void LightHelper::shine()
 			if (distance < light->range)
 			{
 				color = light->colorMap[distance];
+
 				if ((*_lightMapIt) < color)
 				{
 					(*_lightMapIt) = color;

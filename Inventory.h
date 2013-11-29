@@ -32,6 +32,8 @@ public:
 
 	int objectSize;
 
+	void setScreenSize();
+
 	bool add(InventoryObject* inventoryObject);
 
 	bool remove(std::string name, int deltaAmount);

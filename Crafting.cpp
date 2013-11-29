@@ -98,7 +98,10 @@ Crafting::~Crafting(void)
 	
 }
 
+void Crafting::setScreenSize()
+{
 
+}
 
 void Crafting::draw()
 {

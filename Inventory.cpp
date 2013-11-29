@@ -5,8 +5,8 @@
 
 Inventory::Inventory(void)
 {
-	backgroundX = SCREEN_WIDTH/2-282;
-	backgroundY = SCREEN_HEIGHT/2-130;
+	setScreenSize();
+
 	columnCount = 8;
 	rowCount = 6;
 
@@ -31,6 +31,14 @@ Inventory::Inventory(void)
 Inventory::~Inventory(void)
 {
 	delete crafting;
+}
+
+void Inventory::setScreenSize()
+{
+	backgroundX = SCREEN_WIDTH/2-282;
+	backgroundY = SCREEN_HEIGHT/2-130;
+
+	crafting->setScreenSize();
 }
 
 
@@ -160,6 +168,8 @@ void Inventory::swap(int index1, int index2)
 
 void Inventory::draw()
 {
+	setScreenSize();
+
 	apply_surface(backgroundX, backgroundY, load_image("GUI/InventoryBackground.png"), screen);
 	
 	for (int32_t i = 0; i<inventorySize; i++)

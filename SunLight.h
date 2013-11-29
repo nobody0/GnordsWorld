@@ -30,12 +30,17 @@ public:
 	Uint32* colorMap; //get color by distance
 	int* pixelLock; //which pixel do already have a job queued
 	
+	unsigned int pixelCount_old;
+	int32_t SCREEN_WIDTH_old;
+	
 	std::priority_queue<SunLightHelper*, std::vector<SunLightHelper*>, CompareSunLightHelpers> queue;
 
 	int x;
 	int y;
 	
 	void init();
+
+	void setScreenSize();
 
 	void updatePrecision();
 

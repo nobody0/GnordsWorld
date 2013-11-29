@@ -8,8 +8,8 @@ int32_t SCREEN_HEIGHT = 768;
 
 int32_t GRID_SIZE = 32;
 
-int32_t VISIBLE_GRIDS_X = SCREEN_WIDTH/GRID_SIZE + 4;
-int32_t VISIBLE_GRIDS_Y = SCREEN_WIDTH/GRID_SIZE + 4;
+int32_t VISIBLE_GRIDS_X;
+int32_t VISIBLE_GRIDS_Y;
 
 int32_t UPDATE_GRID_OUT_VIEW_SIZE = 16;
 
@@ -27,7 +27,7 @@ Uint32* lightMap = NULL;
 
 int dayTime = 0;
 
-int pixelCount = 0;
+unsigned int pixelCount = 0;
 
 SDL_Event event;
 
@@ -56,40 +56,48 @@ int32_t myRand(int32_t x)
     return (w ^ (w >> 19) ^ (t ^ (t >> 8)));
 }
 
-bool init()
+void setScreenSize()
 {
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+	VISIBLE_GRIDS_X = SCREEN_WIDTH/GRID_SIZE + 4;
+	VISIBLE_GRIDS_Y = SCREEN_WIDTH/GRID_SIZE + 4;
+
+    if( (screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_RESIZABLE )) == NULL )
     {
-        return false;
+        throw new exception("screen = SDL_SetVideoMode failed");
     }
 
-	TTF_Init();
-
-    if( (screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_HWSURFACE | SDL_DOUBLEBUF )) == NULL )
-    {
-        return false;
-    }
-
+	SDL_FreeSurface(lightScreen);
 	const SDL_PixelFormat& fmt = *(screen->format);
     if( (lightScreen = SDL_CreateRGBSurface(SDL_SWSURFACE, SCREEN_WIDTH, SCREEN_HEIGHT, fmt.BitsPerPixel, fmt.Rmask,fmt.Gmask,fmt.Bmask,fmt.Amask)) == NULL )
     {
-        return false;
+        throw new exception("lightScreen = SDL_CreateRGBSurface failed");
     }
 
 	pixelCount = screen->w*screen->h;
 
+	delete[] lightMap;
 	lightMap = new Uint32[pixelCount];
 
 	int flags = IMG_INIT_JPG | IMG_INIT_PNG;
 	int initted=IMG_Init(flags);
 	if( (initted & flags) != flags)
 	{
-		return false;
+		throw new exception("IMG_INIT_JPG or IMG_INIT_PNG failed");
 	}
+}
+
+void init()
+{
+    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+    {
+		throw new exception("SDL_Init failed");
+    }
+
+	TTF_Init();
+
+	setScreenSize();
 
     SDL_WM_SetCaption( "Gnords World", NULL );
-
-    return true;
 }
 
 unordered_map<string, SDL_Surface*> loadedImages;
@@ -187,6 +195,8 @@ void shade_screen()
 
 	for( int i = (pixelCount*4)-1; i >= 0; i--)
 	{
+		int x = (*shades);
+
 		(*colors) = ((*colors) * (*shades)) >> 8;
 		colors++;
 		shades++;
@@ -331,10 +341,7 @@ int main( int argc, char* args[] )
 	float sinceStartTick;
     bool quit = false;
 
-    if( !init() )
-    {
-        return 1;
-    }
+    init();
 
 	world.init();
 
@@ -439,15 +446,24 @@ int main( int argc, char* args[] )
 					}
 				}
 				break;
+			case SDL_VIDEORESIZE:
+				SCREEN_WIDTH = event.resize.w;
+				SCREEN_HEIGHT = event.resize.h;
+				setScreenSize();
+				break;
 			}
         }
 
-		//do not ifnorm the world about a click event when the ivnentory is open
+		//do not inform the world about a click event when the inventory is open
 		if (mouseDown)
 		{
 			if (!showInventory)
 			{
 				world.onClick();
+			}
+			else
+			{
+				mouseDown = false;
 			}
 		}
 		
