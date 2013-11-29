@@ -217,7 +217,6 @@
     <ClCompile Include="InventoryHemp.cpp" />
     <ClCompile Include="InventoryIron.cpp" />
     <ClCompile Include="InventoryObject.cpp" />
-    <ClCompile Include="InventoryPumpkin.cpp" />
     <ClCompile Include="InventoryRope.cpp" />
     <ClCompile Include="InventorySilverAxe.cpp" />
     <ClCompile Include="InventorySilverIngot.cpp" />
@@ -301,7 +300,6 @@
     <ClInclude Include="InventoryCopperSlice.h" />
     <ClInclude Include="InventoryHemp.h" />
     <ClInclude Include="InventoryIron.h" />
-    <ClInclude Include="InventoryPumpkin.h" />
     <ClInclude Include="InventoryRope.h" />
     <ClInclude Include="InventorySilverAxe.h" />
     <ClInclude Include="InventorySilverIngot.h" />
