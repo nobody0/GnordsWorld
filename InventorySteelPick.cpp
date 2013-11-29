@@ -31,7 +31,7 @@ void InventorySteelPick::onUse(Field* target, const int32_t &x, const int32_t &y
 void InventorySteelPick::init()
 {
 	toolType = Default;
-	toolLevel = 1;
+	toolLevel = 3;
 
 	maxAmount = 1;
 	name = "Stahlhacke";

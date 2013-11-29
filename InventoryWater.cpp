@@ -30,6 +30,8 @@ void InventoryWater::onUse(Field* target, const int32_t &x, const int32_t &y)
 		FieldBackWater* fieldBackWater = new FieldBackWater();
 		fieldBackWater->init(x*GRID_SIZE, y*GRID_SIZE);
 
+		fieldBackWater->setWaterLevel(fieldBackWater->maxWaterLevel);
+
 		world.player.inventory.remove(this, 1);
 	}
 }

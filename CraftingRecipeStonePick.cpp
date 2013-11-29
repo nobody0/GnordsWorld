@@ -13,15 +13,19 @@ CraftingRecipeStonePick::CraftingRecipeStonePick(void)
 	req->amount = 4;
 	requirements.push_back(req);
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Stock";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Seil";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 }
 
 

@@ -6,25 +6,31 @@ CraftingRecipeCopperAxe::CraftingRecipeCopperAxe(void)
 {
 	name = "Kupferaxt";
 
+	/*
 	CraftingRecipeRequirement* reqWorkBanch = new CraftingRecipeRequirement;
 	reqWorkBanch->name = "Werkbank";
 	reqWorkBanch->amount = 1;
 	requirements.push_back(reqWorkBanch);
+	*/
 
 	CraftingRecipeRequirement* reqCopperIngot = new CraftingRecipeRequirement;
 	reqCopperIngot->name = "Kupferbarren";
-	reqCopperIngot->amount = 4;
+	reqCopperIngot->amount = 3;
 	requirements.push_back(reqCopperIngot);
 
+	/*
 	CraftingRecipeRequirement* reqStick = new CraftingRecipeRequirement;
 	reqStick->name = "Stock";
 	reqStick->amount = 1;
 	requirements.push_back(reqStick);
+	*/
 
+	/*
 	CraftingRecipeRequirement* reqRope = new CraftingRecipeRequirement;
 	reqRope->name = "Seil";
 	reqRope->amount = 1;
 	requirements.push_back(reqRope);
+	*/
 }
 
 

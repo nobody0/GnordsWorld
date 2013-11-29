@@ -10,7 +10,7 @@ CraftingRecipeSteelIngot::CraftingRecipeSteelIngot(void)
 
 	req = new CraftingRecipeRequirement;
 	req->name = "Eisen";
-	req->amount = 2;
+	req->amount = 1;
 	requirements.push_back(req);
 
 	req = new CraftingRecipeRequirement;

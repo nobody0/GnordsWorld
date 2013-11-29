@@ -36,6 +36,7 @@ Uint8 *keystates;
 bool mouseDown = false;
 uint16_t mouseX;
 uint16_t mouseY;
+uint16_t mouseDistanceToPlayer;
 
 bool showFrames = false;
 
@@ -44,6 +45,8 @@ float totalTime = 0;
 bool doShadeScreen = true;
 
 bool showInventory = false;
+
+bool payStuff = true;
 
 World world;
 
@@ -377,6 +380,10 @@ int main( int argc, char* args[] )
 				{
 					doShadeScreen = !doShadeScreen;
 				}
+				else if ( event.key.keysym.sym == SDLK_p )
+				{
+					payStuff = !payStuff;
+				}
 				else if ( event.key.keysym.sym == SDLK_i )
 				{
 					showInventory = !showInventory;		
@@ -415,9 +422,14 @@ int main( int argc, char* args[] )
 				}
 				break;
 			case SDL_MOUSEMOTION :
+			{
 				mouseX = event.motion.x;
 				mouseY = event.motion.y;
+				int deltaX = mouseX - SCREEN_WIDTH/2;
+				int deltaY = mouseY - SCREEN_HEIGHT/2;
+				mouseDistanceToPlayer = sqrt(pow(deltaX, 2) + pow(deltaY, 2));
 				break;
+			}
 			case SDL_MOUSEBUTTONDOWN:
 				if(event.button.button == SDL_BUTTON_LEFT)
 				{

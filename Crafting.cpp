@@ -71,7 +71,7 @@ Crafting::Crafting(void)
 	recipes.push_back(new CraftingRecipeAnvil());
 	recipes.push_back(new CraftingRecipeAlchemyTable());
 	recipes.push_back(new CraftingRecipeRope());
-	recipes.push_back(new CraftingRecipeTorch());
+	//recipes.push_back(new CraftingRecipeTorch());
 	
 	craftingListPages = recipes.size() / craftingListEntriesPerPage;
 }

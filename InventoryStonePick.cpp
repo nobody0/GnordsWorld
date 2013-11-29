@@ -35,7 +35,7 @@ void InventoryStonePick::onUse(Field* target, const int32_t &x, const int32_t &y
 void InventoryStonePick::init()
 {
 	toolType = Default;
-	toolLevel = 1;
+	toolLevel = 2;
 
 	maxAmount = 1;
 	name = "Steinhacke";

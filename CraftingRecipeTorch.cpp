@@ -8,10 +8,12 @@ CraftingRecipeTorch::CraftingRecipeTorch(void)
 
 	CraftingRecipeRequirement* req;
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Stock";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
 	req = new CraftingRecipeRequirement;
 	req->name = "Kohle";

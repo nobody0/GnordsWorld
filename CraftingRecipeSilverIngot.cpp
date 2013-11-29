@@ -8,14 +8,16 @@ CraftingRecipeSilverIngot::CraftingRecipeSilverIngot(void)
 
 	CraftingRecipeRequirement* req;
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Amboss";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
 	req = new CraftingRecipeRequirement;
 	req->name = "Silber";
-	req->amount = 4;
+	req->amount = 1;
 	requirements.push_back(req);
 
 	req = new CraftingRecipeRequirement;
@@ -23,10 +25,12 @@ CraftingRecipeSilverIngot::CraftingRecipeSilverIngot(void)
 	req->amount = 1;
 	requirements.push_back(req);
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "EimerVoll";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 }
 
 

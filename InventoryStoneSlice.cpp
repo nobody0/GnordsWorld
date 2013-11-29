@@ -35,7 +35,7 @@ void InventoryStoneSlice::onUse(Field* target, const int32_t &x, const int32_t &
 void InventoryStoneSlice::init()
 {
 	toolType = Default;
-	toolLevel = 1;
+	toolLevel = 2;
 
 	maxAmount = 1;
 	name = "Steinsichel";

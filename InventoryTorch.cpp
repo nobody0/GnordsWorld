@@ -36,7 +36,7 @@ void InventoryTorch::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Fackel";
 
 	imageActive = load_image("Inventar/Werkzeug/Fackel.png");

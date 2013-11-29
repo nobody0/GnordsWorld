@@ -10,7 +10,7 @@ CraftingRecipeCopperIngot::CraftingRecipeCopperIngot(void)
 
 	req = new CraftingRecipeRequirement;
 	req->name = "Kupfer";
-	req->amount = 2;
+	req->amount = 1;
 	requirements.push_back(req);
 
 	req = new CraftingRecipeRequirement;

@@ -247,7 +247,7 @@ void Player::myUpdate()
 			bodyAnimStart = -1;
 		}
 
-		if (mouseDown)
+		if (mouseDown && mouseDistanceToPlayer <= GRID_SIZE*4)
 		{
 			if (armAnimStart == -1)
 			{

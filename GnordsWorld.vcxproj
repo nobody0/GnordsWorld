@@ -196,6 +196,7 @@
     <ClCompile Include="FieldBackEarth.cpp" />
     <ClCompile Include="FieldBackCoal.cpp" />
     <ClCompile Include="FieldBackCopper.cpp" />
+    <ClCompile Include="FieldBackHemp.cpp" />
     <ClCompile Include="FieldBackStone.cpp" />
     <ClCompile Include="FieldBackSilver.cpp" />
     <ClCompile Include="FieldBackIron.cpp" />
@@ -282,6 +283,7 @@
     <ClInclude Include="FieldBackEarth.h" />
     <ClInclude Include="FieldBackCoal.h" />
     <ClInclude Include="FieldBackCopper.h" />
+    <ClInclude Include="FieldBackHemp.h" />
     <ClInclude Include="FieldBackStone.h" />
     <ClInclude Include="FieldBackSilver.h" />
     <ClInclude Include="FieldBackIron.h" />

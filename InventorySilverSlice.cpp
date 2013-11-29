@@ -35,7 +35,7 @@ void InventorySilverSlice::onUse(Field* target, const int32_t &x, const int32_t 
 void InventorySilverSlice::init()
 {
 	toolType = Default;
-	toolLevel = 1;
+	toolLevel = 3.5;
 
 	maxAmount = 1;
 	name = "Silbersichel";

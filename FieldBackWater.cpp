@@ -192,7 +192,7 @@ void FieldBackWater::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
 	if (health <= 0)
 	{
 
-		InventoryObject* inventoryObject = new InventoryWater(waterLevel);
+		InventoryObject* inventoryObject = new InventoryWater(1);
 		world.player.inventory.add(inventoryObject);
 		world.player.inventory.remove("EimerLeer", 1);
 

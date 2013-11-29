@@ -8,25 +8,31 @@ CraftingRecipeCopperSlice::CraftingRecipeCopperSlice(void)
 
 	CraftingRecipeRequirement* req;
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Werkbank";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
 	req = new CraftingRecipeRequirement;
 	req->name = "Kupfebarren";
-	req->amount = 4;
+	req->amount = 3;
 	requirements.push_back(req);
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Stock";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Seil";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 }
 
 

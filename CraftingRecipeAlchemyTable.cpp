@@ -4,31 +4,37 @@
 
 CraftingRecipeAlchemyTable::CraftingRecipeAlchemyTable(void)
 {
-	name = "Alschemietisch";
+	name = "Alchemietisch";
 
+	/*
 	CraftingRecipeRequirement* reqWoodenPlank = new CraftingRecipeRequirement;
 	reqWoodenPlank->name = "Holzbrett";
-	reqWoodenPlank->amount = 10;
+	reqWoodenPlank->amount = 5;
 	requirements.push_back(reqWoodenPlank);
+	*/
 
+	/*
 	CraftingRecipeRequirement* reqStick = new CraftingRecipeRequirement;
 	reqStick->name = "Stock";
-	reqStick->amount = 5;
+	reqStick->amount = 2;
 	requirements.push_back(reqStick);
+	*/
 
 	CraftingRecipeRequirement* reqSteelIngot = new CraftingRecipeRequirement;
 	reqSteelIngot->name = "Stahlbarren";
-	reqSteelIngot->amount = 5;
+	reqSteelIngot->amount = 2;
 	requirements.push_back(reqSteelIngot);
 
+	/*
 	CraftingRecipeRequirement* reqRope = new CraftingRecipeRequirement;
 	reqRope->name = "Seil";
-	reqRope->amount = 2;
+	reqRope->amount = 1;
 	requirements.push_back(reqRope);
+	*/
 
 	CraftingRecipeRequirement* reqBucketFull = new CraftingRecipeRequirement;
 	reqBucketFull->name = "EimerVoll";
-	reqBucketFull->amount = 5;
+	reqBucketFull->amount = 2;
 	requirements.push_back(reqBucketFull);
 }
 

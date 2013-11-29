@@ -34,7 +34,7 @@ void InventoryCopperSlice::onUse(Field* target, const int32_t &x, const int32_t 
 void InventoryCopperSlice::init()
 {
 	toolType = Default;
-	toolLevel = 1;
+	toolLevel = 1.5;
 
 	maxAmount = 1;
 	name = "Kupfersichel";

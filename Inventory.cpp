@@ -71,6 +71,10 @@ bool Inventory::add(InventoryObject* inventoryObject)
 
 bool Inventory::remove(std::string name, int deltaAmount)
 {
+	if (!payStuff) {
+		return true;
+	}
+
 	for (int32_t i = 0; i<inventorySize; i++)
 	{
 		if (objects[i] != NULL && objects[i]->name == name) 
@@ -86,6 +90,10 @@ bool Inventory::remove(std::string name, int deltaAmount)
 
 bool Inventory::remove(InventoryObject* object, int deltaAmount)
 {
+	if (!payStuff) {
+		return true;
+	}
+
 	for (int32_t i = 0; i<inventorySize; i++)
 	{
 		if (objects[i] == object) 
@@ -101,6 +109,10 @@ bool Inventory::remove(InventoryObject* object, int deltaAmount)
 
 bool Inventory::remove(int i, int deltaAmount)
 {
+	if (!payStuff) {
+		return true;
+	}
+
 	if (objects[i]->amount >= deltaAmount)
 	{
 		objects[i]->amount -= deltaAmount;
@@ -125,6 +137,10 @@ bool Inventory::remove(int i, int deltaAmount)
 
 bool Inventory::hasObject(std::string name, int amount)
 {
+	if (!payStuff) {
+		return true;
+	}
+
 	for (int32_t i = 0; i<inventorySize; i++)
 	{
 		if (objects[i] != NULL && objects[i]->name == name) 

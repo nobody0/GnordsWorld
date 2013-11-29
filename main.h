@@ -54,6 +54,7 @@ extern Uint8 *keystates;
 extern bool mouseDown;
 extern uint16_t mouseX;
 extern uint16_t mouseY;
+extern uint16_t mouseDistanceToPlayer;
 
 extern float deltaTime;
 extern float totalTime;
@@ -61,6 +62,8 @@ extern float totalTime;
 extern bool doShadeScreen;
 
 extern bool showInventory;
+
+extern bool payStuff;
 
 extern World world;
 

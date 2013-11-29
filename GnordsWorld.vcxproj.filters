@@ -253,6 +253,9 @@
     <ClCompile Include="CraftingRecipeSilverSlice.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
+    <ClCompile Include="FieldBackHemp.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FieldBackEarth.h">
@@ -509,6 +512,9 @@
     </ClInclude>
     <ClInclude Include="CraftingRecipeSilverSlice.h">
       <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackHemp.h">
+      <Filter>BackFields</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

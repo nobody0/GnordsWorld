@@ -17,6 +17,8 @@ void FieldBackEarth::init(const int32_t &x, const int32_t &y)
 {
 	FieldBack::init(x, y);
 
+	updateCounter = 0;
+
 	switch (myRand(x ^ (y<<2)) % 6)
 	{
 	case 0:

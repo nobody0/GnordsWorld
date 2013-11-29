@@ -34,7 +34,7 @@ void InventorySilverPick::onUse(Field* target, const int32_t &x, const int32_t &
 void InventorySilverPick::init()
 {
 	toolType = Default;
-	toolLevel = 1;
+	toolLevel = 3.5;
 
 	maxAmount = 1;
 	name = "Silberhacke";

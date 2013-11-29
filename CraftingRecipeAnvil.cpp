@@ -8,7 +8,7 @@ CraftingRecipeAnvil::CraftingRecipeAnvil(void)
 
 	CraftingRecipeRequirement* reqWood = new CraftingRecipeRequirement;
 	reqWood->name = "Stahlbarren";
-	reqWood->amount = 20;
+	reqWood->amount = 10;
 	requirements.push_back(reqWood);
 }
 

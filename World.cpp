@@ -165,6 +165,11 @@ void World::onClick()
 
 	int32_t mouseWorldX = mouseX + (int32_t)world.player.x - SCREEN_WIDTH/2;
 	int32_t mouseWorldY = mouseY + (int32_t)world.player.y - SCREEN_HEIGHT/2;
+	
+	if (mouseDistanceToPlayer > GRID_SIZE*4)
+	{
+		return;
+	}
 
 	x = (int32_t)floor((double)mouseWorldX / GRID_SIZE);
 	y = (int32_t)floor((double)mouseWorldY / GRID_SIZE);

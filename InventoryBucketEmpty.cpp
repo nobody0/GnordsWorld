@@ -36,10 +36,10 @@ void InventoryBucketEmpty::init()
 	toolType = Bucket;
 	toolLevel = 1;
 
-	maxAmount = 1;
+	maxAmount = 99;
 	name = "EimerLeer";
 
-	imageActive = load_image("Hand/EimerLeer.png");
+	imageActive = load_image("Hand/Eimer_leer.png");
 	image = load_image("Inventar/Werkzeug/EimerLeer.png");
 }
 

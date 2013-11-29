@@ -10,18 +10,20 @@ CraftingRecipeMetalBucket::CraftingRecipeMetalBucket(void)
 
 	req = new CraftingRecipeRequirement;
 	req->name = "Stahlbarren";
-	req->amount = 5;
-	requirements.push_back(req);
-
-	req = new CraftingRecipeRequirement;
-	req->name = "Kupferbarren";
 	req->amount = 2;
 	requirements.push_back(req);
 
 	req = new CraftingRecipeRequirement;
+	req->name = "Kupferbarren";
+	req->amount = 1;
+	requirements.push_back(req);
+
+	/*
+	req = new CraftingRecipeRequirement;
 	req->name = "Seil";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 }
 
 

@@ -8,20 +8,31 @@ CraftingRecipeSilverPick::CraftingRecipeSilverPick(void)
 
 	CraftingRecipeRequirement* req;
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Amboss";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
+	req = new CraftingRecipeRequirement;
+	req->name = "Silberbarren";
+	req->amount = 3;
+	requirements.push_back(req);
+
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "Stock";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 
+	/*
 	req = new CraftingRecipeRequirement;
 	req->name = "EimerVoll";
 	req->amount = 1;
 	requirements.push_back(req);
+	*/
 }
 
 
