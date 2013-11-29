@@ -199,9 +199,6 @@
     <ClCompile Include="InventoryHemp.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryPumpkin.cpp">
-      <Filter>InvenotryObjects</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryRope.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
@@ -457,9 +454,6 @@
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
     <ClInclude Include="InventoryHemp.h">
-      <Filter>InvenotryObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryPumpkin.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
     <ClInclude Include="InventoryRope.h">
