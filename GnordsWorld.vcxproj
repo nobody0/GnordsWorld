@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4DC2F35E-2918-4F7D-AC4C-2FB1B5FF3051}</ProjectGuid>
-    <RootNamespace>SDL_basics</RootNamespace>
+    <RootNamespace>GnordsWorld</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
