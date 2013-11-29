@@ -87,7 +87,7 @@ bool init()
 		return false;
 	}
 
-    SDL_WM_SetCaption( "Hello 2D World", NULL );
+    SDL_WM_SetCaption( "Gnords World", NULL );
 
     return true;
 }

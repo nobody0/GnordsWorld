@@ -269,7 +269,7 @@ void Player::myUpdate()
 		if (swimming)
 		{
 			velocity.y += myDeltaTime * fallSpeed/3;
-			if (velocity.y > maxFallSpeed/2) velocity.y = maxFallSpeed/2;
+			if (velocity.y > maxFallSpeed/3) velocity.y = maxFallSpeed/3;
 		}
 		else
 		{

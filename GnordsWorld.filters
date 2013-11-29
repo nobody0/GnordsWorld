@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="FieldBackEarth.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackGrass.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBack.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldFront.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackIron.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackCoal.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackCopper.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackSilver.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackStone.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="Paralax.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryEarth.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryObject.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Fists.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="LightHelper.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SunLight.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="SunLightHelper.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Actionbar.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCoal.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopper.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryIron.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySilver.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelAxe.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelPick.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelSlice.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryStone.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Crafting.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipe.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeRequirement.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeAlchemyTable.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeAnvil.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeCopperAxe.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeCopperIngot.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeCopperPick.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeCopperSlice.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeDirektHealingPotion.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeHealOverTimeHealingPotion.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeMetalBucket.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipePumpkin.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeRope.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSilverAxe.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSilverIngot.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSilverPick.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSlice.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSteelAxe.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSteelIngot.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSteelPick.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSteelSlice.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeStick.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeStoneAxe.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeStonePick.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeStoneSlice.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeTest.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeTorch.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeWoodenBucket.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeWoodenDoor.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeWoodenPlank.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeWoodenWall.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeWorkBanch.cpp">
+      <Filter>CraftingRecipes</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryAlchemyTable.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryAnvil.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBucketEmpty.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBucketFull.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopperAxe.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopperPick.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopperSlice.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryEldasHerb.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryHemp.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryPumpkin.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryRope.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySilverAxe.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySilverIngot.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySilverPick.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySilverSlice.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySteelIngot.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryStick.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryStoneAxe.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryStonePick.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryStoneSlice.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryTorch.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryWood.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryWoodenDoor.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryWoodenPlank.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryWoodenWall.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryWorkbanch.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldBackWater.cpp">
+      <Filter>BackFields</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCopperIngot.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryWater.cpp">
+      <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FieldBackEarth.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackGrass.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBack.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldFront.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackIron.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackCoal.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackCopper.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackSilver.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackStone.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="Paralax.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryEarth.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryObject.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Fists.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolTypes.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="LightHelper.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SunLight.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="SunLightHelper.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Actionbar.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCoal.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopper.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryIron.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySilver.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelAxe.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelPick.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelSlice.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryStone.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Crafting.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipe.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeRequirement.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeAlchemyTable.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeAnvil.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeCopperAxe.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeCopperIngot.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeCopperPick.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeCopperSlice.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeDirektHealingPotion.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeHealOverTimeHealingPotion.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeMetalBucket.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipePumpkin.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeRope.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSilverAxe.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSilverIngot.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSilverPick.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSlice.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSteelAxe.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSteelIngot.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSteelPick.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSteelSlice.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeStick.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeStoneAxe.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeStonePick.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeStoneSlice.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeTest.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeTorch.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeWoodenBucket.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeWoodenDoor.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeWoodenPlank.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeWoodenWall.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeWorkBanch.h">
+      <Filter>CraftingRecipes</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryAlchemyTable.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryAnvil.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBucketEmpty.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBucketFull.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopperAxe.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopperPick.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopperSlice.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryEldasHerb.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryHemp.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryPumpkin.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryRope.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySilverAxe.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySilverIngot.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySilverPick.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySilverSlice.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySteelIngot.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryStick.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryStoneAxe.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryStonePick.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryStoneSlice.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryTorch.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryWood.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryWoodenDoor.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryWoodenPlank.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryWoodenWall.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryWorkbanch.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldBackWater.h">
+      <Filter>BackFields</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCopperIngot.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryWater.h">
+      <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="BackFields">
+      <UniqueIdentifier>{acdf763d-5bf5-482c-ac4b-8a565a2ddbd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{b8fa7a82-96d8-4b63-bedf-204393c1c4b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InvenotryObjects">
+      <UniqueIdentifier>{faef8041-5bb6-40cd-a397-2bc89e099cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CraftingRecipes">
+      <UniqueIdentifier>{71137fd1-622f-4365-ab91-e0f958606e89}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
