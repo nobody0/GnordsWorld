@@ -1,8 +1,13 @@
 #pragma once
-class CraftingRecipeAlchemyTable
+#include "craftingrecipe.h"
+
+class CraftingRecipeAlchemyTable :
+	public CraftingRecipe
 {
 public:
 	CraftingRecipeAlchemyTable(void);
 	~CraftingRecipeAlchemyTable(void);
+
+	void doCraft();
 };
 

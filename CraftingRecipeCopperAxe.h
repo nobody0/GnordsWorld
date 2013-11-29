@@ -1,8 +1,13 @@
 #pragma once
-class CraftingRecipeCopperAxe
+#include "craftingrecipe.h"
+
+class CraftingRecipeCopperAxe :
+	public CraftingRecipe
 {
 public:
 	CraftingRecipeCopperAxe(void);
 	~CraftingRecipeCopperAxe(void);
+
+	void doCraft();
 };
 
