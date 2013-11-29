@@ -16,6 +16,8 @@ void FieldBackWater::init(const int32_t &x, const int32_t &y)
 {
 	FieldBack::init(x, y);
 
+	appropriateTool = Bucket;
+
 	liquid = true;
 
 	setWaterLevel(maxWaterLevel);
@@ -172,13 +174,15 @@ void FieldBackWater::onUsed(const ToolTypes &toolType, const int32_t &toolLevel)
 	}
 	else
 	{
-		health -= toolLevel*deltaTime;
+		//health -= toolLevel*deltaTime;
 	}
 
 	if (health <= 0)
 	{
+
 		InventoryObject* inventoryObject = new InventoryWater(waterLevel);
 		world.player.inventory.add(inventoryObject);
+		world.player.inventory.remove("EimerLeer", 1);
 
 		removeFromMap();
 

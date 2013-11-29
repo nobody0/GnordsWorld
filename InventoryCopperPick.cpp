@@ -37,7 +37,7 @@ void InventoryCopperPick::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "Kupferhacke";
 
 	imageActive = load_image("Hand/Kupferhacke.png");

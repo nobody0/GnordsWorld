@@ -37,9 +37,10 @@ void InventoryWoodenPlank::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Holzbrett";
 
+	imageActive = load_image("Inventar/Holzbrett.png");
 	image = load_image("Inventar/Holzbrett.png");
 }
 

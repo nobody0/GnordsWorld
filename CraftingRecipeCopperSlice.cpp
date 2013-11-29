@@ -4,7 +4,7 @@
 
 CraftingRecipeCopperSlice::CraftingRecipeCopperSlice(void)
 {
-	name = "Kupferbarren";
+	name = "Kupfersichel";
 
 	CraftingRecipeRequirement* req;
 

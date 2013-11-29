@@ -39,7 +39,7 @@ void InventoryTorch::init()
 	maxAmount = 9;
 	name = "Fackel";
 
-	imageActive = load_image("Hand/Fackel.png");
+	imageActive = load_image("Inventar/Werkzeug/Fackel.png");
 	image = load_image("Inventar/Werkzeug/Fackel.png");
 }
 

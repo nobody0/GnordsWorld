@@ -36,10 +36,10 @@ void InventoryCopperIngot::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Kupferbarren";
 
-	imageActive = load_image("Hand/Kupferbarren.png");
+	imageActive = load_image("Inventar/Barren/Kupferbarren.png");
 	image = load_image("Inventar/Barren/Kupferbarren.png");
 }
 

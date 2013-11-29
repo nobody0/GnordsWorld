@@ -36,7 +36,7 @@ void InventoryCopperSlice::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "Kupfersichel";
 
 	imageActive = load_image("Hand/Kupfersichel.png");

@@ -19,9 +19,8 @@ InventoryAnvil::InventoryAnvil(int32_t amount)
 InventoryAnvil::~InventoryAnvil(void)
 {
 }
-//TODO
-/*
-void InventoryAlchemyTable::onUse(Field* target, const int32_t &x, const int32_t &y)
+
+void InventoryAnvil::onUse(Field* target, const int32_t &x, const int32_t &y)
 {
 	if (target != NULL)
 	{
@@ -29,23 +28,20 @@ void InventoryAlchemyTable::onUse(Field* target, const int32_t &x, const int32_t
 	}
 	else
 	{
-		FieldBackCopper* fieldBackCopper = new FieldBackCopper();
-		fieldBackCopper->init(x*GRID_SIZE, y*GRID_SIZE);
-
 		world.player.inventory.remove(this, 1);
 	}
 }
-*/
+
 
 void InventoryAnvil::init()
 {
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "Schmiede";
 
-	
+	imageActive = load_image("Inventar/Stationen/Schmiede.png");
 	image = load_image("Inventar/Stationen/Schmiede.png");
 }
 

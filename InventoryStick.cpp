@@ -37,9 +37,10 @@ void InventoryStick::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
-	name = "Kupfer";
+	maxAmount = 99;
+	name = "Stock";
 
+	imageActive = load_image("Inventar/Holzstock.png");
 	image = load_image("Inventar/Holzstock.png");
 }
 

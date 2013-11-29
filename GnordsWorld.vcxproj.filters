@@ -133,9 +133,6 @@
     <ClCompile Include="CraftingRecipeMetalBucket.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
-    <ClCompile Include="CraftingRecipePumpkin.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
     <ClCompile Include="CraftingRecipeRope.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
@@ -146,9 +143,6 @@
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
     <ClCompile Include="CraftingRecipeSilverPick.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
-    <ClCompile Include="CraftingRecipeSlice.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
     <ClCompile Include="CraftingRecipeSteelAxe.cpp">
@@ -175,22 +169,10 @@
     <ClCompile Include="CraftingRecipeStoneSlice.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
-    <ClCompile Include="CraftingRecipeTest.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
     <ClCompile Include="CraftingRecipeTorch.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
-    <ClCompile Include="CraftingRecipeWoodenBucket.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
-    <ClCompile Include="CraftingRecipeWoodenDoor.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
     <ClCompile Include="CraftingRecipeWoodenPlank.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
-    <ClCompile Include="CraftingRecipeWoodenWall.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
     <ClCompile Include="CraftingRecipeWorkBanch.cpp">
@@ -205,9 +187,6 @@
     <ClCompile Include="InventoryBucketEmpty.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryBucketFull.cpp">
-      <Filter>InvenotryObjects</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryCopperAxe.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
@@ -215,9 +194,6 @@
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
     <ClCompile Include="InventoryCopperSlice.cpp">
-      <Filter>InvenotryObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryEldasHerb.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
     <ClCompile Include="InventoryHemp.cpp">
@@ -262,13 +238,7 @@
     <ClCompile Include="InventoryWood.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryWoodenDoor.cpp">
-      <Filter>InvenotryObjects</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryWoodenPlank.cpp">
-      <Filter>InvenotryObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryWoodenWall.cpp">
       <Filter>InvenotryObjects</Filter>
     </ClCompile>
     <ClCompile Include="InventoryWorkbanch.cpp">
@@ -282,6 +252,9 @@
     </ClCompile>
     <ClCompile Include="InventoryWater.cpp">
       <Filter>InvenotryObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CraftingRecipeSilverSlice.cpp">
+      <Filter>CraftingRecipes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,9 +393,6 @@
     <ClInclude Include="CraftingRecipeMetalBucket.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
-    <ClInclude Include="CraftingRecipePumpkin.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
     <ClInclude Include="CraftingRecipeRope.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
@@ -433,9 +403,6 @@
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
     <ClInclude Include="CraftingRecipeSilverPick.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
-    <ClInclude Include="CraftingRecipeSlice.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
     <ClInclude Include="CraftingRecipeSteelAxe.h">
@@ -462,22 +429,10 @@
     <ClInclude Include="CraftingRecipeStoneSlice.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
-    <ClInclude Include="CraftingRecipeTest.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
     <ClInclude Include="CraftingRecipeTorch.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
-    <ClInclude Include="CraftingRecipeWoodenBucket.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
-    <ClInclude Include="CraftingRecipeWoodenDoor.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
     <ClInclude Include="CraftingRecipeWoodenPlank.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
-    <ClInclude Include="CraftingRecipeWoodenWall.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
     <ClInclude Include="CraftingRecipeWorkBanch.h">
@@ -492,9 +447,6 @@
     <ClInclude Include="InventoryBucketEmpty.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryBucketFull.h">
-      <Filter>InvenotryObjects</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryCopperAxe.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
@@ -502,9 +454,6 @@
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
     <ClInclude Include="InventoryCopperSlice.h">
-      <Filter>InvenotryObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryEldasHerb.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
     <ClInclude Include="InventoryHemp.h">
@@ -549,13 +498,7 @@
     <ClInclude Include="InventoryWood.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryWoodenDoor.h">
-      <Filter>InvenotryObjects</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryWoodenPlank.h">
-      <Filter>InvenotryObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryWoodenWall.h">
       <Filter>InvenotryObjects</Filter>
     </ClInclude>
     <ClInclude Include="InventoryWorkbanch.h">
@@ -569,6 +512,9 @@
     </ClInclude>
     <ClInclude Include="InventoryWater.h">
       <Filter>InvenotryObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CraftingRecipeSilverSlice.h">
+      <Filter>CraftingRecipes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

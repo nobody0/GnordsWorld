@@ -37,8 +37,8 @@ void InventorySilverAxe::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
-	name = "silberaxt";
+	maxAmount = 1;
+	name = "Silberaxt";
 
 	imageActive = load_image("Hand/Silberaxt.png");
 	image = load_image("Inventar/Werkzeug/Silberaxt.png");

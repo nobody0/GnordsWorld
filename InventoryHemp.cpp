@@ -39,6 +39,7 @@ void InventoryHemp::init()
 	maxAmount = 9;
 	name = "Hanf";
 
+	imageActive = load_image("Inventar/Pflanzen/Hanf.png");
 	image = load_image("Inventar/Pflanzen/Hanf.png");
 }
 

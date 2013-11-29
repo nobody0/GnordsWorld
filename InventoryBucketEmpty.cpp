@@ -33,10 +33,10 @@ void InventoryBucketEmpty::onUse(Field* target, const int32_t &x, const int32_t 
 
 void InventoryBucketEmpty::init()
 {
-	toolType = Default;
+	toolType = Bucket;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "EimerLeer";
 
 	imageActive = load_image("Hand/EimerLeer.png");

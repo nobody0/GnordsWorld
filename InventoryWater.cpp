@@ -39,9 +39,9 @@ void InventoryWater::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Wasser";
 
-	imageActive = load_image("Background/Wasser/Wasser_8.png");
-	image = load_image("Background/Wasser/Wasser_8.png");
+	imageActive = load_image("Hand/Eimer_voll.png");
+	image = load_image("Inventar/Werkzeug/EimerVoll.png");
 }

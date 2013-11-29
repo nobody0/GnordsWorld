@@ -40,7 +40,7 @@ void InventoryIron::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Eisen";
 
 	imageActive = load_image("Hand/Eisen.png");

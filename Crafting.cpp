@@ -1,14 +1,34 @@
 #include "Crafting.h"
 #include "main.h"
-#include "CraftingRecipeTest.h"
+#include "CraftingRecipeAlchemyTable.h"
+#include "CraftingRecipeAnvil.h"
+#include "CraftingRecipeCopperAxe.h"
+#include "CraftingRecipeCopperIngot.h"
+#include "CraftingRecipeCopperPick.h"
+#include "CraftingRecipeCopperSlice.h"
+#include "CraftingRecipeMetalBucket.h"
+#include "CraftingRecipeRope.h"
+#include "CraftingRecipeSilverAxe.h"
+#include "CraftingRecipeSilverIngot.h"
+#include "CraftingRecipeSilverPick.h"
+#include "CraftingRecipeSilverSlice.h"
+#include "CraftingRecipeSteelAxe.h"
+#include "CraftingRecipeSteelIngot.h"
+#include "CraftingRecipeSteelPick.h"
+#include "CraftingRecipeSteelSlice.h"
+#include "CraftingRecipeStick.h"
+#include "CraftingRecipeStoneAxe.h"
+#include "CraftingRecipeStonePick.h"
+#include "CraftingRecipeStoneSlice.h"
+#include "CraftingRecipeTorch.h"
+#include "CraftingRecipeWoodenPlank.h"
+#include "CraftingRecipeWorkBanch.h"
 
 
 Crafting::Crafting(void)
 {
 	craftingX = world.player.inventory.backgroundX + 525;
 	craftingY = world.player.inventory.backgroundY + 15;
-
-
 
 	listOffsetX = 30;
 	listOffsetY = 40;
@@ -32,63 +52,30 @@ Crafting::Crafting(void)
 	pagginationXButtonRight = 110;
 	pagginationYButton = 350;
 	
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-	recipes.push_back(new CraftingRecipeTest());
-
+	recipes.push_back(new CraftingRecipeStick());
+	recipes.push_back(new CraftingRecipeWoodenPlank());
+	recipes.push_back(new CraftingRecipeCopperIngot());
+	recipes.push_back(new CraftingRecipeSteelIngot());
+	recipes.push_back(new CraftingRecipeSilverIngot());
+	recipes.push_back(new CraftingRecipeStoneAxe());
+	recipes.push_back(new CraftingRecipeStonePick());
+	recipes.push_back(new CraftingRecipeStoneSlice());
+	recipes.push_back(new CraftingRecipeCopperAxe());
+	recipes.push_back(new CraftingRecipeCopperPick());
+	recipes.push_back(new CraftingRecipeCopperSlice());
+	recipes.push_back(new CraftingRecipeSteelAxe());
+	recipes.push_back(new CraftingRecipeSteelPick());
+	recipes.push_back(new CraftingRecipeSteelSlice());
+	recipes.push_back(new CraftingRecipeSilverAxe());
+	recipes.push_back(new CraftingRecipeSilverPick());
+	recipes.push_back(new CraftingRecipeSilverSlice());
+	recipes.push_back(new CraftingRecipeMetalBucket());
+	recipes.push_back(new CraftingRecipeWorkBanch());
+	recipes.push_back(new CraftingRecipeAnvil());
+	recipes.push_back(new CraftingRecipeAlchemyTable());
+	recipes.push_back(new CraftingRecipeRope());
+	recipes.push_back(new CraftingRecipeTorch());
+	
 	craftingListPages = recipes.size() / craftingListEntriesPerPage;
 }
 

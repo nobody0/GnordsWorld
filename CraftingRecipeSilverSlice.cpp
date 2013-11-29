@@ -1,10 +1,10 @@
-#include "CraftingRecipeSteelPick.h"
+#include "CraftingRecipeSilverSlice.h"
 #include "main.h"
-#include "InventorySteelPick.h"
+#include "InventorySilverSlice.h"
 
-CraftingRecipeSteelPick::CraftingRecipeSteelPick(void)
+CraftingRecipeSilverSlice::CraftingRecipeSilverSlice(void)
 {
-	name = "Stahlaxt";
+	name = "SilberAxt";
 
 	CraftingRecipeRequirement* req;
 
@@ -22,19 +22,14 @@ CraftingRecipeSteelPick::CraftingRecipeSteelPick(void)
 	req->name = "EimerVoll";
 	req->amount = 1;
 	requirements.push_back(req);
-
-	req = new CraftingRecipeRequirement;
-	req->name = "Stahlbarren";
-	req->amount = 4;
-	requirements.push_back(req);
 }
 
 
-CraftingRecipeSteelPick::~CraftingRecipeSteelPick(void)
+CraftingRecipeSilverSlice::~CraftingRecipeSilverSlice(void)
 {
 }
 
-void CraftingRecipeSteelPick::doCraft()
+void CraftingRecipeSilverSlice::doCraft()
 {
 	if (canBeCrafted())
 	{
@@ -43,7 +38,7 @@ void CraftingRecipeSteelPick::doCraft()
 			world.player.inventory.remove(requirements[i]->name, requirements[i]->amount);	
 			
 		}
-		InventorySteelPick *inventorySteelPick = new InventorySteelPick;
-		world.player.inventory.add(inventorySteelPick);
+		InventorySilverSlice *inventorySilverSlice = new InventorySilverSlice;
+		world.player.inventory.add(inventorySilverSlice);
 	}
 }

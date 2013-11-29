@@ -1,8 +1,13 @@
 #pragma once
-class CraftingRecipeWorkBanch
+#include "craftingrecipe.h"
+
+class CraftingRecipeWorkBanch :
+	public CraftingRecipe
 {
 public:
 	CraftingRecipeWorkBanch(void);
 	~CraftingRecipeWorkBanch(void);
+
+	void doCraft();
 };
 

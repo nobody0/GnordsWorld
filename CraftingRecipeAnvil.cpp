@@ -4,16 +4,13 @@
 
 CraftingRecipeAnvil::CraftingRecipeAnvil(void)
 {
-	name = "Amboss";
+	name = "Schmiede";
 
 	CraftingRecipeRequirement* reqWood = new CraftingRecipeRequirement;
-	reqWood->name = "Holz";
+	reqWood->name = "Stahlbarren";
 	reqWood->amount = 20;
 	requirements.push_back(reqWood);
-
-	
 }
-
 
 CraftingRecipeAnvil::~CraftingRecipeAnvil(void)
 {

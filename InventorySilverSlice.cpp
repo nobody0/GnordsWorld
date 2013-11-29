@@ -37,7 +37,7 @@ void InventorySilverSlice::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "Silbersichel";
 
 	imageActive = load_image("Hand/Silbersichel.png");

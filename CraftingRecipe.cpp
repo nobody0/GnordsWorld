@@ -14,7 +14,16 @@ CraftingRecipe::~CraftingRecipe(void)
 void CraftingRecipe::draw(int x, int y)
 {
 	SDL_Color color = {0,0,0};
-	apply_font(x, y, screen, load_font("arial.ttf", 15), name, color);
+	SDL_Color colorRed = {255,0,0};
+
+	if (canBeCrafted())
+	{
+		apply_font(x, y, screen, load_font("arial.ttf", 15), name, color);
+	}
+	else
+	{
+		apply_font(x, y, screen, load_font("arial.ttf", 15), name, colorRed);
+	}
 }
 
 void CraftingRecipe::drawActive(int x, int y)

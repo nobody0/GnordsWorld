@@ -36,9 +36,10 @@ void InventoryWood::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
-	name = "Eschenholz";
+	maxAmount = 99;
+	name = "Holz";
 
+	imageActive = load_image("Inventar/Holz/Eschenholz.png");
 	image = load_image("Inventar/Holz/Eschenholz.png");
 }
 

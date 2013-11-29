@@ -4,7 +4,7 @@
 
 CraftingRecipeMetalBucket::CraftingRecipeMetalBucket(void)
 {
-	name = "Eimer";
+	name = "EimerLeer";
 
 	CraftingRecipeRequirement* req;
 
@@ -19,8 +19,8 @@ CraftingRecipeMetalBucket::CraftingRecipeMetalBucket(void)
 	requirements.push_back(req);
 
 	req = new CraftingRecipeRequirement;
-	req->name = "Kupferbarren";
-	req->amount = 2;
+	req->name = "Seil";
+	req->amount = 1;
 	requirements.push_back(req);
 }
 

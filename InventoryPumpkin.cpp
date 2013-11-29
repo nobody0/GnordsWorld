@@ -36,10 +36,10 @@ void InventoryPumpkin::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "Kürbis";
 
-	//imageActive = load_image("Hand/Kupfer.png");
+	imageActive = load_image("Inventar/Werkzeug/Kürbis.png");
 	image = load_image("Inventar/Werkzeug/Kürbis.png");
 }
 

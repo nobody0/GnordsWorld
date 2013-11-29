@@ -1,8 +1,13 @@
 #pragma once
-class CraftingRecipeSilverIngot
+#include "craftingrecipe.h"
+
+class CraftingRecipeSilverIngot :
+	public CraftingRecipe
 {
 public:
 	CraftingRecipeSilverIngot(void);
 	~CraftingRecipeSilverIngot(void);
+
+	void doCraft();
 };
 

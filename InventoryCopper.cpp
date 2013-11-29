@@ -40,7 +40,7 @@ void InventoryCopper::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Kupfer";
 
 	imageActive = load_image("Hand/Kupfer.png");

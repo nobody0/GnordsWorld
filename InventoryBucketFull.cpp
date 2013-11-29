@@ -36,7 +36,7 @@ void InventoryBucketFull::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "EimerVoll";
 
 	imageActive = load_image("Hand/EimerVoll.png");

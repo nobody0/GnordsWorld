@@ -37,7 +37,7 @@ void InventoryCopperAxe::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 1;
 	name = "Kupferaxt";
 
 	imageActive = load_image("Hand/Kupferaxt.png");

@@ -36,9 +36,10 @@ void InventorySilverIngot::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Silberbarren";
 
+	imageActive = load_image("Inventar/Barren/Silberbarren.png");
 	image = load_image("Inventar/Barren/Silberbarren.png");
 }
 

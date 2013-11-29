@@ -36,8 +36,8 @@ void InventorySilverPick::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
-	name = "silberhacke";
+	maxAmount = 1;
+	name = "Silberhacke";
 
 	imageActive = load_image("Hand/Silberhacke.png");
 	image = load_image("Inventar/Werkzeug/Silberhacke.png");

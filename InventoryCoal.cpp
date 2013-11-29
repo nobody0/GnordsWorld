@@ -40,7 +40,7 @@ void InventoryCoal::init()
 	toolType = Default;
 	toolLevel = 1;
 
-	maxAmount = 9;
+	maxAmount = 99;
 	name = "Kohle";
 
 	imageActive = load_image("Hand/Kohle.png");
