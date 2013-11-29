@@ -130,12 +130,6 @@
     <ClCompile Include="CraftingRecipeCopperSlice.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
-    <ClCompile Include="CraftingRecipeDirektHealingPotion.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
-    <ClCompile Include="CraftingRecipeHealOverTimeHealingPotion.cpp">
-      <Filter>CraftingRecipes</Filter>
-    </ClCompile>
     <ClCompile Include="CraftingRecipeMetalBucket.cpp">
       <Filter>CraftingRecipes</Filter>
     </ClCompile>
@@ -421,12 +415,6 @@
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
     <ClInclude Include="CraftingRecipeCopperSlice.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
-    <ClInclude Include="CraftingRecipeDirektHealingPotion.h">
-      <Filter>CraftingRecipes</Filter>
-    </ClInclude>
-    <ClInclude Include="CraftingRecipeHealOverTimeHealingPotion.h">
       <Filter>CraftingRecipes</Filter>
     </ClInclude>
     <ClInclude Include="CraftingRecipeMetalBucket.h">

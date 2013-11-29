@@ -9,12 +9,22 @@ CraftingRecipeCopperPick::CraftingRecipeCopperPick(void)
 	CraftingRecipeRequirement* req;
 
 	req = new CraftingRecipeRequirement;
-	req->name = "Kupfererz";
-	req->amount = 2;
+	req->name = "Werkbank";
+	req->amount = 1;
+	requirements.push_back(req);
+	
+	req = new CraftingRecipeRequirement;
+	req->name = "Kupferbarren";
+	req->amount = 4;
 	requirements.push_back(req);
 
 	req = new CraftingRecipeRequirement;
-	req->name = "Kohle";
+	req->name = "Stock";
+	req->amount = 1;
+	requirements.push_back(req);
+
+	req = new CraftingRecipeRequirement;
+	req->name = "Seil";
 	req->amount = 1;
 	requirements.push_back(req);
 }
