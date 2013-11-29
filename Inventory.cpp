@@ -5,8 +5,6 @@
 
 Inventory::Inventory(void)
 {
-	setScreenSize();
-
 	columnCount = 8;
 	rowCount = 6;
 
@@ -37,8 +35,6 @@ void Inventory::setScreenSize()
 {
 	backgroundX = SCREEN_WIDTH/2-282;
 	backgroundY = SCREEN_HEIGHT/2-130;
-
-	crafting->setScreenSize();
 }
 
 

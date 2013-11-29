@@ -12,6 +12,18 @@ FieldBackWater::~FieldBackWater(void)
 {
 }
 
+void FieldBackWater::draw(bool forceRedraw)
+{
+	if (lastDraw != totalTime && !forceRedraw)
+	{
+		int32_t xScreen = (int32_t)x - (int32_t)world.player.x + SCREEN_WIDTH/2;
+		int32_t yScreen = (int32_t)y - (int32_t)world.player.y + SCREEN_HEIGHT/2;
+		apply_surface(xScreen, yScreen, image, screen);
+
+		lastDraw = totalTime;
+	}
+}
+
 void FieldBackWater::init(const int32_t &x, const int32_t &y)
 {
 	FieldBack::init(x, y);
