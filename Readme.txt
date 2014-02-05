@@ -9,9 +9,9 @@ Steuerung
 -----------------------------------
 
 w a s d zum Laufen und Springen
-linke Maustaste zum Abbauen und Platzieren der Bl�cke
-i zum Inventar�ffnen, Drag'n'Drop in die Werkzeugleiste
-1-8 Ausw�hlen des aktiven Werkzeugs
+linke Maustaste zum Abbauen und Platzieren der Blöcke
+i zum Inventaröffnen, Drag'n'Drop in die Werkzeugleiste
+1-8 Auswählen des aktiven Werkzeugs
 (debug) c zum an/ausschalten der Lichtberechnung
 (debug) f zum anzeigen der fps
 (debug) p alles craften ist gratis
