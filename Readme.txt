@@ -9,9 +9,9 @@ Steuerung
 -----------------------------------
 
 w a s d zum Laufen und Springen
-linke Maustaste zum Abbauen und Platzieren der Blöcke
-i zum Inventaröffnen, Drag'n'Drop in die Werkzeugleiste
-1-8 Auswählen des aktiven Werkzeugs
+linke Maustaste zum Abbauen und Platzieren der Blï¿½cke
+i zum Inventarï¿½ffnen, Drag'n'Drop in die Werkzeugleiste
+1-8 Auswï¿½hlen des aktiven Werkzeugs
 (debug) c zum an/ausschalten der Lichtberechnung
 (debug) f zum anzeigen der fps
 (debug) p alles craften ist gratis
@@ -21,9 +21,9 @@ i zum Inventaröffnen, Drag'n'Drop in die Werkzeugleiste
 Teammitglieder
 -----------------------------------
 
-Andre Grad 		- Artist
+Andre Graf 		- Lead Artist
 Arek Kaminski		- Artist
 Axel Grother		- Artist
 Sherena Pick		- Artist
-Raphael Wittgruber	- Coder
-Steven Jung		- Coder
+Raphael Wittgruber	- Lead Programmer
+Steven Jung		- Programmer
