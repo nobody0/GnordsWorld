@@ -1,24 +1,24 @@
 ###################################
-Starten
+Executable Location
 -----------------------------------
 Release\GnordsWorld.exe
 
 
 ###################################
-Steuerung
+Control
 -----------------------------------
 
-w a s d zum Laufen und Springen
-linke Maustaste zum Abbauen und Platzieren der Blöcke
-i zum Inventaröffnen, Drag'n'Drop in die Werkzeugleiste
-1-8 Auswählen des aktiven Werkzeugs
-(debug) c zum an/ausschalten der Lichtberechnung
-(debug) f zum anzeigen der fps
-(debug) p alles craften ist gratis
+w a s d to move and jump
+left mouse button to mine and place blocks
+i to open Inventory, Drag'n'Drop Blocks onto toolsbar
+1-8 select active tool
+(debug) c to toggle light
+(debug) f to display fps
+(debug) p set all crafting costs to 0
 
 
 ###################################
-Teammitglieder
+The Team
 -----------------------------------
 
 Andre Graf 		- Lead Artist
